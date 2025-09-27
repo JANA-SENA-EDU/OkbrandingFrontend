@@ -13,7 +13,7 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router:Router, private loaderService:LoaderService) {}
 
-  private baseUrl = 'http://localhost:8080/okBranding/usuarios'; 
+  private baseUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/usuarios'; 
   private sidebarState = new BehaviorSubject<boolean>(false);
 
   private tokenKey = 'auth_token';

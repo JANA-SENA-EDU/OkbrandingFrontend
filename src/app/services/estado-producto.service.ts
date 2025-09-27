@@ -9,7 +9,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EstadoProductoService {
-  private apiUrl = 'http://localhost:8080/okBranding/estado-producto'; // ajusta si tu endpoint cambia
+  private apiUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/estado-producto'; // ajusta si tu endpoint cambia
 
   constructor(
     private http: HttpClient,

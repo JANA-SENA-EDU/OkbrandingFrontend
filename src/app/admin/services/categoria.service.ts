@@ -9,7 +9,7 @@ import { AlertService } from '../../shared/services/alert.service';
   providedIn: 'root'
 })
 export class CategoriaService {
-  private baseUrl = 'http://localhost:8080/okBranding/categorias';
+  private baseUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/categorias';
 
   constructor(
   private http: HttpClient,

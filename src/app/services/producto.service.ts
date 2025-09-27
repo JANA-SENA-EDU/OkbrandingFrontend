@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiUrl = 'http://localhost:8080/okBranding/productos';
+  private apiUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/productos';
 
   constructor(
     private http: HttpClient,
@@ -57,7 +57,7 @@ export class ProductoService {
   });
 }
 obtenerPorId(id: number) {
-  return this.http.get<any>(`http://localhost:8080/okBranding/productos/${id}`);
+  return this.http.get<any>(`https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/productos/${id}`);
 }
 
 actualizarProducto(producto: any): Observable<any> {
