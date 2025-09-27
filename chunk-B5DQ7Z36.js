@@ -1,0 +1,1 @@
+import{Tb as d,_b as s,ka as o,wb as n,xb as i}from"./chunk-P5NMP2U3.js";var m=(()=>{class e{static{this.\u0275fac=function(t){return new(t||e)}}static{this.\u0275cmp=o({type:e,selectors:[["app-pedidos"]],standalone:!0,features:[s],decls:2,vars:0,template:function(t,p){t&1&&(n(0,"p"),d(1,"pedidos works!"),i())}})}}return e})();export{m as PedidosComponent};
