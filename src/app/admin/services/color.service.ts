@@ -9,7 +9,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ColorService {
-  private apiUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/colores';
+  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/colores';
 
   constructor(
     private http: HttpClient,

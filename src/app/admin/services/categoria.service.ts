@@ -9,7 +9,7 @@ import { AlertService } from '../../shared/services/alert.service';
   providedIn: 'root'
 })
 export class CategoriaService {
-  private baseUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/categorias';
+  private baseUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/categorias';
 
   constructor(
   private http: HttpClient,

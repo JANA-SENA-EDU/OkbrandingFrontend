@@ -8,7 +8,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'https://encouraging-hedy-okbranding-4b2e5519.koyeb.app/okBranding/usuarios'; 
+  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/usuarios'; 
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,
