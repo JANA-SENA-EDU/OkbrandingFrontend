@@ -5,6 +5,7 @@ import { LoginResponse } from '../models/login-response.model';
 import { LoginRequest } from '../models/login-request.model';
 import { Router } from '@angular/router';
 import { LoaderService } from '../../shared/services/loader.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,16 +14,17 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router:Router, private loaderService:LoaderService) {}
 
-  private baseUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/usuarios'; 
+  private baseUrl = `${environment.apiUrl}/auth`; 
   private sidebarState = new BehaviorSubject<boolean>(false);
 
   private tokenKey = 'auth_token';
   sidebarVisible: boolean = false;
 
+   
    //  Método para hacer login
-   login(LoginRequest: LoginRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, LoginRequest);
-  }
+   login(loginRequest: LoginRequest): Observable<LoginResponse> {
+  return this.http.post<LoginResponse>(`${this.baseUrl}/login`, loginRequest);
+}
 
   //  Método para registrar usuario
   registrarUsuario(usuario: any): Observable<any> {

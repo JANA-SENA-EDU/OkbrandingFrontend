@@ -9,7 +9,7 @@ import { AlertService } from '../../shared/services/alert.service';
   providedIn: 'root'
 })
 export class CategoriaService {
-  private baseUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/categorias';
+  private baseUrl = 'http://localhost:8080/okBranding/categorias';
 
   constructor(
   private http: HttpClient,

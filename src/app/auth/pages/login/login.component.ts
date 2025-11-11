@@ -53,15 +53,17 @@ export class LoginComponent {
     this.loaderService.show();
     this.authService.login(credentials).subscribe({
       next: (response) => {
-        this.loaderService.hide();
-        if (response.exitoso) {
-          this.authService.setToken(response.data.token);
-          this.alertService.success(response.message);
-          this.router.navigate(['/admin']);
-        } else {
-          this.alertService.error(response.message);
-        }
-      },
+  this.loaderService.hide();
+
+  // ✅ Ahora el backend devuelve directamente el token y los datos
+  if (response && response.token) {
+    this.authService.setToken(response.token);
+    this.alertService.success(`Bienvenido, ${response.nombre}`);
+    this.router.navigate(['/admin']);
+  } else {
+    this.alertService.error('Error inesperado en la respuesta del servidor.');
+  }
+  },
       error: (error) => {
         this.loaderService.hide();
         const message = error.error?.message || 'Error al iniciar sesión.';

@@ -9,7 +9,7 @@ import { catchError, finalize, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class EstadoProductoService {
-  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/estado-producto'; // ajusta si tu endpoint cambia
+  private apiUrl = 'http://localhost:8080/okBranding/estado-producto'; // ajusta si tu endpoint cambia
 
   constructor(
     private http: HttpClient,
