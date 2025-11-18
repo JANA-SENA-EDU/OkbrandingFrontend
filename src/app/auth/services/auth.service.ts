@@ -6,32 +6,37 @@ import { LoginRequest } from '../models/login-request.model';
 import { Router } from '@angular/router';
 import { LoaderService } from '../../shared/services/loader.service';
 import { environment } from '../../../environments/environment';
+import { AlertService } from '../../shared/services/alert.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private router:Router, private loaderService:LoaderService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private loaderService: LoaderService,
+    private alertService: AlertService
+  ) {}
 
-  private baseUrl = `${environment.apiUrl}/auth`; 
+  private baseUrl = `${environment.apiUrl}/auth`;
   private sidebarState = new BehaviorSubject<boolean>(false);
 
   private tokenKey = 'auth_token';
   sidebarVisible: boolean = false;
 
-   
-   //  Método para hacer login
-   login(loginRequest: LoginRequest): Observable<LoginResponse> {
-  return this.http.post<LoginResponse>(`${this.baseUrl}/login`, loginRequest);
-}
-
-  //  Método para registrar usuario
-  registrarUsuario(usuario: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/registrar`, usuario);
+  // Método para hacer login
+  login(loginRequest: LoginRequest): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.baseUrl}/login`, loginRequest);
   }
 
-  //  Manejo del token en localStorage
+  // Método para registrar usuario
+  registrarUsuario(usuario: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/register`, usuario);
+  }
+
+  // Manejo del token en localStorage
   setToken(token: string): void {
     localStorage.setItem(this.tokenKey, token);
   }
@@ -48,13 +53,17 @@ export class AuthService {
     return !!this.getToken(); // Retorna true si hay un token, false si no
   }
 
-  //  Método para cerrar sesión
-  logout(): void {
-    this.removeToken();
-    this.router.navigate(['/login']); // Redirige a la pantalla de login
+  // Método para cerrar sesión
+  logout(redirectTo: string = '/'): void {
+    this.alertService
+      .success('Sesión cerrada con éxito', '¡Hasta pronto!')
+      .then(() => {
+        this.removeToken();
+        this.router.navigate([redirectTo]);
+      });
   }
 
-  // 🔹 Métodos para manejar el sidebar
+  // Métodos para manejar el sidebar
   toggleSidebar(): void {
     this.sidebarState.next(!this.sidebarState.value);
   }
@@ -62,6 +71,5 @@ export class AuthService {
   getSidebarState(): Observable<boolean> {
     return this.sidebarState.asObservable();
   }
-
 
 }

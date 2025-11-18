@@ -63,7 +63,7 @@ export class CategoriaComponent implements OnInit {
       'Esta acción no se puede deshacer.',
       'Sí, eliminar',
       'Cancelar'
-    ).then((confirmado) => {
+    ).then((confirmado: boolean) => {
       if (confirmado) {
         this.categoriaService.eliminar(id).subscribe({
           next: () => {

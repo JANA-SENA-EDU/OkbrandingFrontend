@@ -1,47 +1,45 @@
-import { Injectable} from "@angular/core";
-import Swal,{SweetAlertIcon} from "sweetalert2";
+import { Injectable } from '@angular/core';
+import Swal, { SweetAlertIcon } from 'sweetalert2';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
+export class AlertService {
+  constructor() {}
 
-export class AlertService{
-
-  constructor() { }
-
-  success(message: string, title: string = '¡Éxito!') {
-    Swal.fire({
+  success(message: string, title: string = 'Éxito'): Promise<any> {
+    return Swal.fire({
       title,
       text: message,
       icon: 'success',
-      confirmButtonText: 'Aceptar'
+      confirmButtonText: 'Aceptar',
     });
   }
 
-  error(message: string, title: string = '¡Error!') {
-    Swal.fire({
+  error(message: string, title: string = 'Error'): Promise<any> {
+    return Swal.fire({
       title,
       text: message,
       icon: 'error',
-      confirmButtonText: 'Cerrar'
+      confirmButtonText: 'Cerrar',
     });
   }
 
-  warning(message: string, title: string = '¡Advertencia!') {
-    Swal.fire({
+  warning(message: string, title: string = 'Advertencia'): Promise<any> {
+    return Swal.fire({
       title,
       text: message,
       icon: 'warning',
-      confirmButtonText: 'Entiendo'
+      confirmButtonText: 'Entiendo',
     });
   }
 
-  info(message: string, title: string = 'Información') {
-    Swal.fire({
+  info(message: string, title: string = 'Información'): Promise<any> {
+    return Swal.fire({
       title,
       text: message,
       icon: 'info',
-      confirmButtonText: 'Ok'
+      confirmButtonText: 'Ok',
     });
   }
 
@@ -57,9 +55,8 @@ export class AlertService{
       icon: 'question',
       showCancelButton: true,
       confirmButtonText: confirmText,
-      cancelButtonText: cancelText
-    }).then(result => result.isConfirmed);
+      cancelButtonText: cancelText,
+    }).then((result) => result.isConfirmed);
   }
-
-
 }
+

@@ -58,7 +58,7 @@ export class UsuariosComponent {
        '¿Estás seguro?',
        'Sí, desactivar',
        'Cancelar'
-    ).then((confirmado) => {
+    ).then((confirmado: boolean) => {
        if (confirmado) {
           this.usuarioService.eliminarUsuario(idUsuario).subscribe(
              () => {

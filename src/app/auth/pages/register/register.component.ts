@@ -84,17 +84,15 @@ this.registerForm.get('confirmPassword')?.valueChanges.subscribe(() => {
 
   const userData = this.registerForm.value;
 
-  this.authService.registrarUsuario(userData).subscribe({
+   this.authService.registrarUsuario(userData).subscribe({
     next: (res) => {
-      if (res.exitoso) {
-        this.alertService.success('Registro exitoso', res.message);
-        this.router.navigate(['/login']);
-      } else {
-        this.alertService.warning('Advertencia', res.message);
-      }
+      // Si llegó aquí, el registro fue exitoso (HTTP 201)
+      this.alertService.success('Registro exitoso', 'Usuario registrado correctamente.');
+      this.router.navigate(['/login']);
     },
     error: (err) => {
-      const mensaje = err.error?.message || 'Error inesperado al registrar';
+      // El backend devuelve un string en el body cuando hay error
+      const mensaje = err.error || 'Error inesperado al registrar';
       this.alertService.error('Error', mensaje);
     }
   });

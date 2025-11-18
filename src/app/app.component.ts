@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 
 
@@ -12,4 +12,8 @@ import { LoaderComponent } from './shared/components/loader/loader.component';
 })
 export class AppComponent {
   title = 'frontend-okbranding';
+
+  constructor(private router: Router) {
+    console.log('Config de rutas:', this.router.config);
+  }
 }

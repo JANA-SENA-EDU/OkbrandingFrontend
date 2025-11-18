@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
 
-import { NavbarComponent } from './components/navbar/navbar.component'; // ✅ Nombre y ruta corregidos
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -19,7 +19,7 @@ import { AuthService } from '../auth/services/auth.service';
   imports: [
     CommonModule,
     RouterModule,
-    NavbarComponent, // ✅ aquí también corregido
+    NavbarComponent,
     MatSidenavModule,
     MatListModule,
     MatIconModule,
@@ -41,16 +41,12 @@ export class AdminComponent {
   ) {}
 
   ngOnInit() {
-    console.log('Token después de redirigir:', localStorage.getItem('token'));
+    console.log('Token después de redirigir:', localStorage.getItem('auth_token'));
   }
 
   cerrarSesion() {
-    this.loaderService.show();
-    setTimeout(() => {
-      this.authService.logout();
-      this.loaderService.hide();
-      this.alertService.success('Sesión cerrada con éxito', '¡Hasta pronto!');
-      this.router.navigate(['/login']);
-    }, 1000);
+    // Cierra sesión y redirige al login
+    this.authService.logout('/login');
   }
 }
+

@@ -9,13 +9,13 @@ import { AlertService } from '../../../shared/services/alert.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
-  selector: 'app-navbar', // ✅ corregido
+  selector: 'app-navbar', // ítem corregido
   standalone: true,
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'] // ✅ corregido (era styleUrl)
+  styleUrls: ['./navbar.component.css'] // ítem corregido (era styleUrl)
 })
-export class NavbarComponent { // ✅ corregido (era NavarComponent)
+export class NavbarComponent { // ítem corregido (era NavarComponent)
 
   @Output() toggleSidebar = new EventEmitter<void>();
 
@@ -27,13 +27,8 @@ export class NavbarComponent { // ✅ corregido (era NavarComponent)
   ) {}
 
   cerrarSesion() {
-    this.loaderService.show();
-    setTimeout(() => {
-      this.authService.logout();
-      this.loaderService.hide();
-      this.alertService.success('Sesión cerrada con éxito', '¡Hasta pronto!');
-      this.router.navigate(['/index']);
-    }, 1000);
+    // Cierra sesión y redirige al login
+    this.authService.logout('/login');
   }
 
   toggleMenu() {

@@ -1,15 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
-import { LoginRequest } from '../../models/login-request.model';
-import { AlertService } from '../../../shared/services/alert.service';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { Router, RouterModule } from '@angular/router';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+
+import { AuthService } from '../../services/auth.service';
+import { LoginRequest } from '../../models/login-request.model';
+import { AlertService } from '../../../shared/services/alert.service';
 import { LoaderService } from '../../../shared/services/loader.service';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -20,13 +25,12 @@ import { RouterModule } from '@angular/router';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    RouterModule
+    RouterModule,
   ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   loginForm: FormGroup;
 
   constructor(
@@ -38,7 +42,7 @@ export class LoginComponent {
   ) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
@@ -53,26 +57,49 @@ export class LoginComponent {
     this.loaderService.show();
     this.authService.login(credentials).subscribe({
       next: (response) => {
-  this.loaderService.hide();
+        this.loaderService.hide();
 
-  // ✅ Ahora el backend devuelve directamente el token y los datos
-  if (response && response.token) {
-    this.authService.setToken(response.token);
-    this.alertService.success(`Bienvenido, ${response.nombre}`);
-    this.router.navigate(['/admin']);
-  } else {
-    this.alertService.error('Error inesperado en la respuesta del servidor.');
-  }
-  },
+        if (response && response.token) {
+          console.log('Respuesta de login:', response);
+          this.authService.setToken(response.token);
+          this.alertService.success(`Bienvenido, ${response.nombre}`);
+
+          const rawRol: any =
+            (response as any).rol ??
+            (response as any).role ??
+            (response as any).roles ??
+            '';
+
+          let rol = '';
+          if (Array.isArray(rawRol)) {
+            rol = rawRol.map((r) => String(r).toLowerCase()).join(',');
+          } else {
+            rol = String(rawRol).toLowerCase();
+          }
+
+          if (rol.includes('admin')) {
+            console.log('Rol detectado como admin, navegando a /admin');
+            this.router.navigate(['/admin']);
+          } else {
+            // Cliente: vuelve al inicio
+            this.router.navigate(['/']);
+          }
+        } else {
+          this.alertService.error(
+            'Error inesperado en la respuesta del servidor.'
+          );
+        }
+      },
       error: (error) => {
         this.loaderService.hide();
-        const message = error.error?.message || 'Error al iniciar sesión.';
+        const message =
+          error.error?.message || 'Error al iniciar sesión.';
         this.alertService.error(message);
-      }
+      },
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.loginForm.valid) {
       this.login();
     }
