@@ -41,7 +41,7 @@ export class AdminComponent {
   ) {}
 
   ngOnInit() {
-    console.log('Token después de redirigir:', localStorage.getItem('auth_token'));
+    console.log('Token después de redirigir:', sessionStorage.getItem('auth_token'));
   }
 
   cerrarSesion() {

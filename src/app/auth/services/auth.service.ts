@@ -36,17 +36,17 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/register`, usuario);
   }
 
-  // Manejo del token en localStorage
+  // Manejo del token en sessionStorage
   setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+    sessionStorage.setItem(this.tokenKey, token);
   }
 
   getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+    return sessionStorage.getItem(this.tokenKey);
   }
 
   removeToken(): void {
-    localStorage.removeItem(this.tokenKey);
+    sessionStorage.removeItem(this.tokenKey);
   }
 
   isAuthenticated(): boolean {
