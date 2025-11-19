@@ -119,4 +119,8 @@ this.registerForm.get('confirmPassword')?.valueChanges.subscribe(() => {
   goToLogin() {
     this.router.navigate(['/login']);
   }
+
+  goBack(): void {
+    window.history.back();
+  }
 }

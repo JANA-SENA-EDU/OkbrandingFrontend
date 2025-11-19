@@ -1,82 +1,93 @@
 .register-outer-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #f7f7f7;
-  }
-  
-  /* Card visual */
-  .register-card {
-    display: flex;
-    min-width: 800px;
-    max-width: 1000px;
-    width: 100%;
-    max-height: 700px;      /* Menor altura máxima */
-    border-radius: 24px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
-    overflow: hidden;
-    background: #fff;
-    margin: 40px 0;
-  }
-  
-  .register-left {
-    flex: 1;
-    background: url('/assets/img/background.jpg') center center/cover no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .welcome-text {
-    color: #fff;
-    max-width: 340px;
-    text-align: left;
-    padding: 40px 24px;
-    background: rgba(80, 36, 255, 0.3);
-    border-radius: 16px;
-  }
-  
-  /* Permite scroll interno si hay muchos campos */
-  .register-right {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #fff;
-    /* overflow-y: auto; */   /* Quita el scroll forzado */
-    padding: 0;
-  }
-  
-  .register-form {
-    width: 100%;
-    max-width: 380px;      /* Un poco más angosto */
-    padding: 16px 8px;     /* Menos padding */
-    display: flex;
-    flex-direction: column;
-    gap: 8px;              /* Menos espacio entre campos */
-    background: #fff;
-  }
-  
-  .login-logo-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 8px;    /* Menos espacio debajo del logo */
-  }
-  
-  .logo {
-    height: 48px;          /* Un poco más pequeño si es necesario */
-    max-width: 90%;
-    object-fit: contain;
-  }
-  
-  .registro-link {
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .registro-link a {
-    cursor: pointer;
-    color: #3f51b5;
-    text-decoration: underline;
-  }
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f7;
+}
+
+/* Card visual */
+.register-card {
+  display: flex;
+  min-width: 800px;
+  max-width: 1000px;
+  width: 100%;
+  max-height: 700px;
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  background: #fff;
+  margin: 40px 0;
+}
+
+.register-left {
+  flex: 1;
+  background: url('/assets/img/background.jpg') center center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-text {
+  color: #fff;
+  max-width: 340px;
+  text-align: left;
+  padding: 40px 24px;
+  background: rgba(80, 36, 255, 0.3);
+  border-radius: 16px;
+}
+
+/* Permite scroll interno si hay muchos campos */
+.register-right {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 0;
+}
+
+.register-form {
+  width: 100%;
+  max-width: 380px;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #fff;
+}
+
+.back-button {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  background: transparent;
+  border: none;
+  color: #3f51b5;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
+.login-logo-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.logo {
+  height: 48px;
+  max-width: 90%;
+  object-fit: contain;
+}
+
+.registro-link {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.registro-link a {
+  cursor: pointer;
+  color: #3f51b5;
+  text-decoration: underline;
+}
+

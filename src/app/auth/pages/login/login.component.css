@@ -103,6 +103,17 @@ form {
   background: #fff;
 }
 
+.back-button {
+  align-self: flex-start;
+  margin-bottom: 8px;
+  background: transparent;
+  border: none;
+  color: #3f51b5;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+}
+
 .login-logo-container {
   display: flex;
   justify-content: center;

@@ -104,4 +104,8 @@ export class LoginComponent {
       this.login();
     }
   }
+
+  goBack(): void {
+    window.history.back();
+  }
 }
