@@ -4,6 +4,7 @@ import { HomeComponent } from '../home/pages/home/home.component';
 import { LoginComponent } from '../auth/pages/login/login.component';
 import { RegisterComponent } from '../auth/pages/register/register.component';
 import { ClientComponent } from './client.component';
+import { authGuard } from '../auth/guards/auth.guard';
 
 export const clientRoutes: Routes = [
   {
@@ -28,6 +29,7 @@ export const clientRoutes: Routes = [
       },
       {
         path: 'mis-cotizaciones',
+        canActivate: [authGuard],
         loadComponent: () =>
           import('./pages/mis-cotizaciones/mis-cotizaciones.component').then(
             (m) => m.MisCotizacionesComponent

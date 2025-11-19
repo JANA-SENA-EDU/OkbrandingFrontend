@@ -1,5 +1,66 @@
 <div class="mis-cotizaciones">
   <h2>Mis cotizaciones</h2>
-  <p>Aquí podrás ver tus cotizaciones más adelante.</p>
+
+  <section class="bloque bloque-actual">
+    <h3>Productos a cotizar</h3>
+
+    <ng-container *ngIf="productosActuales.length; else sinProductos">
+      <div
+        class="producto-item"
+        *ngFor="let producto of productosActuales"
+      >
+        <div class="producto-info">
+          <div class="producto-nombre">
+            {{ producto.nombre || producto.name || 'Producto sin nombre' }}
+          </div>
+          <div class="producto-detalle" *ngIf="producto.descripcion">
+            {{ producto.descripcion }}
+          </div>
+        </div>
+      </div>
+
+      <div class="acciones-cotizacion">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="mandarCotizacion()"
+        >
+          Mandar cotización
+        </button>
+      </div>
+    </ng-container>
+
+    <ng-template #sinProductos>
+      <p class="mensaje-vacio">
+        Todavía no tienes productos en tu cotización actual.
+      </p>
+    </ng-template>
+  </section>
+
+  <section class="bloque bloque-enviadas">
+    <h3>Cotizaciones enviadas</h3>
+
+    <ng-container *ngIf="cotizacionesEnviadas.length; else sinCotizaciones">
+      <div
+        class="cotizacion-card"
+        *ngFor="let cot of cotizacionesEnviadas"
+      >
+        <div class="cotizacion-header">
+          <span class="cotizacion-codigo">{{ cot.codigo }}</span>
+          <span class="cotizacion-fecha">{{ cot.fecha }}</span>
+          <span class="cotizacion-estado">{{ cot.estado }}</span>
+        </div>
+        <div class="cotizacion-body">
+          <p>{{ cot.resumen }}</p>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #sinCotizaciones>
+      <p class="mensaje-vacio">
+        Todavía no has enviado ninguna cotización.
+      </p>
+    </ng-template>
+  </section>
 </div>
 

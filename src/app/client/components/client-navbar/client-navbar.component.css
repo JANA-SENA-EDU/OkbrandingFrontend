@@ -1,0 +1,35 @@
+.client-header {                                                                                                         
+    display: flex;                                                                                                         
+    align-items: center;                                                                                                   
+    padding: 0 16px;                                                                                                       
+    height: 64px;                                                                                                          
+  }                                                                                                                        
+                                                                                                                           
+.logo {                                                                                                                  
+    height: 40px;                                                                                                          
+  }                                                                                                                        
+                                                                                                                           
+  .spacer {                                                                                                                
+    flex: 1 1 auto;                                                                                                        
+  }                                                                                                                        
+                                                                                                                           
+  .header-buttons button + button {                                                                                        
+    margin-left: 8px;
+  }
+
+  .quote-button {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .quote-button mat-icon {
+    margin-right: 4px;
+  }
+ .header-buttons button mat-icon {                                                                                        
+    margin-right: 4px;                                                                                                     
+  }                                                                                                                        
+                                                                                                                           
+  .quote-button {                                                                                                          
+    display: inline-flex;                                                                                                  
+    align-items: center;                                                                                                   
+  }
