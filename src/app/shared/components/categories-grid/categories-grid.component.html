@@ -1,0 +1,36 @@
+﻿<!-- Categorías -->
+<h2 class="section-title">Nuestras categorías</h2>
+
+<div class="categorias-lista">
+  <mat-card
+    class="categoria-card"
+    *ngFor="let categoria of categorias"
+    [routerLink]="['/categorias', categoria.idCategoria, 'productos']"
+  >
+    <div class="categoria-image-wrapper" *ngIf="categoria.imagen">
+      <img
+        mat-card-image
+        [src]="categoria.imagen"
+        alt="Imagen de {{ categoria.nombreCategoria }}"
+      />
+    </div>
+
+    <div class="categoria-overlay">
+      <div class="categoria-overlay-content">
+        <h3 class="categoria-overlay-title">{{ categoria.nombreCategoria }}</h3>
+        <p class="categoria-description">
+          {{ categoria.descripcion }}
+        </p>
+      </div>
+    </div>
+
+    <div class="categoria-content">
+      <mat-card-title>{{ categoria.nombreCategoria }}</mat-card-title>
+      <div class="categoria-actions">
+        <button mat-stroked-button color="primary">
+          Ver productos
+        </button>
+      </div>
+    </div>
+  </mat-card>
+</div>

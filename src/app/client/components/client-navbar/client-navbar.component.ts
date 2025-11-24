@@ -34,6 +34,51 @@ import { Component } from '@angular/core';
     goToHome(): void {                                                                                                     
       this.router.navigate(['/']);                                                                                         
     }                                                                                                                      
+
+    scrollToAbout(): void {
+      const doScroll = () => {
+        const el = document.getElementById('nosotros');
+        if (!el) { return; }
+        const rect = el.getBoundingClientRect();
+        const targetY = window.scrollY + rect.top - 80; // pequeño offset por la navbar
+        this.animateScrollTo(targetY, 700); // duración ~700ms
+      };
+
+      if (this.router.url !== '/') {
+        this.router.navigate(['/']).then(() => {
+          setTimeout(doScroll, 250);
+        });
+      } else {
+        doScroll();
+      }
+    }
+
+    private animateScrollTo(targetY: number, duration = 700): void {
+      const startY = window.scrollY || window.pageYOffset;
+      const distance = targetY - startY;
+      if (distance === 0 || duration <= 0) {
+        window.scrollTo(0, targetY);
+        return;
+      }
+
+      const startTime = performance.now();
+
+      const easeInOutQuad = (t: number) =>
+        t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+      const step = (now: number) => {
+        const elapsed = now - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutQuad(progress);
+        window.scrollTo(0, startY + distance * eased);
+
+        if (elapsed < duration) {
+          requestAnimationFrame(step);
+        }
+      };
+
+      requestAnimationFrame(step);
+    }
                                                                                                                            
     goToLogin(): void {                                                                                                    
       this.router.navigate(['/login']);                                                                                    

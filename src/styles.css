@@ -2,3 +2,82 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* Footer */
+.site-footer {
+  background-color: #111827;
+  color: #e5e7eb;
+  padding: 3rem 1.5rem 2rem;
+  margin-top: 3rem;
+  border-top: 1px solid rgba(156, 163, 175, 0.4);
+  font-size: 0.95rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+  color: #f9fafb;
+}
+
+.footer-section p {
+  margin: 0.15rem 0;
+  color: #d1d5db;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: 0.35rem;
+}
+
+.footer-section a {
+  color: #9ca3af;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.footer-section a:hover {
+  color: #f97316;
+  transform: translateY(-1px);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(55, 65, 81, 0.8);
+  text-align: center;
+  font-size: 0.85rem;
+  color: #9ca3af;
+}
+
+/* Animación suave de aparición */
+.site-footer {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: footerFadeIn 0.6s ease-out forwards 0.2s;
+}
+
+@keyframes footerFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

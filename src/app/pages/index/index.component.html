@@ -1,31 +1,7 @@
-<!-- Carrusel -->
-<div class="carousel">
-  <button class="carousel-btn prev" (click)="anterior()">&#10094;</button>
-  <div class="slides" [style.transform]="getTransform()">
-    <img *ngFor="let img of imagenes" [src]="img" />
-  </div>
-  <button class="carousel-btn next" (click)="siguiente()">&#10095;</button>
-</div>
+<app-hero-carousel></app-hero-carousel>
 
-<!-- Categorías -->
-<h2 class="section-title">Categorías</h2>
-<div class="categorias-lista">
-  <mat-card
-    class="categoria-card"
-    *ngFor="let categoria of categorias"
-    [routerLink]="['/categorias', categoria.idCategoria, 'productos']"
-    style="cursor: pointer"
-  >
-    <img
-      *ngIf="categoria.imagen"
-      mat-card-image
-      [src]="categoria.imagen"
-      alt="Imagen de {{ categoria.nombreCategoria }}"
-    />
-    <mat-card-title>{{ categoria.nombreCategoria }}</mat-card-title>
-    <mat-card-content>
-      <p>{{ categoria.descripcion }}</p>
-    </mat-card-content>
-  </mat-card>
-</div>
+<app-categories-grid [categorias]="categorias"></app-categories-grid>
+
+<app-about-us></app-about-us>
+<app-footer></app-footer>
 

@@ -1,0 +1,53 @@
+.hero-carousel {
+  position: relative;
+  width: 100%;
+  height: 60vh;
+  min-height: 320px;
+  max-height: 520px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.slides {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.6s ease;
+}
+
+.slides img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 24px;
+  color: #111827;
+  cursor: pointer;
+  z-index: 2;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carousel-btn:hover {
+  background: #ffffff;
+  transform: translateY(-50%) translateY(-2px);
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.25);
+}
+
+.carousel-btn.prev {
+  left: 20px;
+}
+
+.carousel-btn.next {
+  right: 20px;
+}

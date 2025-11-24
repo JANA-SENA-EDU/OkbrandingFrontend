@@ -8,19 +8,29 @@ import { CategoriaService } from '../../admin/services/categoria.service';
 import { Categoria } from '../../admin/models/categoria.model';
 import { AuthService } from '../../auth/services/auth.service';
 import { AlertService } from '../../shared/services/alert.service';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
+import { AboutUsComponent } from '../../shared/components/about-us/about-us.component';
+import { HeroCarouselComponent } from '../../shared/components/hero-carousel/hero-carousel.component';
+import { CategoriesGridComponent } from '../../shared/components/categories-grid/categories-grid.component';
 
 @Component({
   selector: 'app-index',
   standalone: true,
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.css'],
-  imports: [CommonModule, MatButtonModule, MatCardModule, RouterModule],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatCardModule,
+    RouterModule,
+    FooterComponent,
+    AboutUsComponent,
+    HeroCarouselComponent,
+    CategoriesGridComponent,
+  ],
 })
 export class IndexComponent implements OnInit {
   categorias: Categoria[] = [];
-
-  imagenes = ['assets/img/banner1.png', 'assets/img/banner2.png', 'assets/img/banner3.png'];
-  indexActual = 0;
 
   constructor(
     private router: Router,
@@ -30,7 +40,6 @@ export class IndexComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    setInterval(() => this.siguiente(), 5000);
     this.cargarCategorias();
   }
 
@@ -43,19 +52,6 @@ export class IndexComponent implements OnInit {
       next: (data) => (this.categorias = data),
       error: (err) => console.error('Error cargando categorías', err),
     });
-  }
-
-  getTransform(): string {
-    return `translateX(-${this.indexActual * 100}%)`;
-  }
-
-  siguiente(): void {
-    this.indexActual = (this.indexActual + 1) % this.imagenes.length;
-  }
-
-  anterior(): void {
-    this.indexActual =
-      (this.indexActual - 1 + this.imagenes.length) % this.imagenes.length;
   }
 
   goToLogin(): void {

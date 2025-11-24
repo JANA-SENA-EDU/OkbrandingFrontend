@@ -1,37 +1,39 @@
-<header class="client-header">                                                                                           
-    <img                                                                                                                   
-      src="assets/img/logo.png"                                                                                            
-      alt="Logo"                                                                                                           
-      class="logo"                                                                                                         
-      style="cursor:pointer"                                                                                               
-      (click)="goToHome()"                                                                                                 
-    />                                                                                                                     
-                                                                                                                           
-    <span class="spacer"></span>                                                                                           
-                                                                                                                           
-    <div class="header-buttons">                                                                                           
-      <ng-container *ngIf="!isLoggedIn; else loggedInButtons">                                                             
-        <button mat-stroked-button (click)="goToLogin()">Iniciar sesión</button>                                           
-        <button mat-flat-button color="primary" (click)="goToRegister()">                                                  
-          Registrarse                                                                                                      
-        </button>                                                                                                          
-      </ng-container>                                                                                                      
-                                                                                                                           
-      <ng-template #loggedInButtons>                                                                                           
-    <button mat-stroked-button (click)="goToMisCotizaciones()" class="quote-button">                                       
-      <mat-icon                                                                                                            
-        [matBadge]="cotizacionCount"                                                                                       
-        [matBadgeHidden]="cotizacionCount === 0"                                                                           
-        matBadgeColor="accent"                                                                                             
-      >                                                                                                                    
-        description                                                                                                        
-      </mat-icon>                                                                                                          
-      <span>Mis cotizaciones</span>                                                                                        
-    </button>                                                                                                              
-                                                                                                                           
-    <button mat-flat-button color="primary" (click)="logout()">                                                            
-      Logout                                                                                                               
-    </button>                                                                                                              
-  </ng-template>                                                                                                    
-    </div>                                                                                                                 
-  </header>
+<header class="client-header">
+  <img
+    src="assets/img/logo.png"
+    alt="Logo"
+    class="logo"
+    style="cursor:pointer"
+    (click)="goToHome()"
+  />
+
+  <span class="spacer"></span>
+
+  <div class="header-buttons">
+    <ng-container *ngIf="!isLoggedIn; else loggedInButtons">
+      <button mat-stroked-button (click)="scrollToAbout()">Sobre nosotros</button>
+      <button mat-stroked-button (click)="goToLogin()">Iniciar sesion</button>
+      <button mat-flat-button color="primary" (click)="goToRegister()">
+        Registrarse
+      </button>
+    </ng-container>
+
+    <ng-template #loggedInButtons>
+      <button mat-stroked-button (click)="goToMisCotizaciones()" class="quote-button">
+        <mat-icon
+          [matBadge]="cotizacionCount"
+          [matBadgeHidden]="cotizacionCount === 0"
+          matBadgeColor="accent"
+        >
+          description
+        </mat-icon>
+        <span>Mis cotizaciones</span>
+      </button>
+
+      <button mat-flat-button color="primary" (click)="logout()">
+        Logout
+      </button>
+    </ng-template>
+  </div>
+</header>
+

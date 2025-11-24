@@ -1,0 +1,10 @@
+<section class="hero-carousel">
+  <button class="carousel-btn prev" (click)="prev()">&#10094;</button>
+
+  <div class="slides" [style.transform]="getTransform()">
+    <img *ngFor="let img of images" [src]="img" alt="Banner Okbranding" />
+  </div>
+
+  <button class="carousel-btn next" (click)="next()">&#10095;</button>
+</section>
+
