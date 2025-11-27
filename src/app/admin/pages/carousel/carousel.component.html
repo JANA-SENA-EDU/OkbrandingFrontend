@@ -1,0 +1,53 @@
+<div class="carousel-admin">
+  <h2>Editar carrusel de inicio</h2>
+  <p class="subtitle">
+    Solo administradores pueden cambiar las imágenes que se muestran en el home.
+  </p>
+
+  <div class="slides-grid">
+    <mat-card class="slide-card" *ngFor="let img of images; let i = index">
+      <div class="slide-header">
+        <h3>Slide {{ i + 1 }}</h3>
+        <button
+          mat-icon-button
+          color="warn"
+          (click)="removeSlide(i)"
+          [disabled]="images.length <= 1"
+        >
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+
+      <div class="slide-preview">
+        <img *ngIf="img" [src]="img" alt="Slide {{ i + 1 }}" />
+        <div *ngIf="!img" class="placeholder">
+          Sin imagen
+        </div>
+      </div>
+
+      <div class="slide-fields">
+        <label class="field-label">Subir nueva imagen</label>
+        <input type="file" accept="image/*" (change)="onFileSelected(i, $event)" />
+
+        <label class="field-label">Ruta / URL de la imagen</label>
+        <input
+          type="text"
+          [(ngModel)]="images[i]"
+          placeholder="assets/img/banner1.png o URL completa"
+        />
+      </div>
+    </mat-card>
+
+    <button mat-stroked-button color="primary" class="add-slide-btn" (click)="addSlide()">
+      <mat-icon>add</mat-icon>
+      Agregar slide
+    </button>
+  </div>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="save()">
+      Guardar cambios
+    </button>
+  </div>
+</div>
+

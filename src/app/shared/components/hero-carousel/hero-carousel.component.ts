@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { CarouselConfigService } from '../../services/carousel-config.service';
 
 @Component({
   selector: 'app-hero-carousel',
@@ -9,16 +10,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
   styleUrl: './hero-carousel.component.css',
 })
 export class HeroCarouselComponent implements OnInit, OnDestroy {
-  images: string[] = [
-    'assets/img/banner1.png',
-    'assets/img/banner2.png',
-    'assets/img/banner3.png',
-  ];
+  images: string[] = [];
 
   currentIndex = 0;
   private intervalId: number | undefined;
 
+  constructor(private carouselConfig: CarouselConfigService) {}
+
   ngOnInit(): void {
+    this.images = this.carouselConfig.getImages();
     this.startAutoSlide();
   }
 
@@ -45,4 +45,3 @@ export class HeroCarouselComponent implements OnInit, OnDestroy {
     this.intervalId = window.setInterval(() => this.next(), 5000);
   }
 }
-

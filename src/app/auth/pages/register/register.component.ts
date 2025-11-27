@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,7 +34,7 @@ export const passwordMatchValidator: ValidatorFn = (control: AbstractControl): V
     RouterModule,
   ]
 })
-export class RegisterComponent {
+export class RegisterComponent implements AfterViewInit {
   registerForm: FormGroup;
 
   constructor(
@@ -57,6 +57,20 @@ export class RegisterComponent {
 this.registerForm.get('confirmPassword')?.valueChanges.subscribe(() => {
   this.registerForm.updateValueAndValidity();
 });
+  }
+
+  ngAfterViewInit(): void {
+    // Si venimos desde login, hacemos que el registro entre desde la derecha
+    const from = history.state && (history.state as any).from;
+    if (from === 'login') {
+      const page = document.querySelector('.register-page') as HTMLElement | null;
+      if (page) {
+        page.classList.add('from-left');
+        requestAnimationFrame(() => {
+          page.classList.remove('from-left');
+        });
+      }
+    }
   }
 
   registrarse() {
@@ -121,6 +135,18 @@ this.registerForm.get('confirmPassword')?.valueChanges.subscribe(() => {
   }
 
   goBack(): void {
-    window.history.back();
+    this.router.navigate(['/']);
+  }
+
+  goToLoginWithAnimation(): void {
+    const page = document.querySelector('.register-page') as HTMLElement | null;
+    if (page) {
+      page.classList.add('slide-out-right');
+      setTimeout(() => {
+        this.router.navigate(['/login'], { state: { from: 'register' } });
+      }, 400);
+    } else {
+      this.router.navigate(['/login'], { state: { from: 'register' } });
+    }
   }
 }

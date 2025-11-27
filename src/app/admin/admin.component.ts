@@ -25,10 +25,9 @@ import { AuthService } from '../auth/services/auth.service';
     MatIconModule,
   ],
   templateUrl: './admin.component.html',
-  styleUrls: ['./admin.component.css']
+  styleUrls: ['./admin.component.css'],
 })
 export class AdminComponent {
-
   isSidenavOpen = true;
 
   @ViewChild('sidenav') sidenav!: MatSidenav;
@@ -45,8 +44,8 @@ export class AdminComponent {
   }
 
   cerrarSesion() {
-    // Cierra sesión y redirige al login
-    this.authService.logout('/login');
+    // Cierra sesión y redirige al index (home público)
+    this.authService.logout('/');
   }
 }
 

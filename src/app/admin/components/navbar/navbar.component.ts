@@ -9,14 +9,13 @@ import { AlertService } from '../../../shared/services/alert.service';
 import { LoaderService } from '../../../shared/services/loader.service';
 
 @Component({
-  selector: 'app-navbar', // ítem corregido
+  selector: 'app-navbar',
   standalone: true,
   imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, RouterModule],
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css'] // ítem corregido (era styleUrl)
+  styleUrls: ['./navbar.component.css'],
 })
-export class NavbarComponent { // ítem corregido (era NavarComponent)
-
+export class NavbarComponent {
   @Output() toggleSidebar = new EventEmitter<void>();
 
   constructor(
@@ -27,11 +26,12 @@ export class NavbarComponent { // ítem corregido (era NavarComponent)
   ) {}
 
   cerrarSesion() {
-    // Cierra sesión y redirige al login
-    this.authService.logout('/login');
+    // Cierra sesión y redirige al index (home público)
+    this.authService.logout('/');
   }
 
   toggleMenu() {
     this.toggleSidebar.emit();
   }
 }
+

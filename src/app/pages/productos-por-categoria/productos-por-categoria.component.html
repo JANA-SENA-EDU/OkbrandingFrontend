@@ -3,15 +3,15 @@
     {{ nombreCategoria }}
   </h2>
   <ng-template #tituloGenerico>
-    <h2>Productos de la categoría</h2>
+    <h2>Productos de la categoria</h2>
   </ng-template>
 
-  <div *ngIf="productos.length === 0">No hay productos para esta categoría.</div>
+  <div *ngIf="productos.length === 0">No hay productos para esta categorA-a.</div>
   <div class="producto-grid">
     <mat-card
       *ngFor="let producto of productos"
       class="producto-card mat-elevation-z4"
-      [routerLink]="['/producto', producto.idProducto]"
+      (click)="abrirDetalle(producto)"
       style="cursor:pointer;"
     >
       <img
@@ -23,7 +23,7 @@
       <mat-card-content>
         <h3>{{ producto.nombre }}</h3>
         <p><strong>Dimensiones:</strong> {{ producto.dimensiones }}</p>
-        <p><strong>Descripción:</strong> {{ producto.descripcion }}</p>
+        <p><strong>DescripciA3n:</strong> {{ producto.descripcion }}</p>
         <div class="color-container" *ngIf="producto.colores?.length">
           <strong>Colores:</strong>
           <div

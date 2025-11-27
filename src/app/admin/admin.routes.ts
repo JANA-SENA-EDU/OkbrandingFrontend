@@ -63,6 +63,13 @@ export const adminRoutes: Routes = [
             (m) => m.ColorComponent
           ),
       },
+      {
+        path: 'carrusel',
+        loadComponent: () =>
+          import('./pages/carousel/carousel.component').then(
+            (m) => m.CarouselAdminComponent
+          ),
+      },
     ],
   },
 ];

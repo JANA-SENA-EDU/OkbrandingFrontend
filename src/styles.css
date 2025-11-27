@@ -8,7 +8,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background-color: #111827;
   color: #e5e7eb;
   padding: 3rem 1.5rem 2rem;
-  margin-top: 3rem;
+  margin-top: 0;
   border-top: 1px solid rgba(156, 163, 175, 0.4);
   font-size: 0.95rem;
 }
@@ -80,4 +80,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Panel de diálogo del detalle de producto */
+.producto-detalle-dialog-panel .mat-mdc-dialog-container {
+  padding: 0;
+  border-radius: 24px;
+  overflow: hidden;
+  background: transparent;
 }

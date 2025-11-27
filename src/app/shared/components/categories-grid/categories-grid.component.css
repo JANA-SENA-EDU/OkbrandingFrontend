@@ -1,15 +1,20 @@
-﻿/* Título sección */
+/* Sección de categorías con fondo azul profesional */
+.categories-section {
+  background-color: #eff6ff;
+  padding: 60px 0 80px;
+}
+
+/* Título sección */
 .section-title {
   text-align: center;
-  margin: 40px 0 28px;
+  margin: 0 0 28px;
   font-size: 32px;
   font-weight: 600;
 }
 
-/* Categorías */
+/* Grid de categorías */
 .categorias-lista {
   display: grid;
-  /* Cards todavía más grandes, casi tipo "destacadas" */
   grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
   gap: 36px;
   padding: 0 56px 64px;
@@ -130,3 +135,4 @@
   box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
   transform: translateY(-1px);
 }
+

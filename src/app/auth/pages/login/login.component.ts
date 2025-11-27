@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormBuilder,
@@ -30,7 +30,7 @@ import { LoaderService } from '../../../shared/services/loader.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
   loginForm: FormGroup;
 
   constructor(
@@ -44,6 +44,21 @@ export class LoginComponent {
       username: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  ngAfterViewInit(): void {
+    // Si venimos desde registro, hacemos que el login entre desde la izquierda
+    const from = history.state && (history.state as any).from;
+    if (from === 'register') {
+      const page = document.querySelector('.login-page') as HTMLElement | null;
+      if (page) {
+        page.classList.add('from-right');
+        // Forzar un frame y luego quitar la clase para que se anime hacia su posición
+        requestAnimationFrame(() => {
+          page.classList.remove('from-right');
+        });
+      }
+    }
   }
 
   login(): void {
@@ -106,6 +121,18 @@ export class LoginComponent {
   }
 
   goBack(): void {
-    window.history.back();
+    this.router.navigate(['/']);
+  }
+
+  goToRegister(): void {
+    const page = document.querySelector('.login-page') as HTMLElement | null;
+    if (page) {
+      page.classList.add('slide-out-left');
+      setTimeout(() => {
+        this.router.navigate(['/register'], { state: { from: 'login' } });
+      }, 400);
+    } else {
+      this.router.navigate(['/register'], { state: { from: 'login' } });
+    }
   }
 }

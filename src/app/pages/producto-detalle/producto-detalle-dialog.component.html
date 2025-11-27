@@ -1,5 +1,9 @@
-<div class="producto-detalle-page" *ngIf="producto">
+<div class="producto-detalle-dialog" *ngIf="producto">
   <div class="producto-detalle-card">
+    <button type="button" class="close-btn" (click)="close()">
+      ✕
+    </button>
+
     <div class="producto-detalle-left">
       <div class="producto-detalle-marca" *ngIf="producto.categoria?.nombreCategoria">
         <span class="producto-detalle-marca-badge">

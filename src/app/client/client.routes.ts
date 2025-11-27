@@ -37,7 +37,7 @@ export const clientRoutes: Routes = [
       },
     ],
   },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login', component: LoginComponent, data: { animation: 'LoginPage' } },
+  { path: 'register', component: RegisterComponent, data: { animation: 'RegisterPage' } },
   { path: '**', redirectTo: '' },
 ];
