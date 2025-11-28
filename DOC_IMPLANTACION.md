@@ -1,13 +1,13 @@
-# Documento de ImplantaciÛn del Sistema OkBranding (Frontend y Backend)
+Ôªø# Documento de Implantaci√≥n del Sistema OkBranding (Frontend y Backend)
 
-## 1. IntroducciÛn
+## 1. Introducci√≥n
 
-El presente documento describe el proceso de implantaciÛn del sistema web de OkBranding, compuesto por:
+El presente documento describe el proceso de implantaci√≥n del sistema web de OkBranding, compuesto por:
 
-- Una aplicaciÛn **frontend** desarrollada en **Angular**, con mÛdulos diferenciados para clientes y administradores.
+- Una aplicaci√≥n **frontend** desarrollada en **Angular**, con m√≥dulos diferenciados para clientes y administradores.
 - Un **backend** desarrollado en **Spring Boot (Java 21)**, que expone una API REST y se conecta a una base de datos **MySQL** (actualmente en Azure Database for MySQL Flexible Server).
 
-El documento incluye requerimientos de software y hardware, pasos de instalaciÛn y configuraciÛn, consideraciones de migraciÛn, respaldo de datos y polÌticas de backup, plan de capacitaciÛn y plan de liberaciÛn del sistema de informaciÛn, con el fin de garantizar una puesta en marcha controlada y sostenible en el tiempo, abarcando tanto frontend como backend.
+El documento incluye requerimientos de software y hardware, pasos de instalaci√≥n y configuraci√≥n, consideraciones de migraci√≥n, respaldo de datos y pol√≠ticas de backup, plan de capacitaci√≥n y plan de liberaci√≥n del sistema de informaci√≥n, con el fin de garantizar una puesta en marcha controlada y sostenible en el tiempo, abarcando tanto frontend como backend.
 
 ---
 
@@ -15,15 +15,15 @@ El documento incluye requerimientos de software y hardware, pasos de instalaciÛn
 
 ### 2.1 Objetivo general
 
-Implantar el sistema web de OkBranding (frontend + backend) en un entorno de producciÛn estable, asegurando su operatividad, mantenibilidad, seguridad y escalabilidad, de forma que los usuarios finales (clientes y administradores) puedan utilizar todas las funcionalidades previstas.
+Implantar el sistema web de OkBranding (frontend + backend) en un entorno de producci√≥n estable, asegurando su operatividad, mantenibilidad, seguridad y escalabilidad, de forma que los usuarios finales (clientes y administradores) puedan utilizar todas las funcionalidades previstas.
 
-### 2.2 Objetivos especÌficos
+### 2.2 Objetivos espec√≠ficos
 
-- Disponer de una aplicaciÛn web responsiva para la gestiÛn de productos, categorÌas, colores, carrusel del home y proceso de cotizaciones.
-- Facilitar la administraciÛn del contenido (productos, categorÌas, colores, carrusel, usuarios) a travÈs del mÛdulo de administraciÛn protegido.
-- Exponer una API REST segura en el backend para la gestiÛn de entidades de negocio (productos, categorÌas, usuarios, cotizaciones, etc.), con autenticaciÛn basada en **JWT**.
-- Definir un proceso est·ndar de instalaciÛn, actualizaciÛn y liberaciÛn de nuevas versiones del sistema (frontend y backend).
-- Establecer lineamientos de respaldo y recuperaciÛn de la informaciÛn almacenada en la base de datos de producciÛn.
+- Disponer de una aplicaci√≥n web responsiva para la gesti√≥n de productos, categor√≠as, colores, carrusel del home y proceso de cotizaciones.
+- Facilitar la administraci√≥n del contenido (productos, categor√≠as, colores, carrusel, usuarios) a trav√©s del m√≥dulo de administraci√≥n protegido.
+- Exponer una API REST segura en el backend para la gesti√≥n de entidades de negocio (productos, categor√≠as, usuarios, cotizaciones, etc.), con autenticaci√≥n basada en **JWT**.
+- Definir un proceso est√°ndar de instalaci√≥n, actualizaci√≥n y liberaci√≥n de nuevas versiones del sistema (frontend y backend).
+- Establecer lineamientos de respaldo y recuperaci√≥n de la informaci√≥n almacenada en la base de datos de producci√≥n.
 - Proveer lineamientos de soporte y mantenimiento correctivo y evolutivo tanto para el frontend como para el backend.
 
 ---
@@ -34,55 +34,55 @@ Implantar el sistema web de OkBranding (frontend + backend) en un entorno de pro
 
 #### 3.1.1 Frontend
 
-- Sistema operativo: Windows 10/11, macOS o distribuciÛn Linux.
-- Node.js: versiÛn LTS (>= 18.x).
-- Angular CLI: versiÛn compatible con el proyecto (seg˙n `package.json`).
-- NPM: versiÛn incluida con Node LTS.
+- Sistema operativo: Windows 10/11, macOS o distribuci√≥n Linux.
+- Node.js: versi√≥n LTS (>= 18.x).
+- Angular CLI: versi√≥n compatible con el proyecto (seg√∫n `package.json`).
+- NPM: versi√≥n incluida con Node LTS.
 - Editor recomendado: VS Code o equivalente.
 - Navegadores para pruebas: Chrome, Edge, Firefox.
 
 #### 3.1.2 Backend
 
-- Sistema operativo: Windows 10/11, macOS o distribuciÛn Linux.
+- Sistema operativo: Windows 10/11, macOS o distribuci√≥n Linux.
 - **Java Development Kit (JDK) 21** (por ejemplo, Eclipse Temurin 21).
 - **Maven 3.9+** (o uso de `mvnw` incluido en el proyecto).
 - Servidor de base de datos **MySQL 8.x** (local o remoto) para desarrollo.
 - Herramienta para gestionar la base de datos (MySQL Workbench, DBeaver, etc.).
 - Opcional: Docker (para construir y ejecutar la imagen del backend).
 
-### 3.2 Entorno de producciÛn
+### 3.2 Entorno de producci√≥n
 
 Dependiendo de la estrategia de despliegue:
 
 #### 3.2.1 Frontend
 
-- **Servidor web est·tico**:
+- **Servidor web est√°tico**:
   - Actualmente desplegado en **Azure Static Web Apps**.
-  - URL p˙blica de producciÛn: `https://blue-sky-09b61240f.3.azurestaticapps.net/`.
-- ConfiguraciÛn de red y DNS:
-  - Dominio o subdominio p˙blico para el frontend (puede ser el proporcionado por Azure Static Web Apps o un dominio propio).
-  - Certificados SSL/TLS v·lidos.
+  - URL p√∫blica de producci√≥n: `https://blue-sky-09b61240f.3.azurestaticapps.net/`.
+- Configuraci√≥n de red y DNS:
+  - Dominio o subdominio p√∫blico para el frontend (puede ser el proporcionado por Azure Static Web Apps o un dominio propio).
+  - Certificados SSL/TLS v√°lidos.
 
 #### 3.2.2 Backend
 
 - **Servidor de aplicaciones Java**:
   - Actualmente desplegado en **Azure App Service**.
-  - URL p˙blica de producciÛn: `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net`.
+  - URL p√∫blica de producci√≥n: `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net`.
 - **Base de datos MySQL**:
   - Servicio gestionado **Azure Database for MySQL Flexible Server**.
   - Acceso desde el servidor backend a la base de datos (puerto, firewall, red virtual, etc.).
 - Variables de entorno recomendadas:
-  - `JDBC_DATABASE_URL` (URL de conexiÛn a MySQL).
+  - `JDBC_DATABASE_URL` (URL de conexi√≥n a MySQL).
   - `JDBC_DATABASE_USERNAME` (usuario de BD).
-  - `JDBC_DATABASE_PASSWORD` (contraseÒa de BD).
+  - `JDBC_DATABASE_PASSWORD` (contrase√±a de BD).
   - `PORT` (puerto HTTP del backend, en cloud suele venir dado).
-  - En despliegues m·s avanzados, clave JWT y otros secretos deberÌan parametrizarse vÌa variables de entorno (ver secciÛn 15).
+  - En despliegues m√°s avanzados, clave JWT y otros secretos deber√≠an parametrizarse v√≠a variables de entorno (ver secci√≥n 15).
 
 ### 3.3 Dependencias del proyecto
 
 #### Frontend
 
-Seg˙n `package.json`, el proyecto utiliza al menos:
+Seg√∫n `package.json`, el proyecto utiliza al menos:
 
 - Angular Framework.
 - Angular Material (componentes de interfaz).
@@ -91,18 +91,18 @@ Seg˙n `package.json`, el proyecto utiliza al menos:
 
 #### Backend
 
-Seg˙n `pom.xml`, el proyecto utiliza:
+Seg√∫n `pom.xml`, el proyecto utiliza:
 
 - `spring-boot-starter-web` (API REST).
 - `spring-boot-starter-data-jpa` (acceso a datos con JPA/Hibernate).
-- `spring-boot-starter-security` + `spring-security-crypto` (seguridad / autenticaciÛn).
-- `spring-boot-starter-validation` (validaciÛn).
-- `spring-boot-starter-actuator` (endpoints de monitorizaciÛn).
+- `spring-boot-starter-security` + `spring-security-crypto` (seguridad / autenticaci√≥n).
+- `spring-boot-starter-validation` (validaci√≥n).
+- `spring-boot-starter-actuator` (endpoints de monitorizaci√≥n).
 - `mysql-connector-j` (conector MySQL).
 - `jjwt-*` (manejo de tokens JWT).
-- `spring-boot-starter-mail` (envÌo de correo, si se habilita).
+- `spring-boot-starter-mail` (env√≠o de correo, si se habilita).
 - `lombok`, `mapstruct` y `mapstruct-processor` (DTOs y mapeos).
-- Plugins de Maven para compilaciÛn y empaquetado con Spring Boot.
+- Plugins de Maven para compilaci√≥n y empaquetado con Spring Boot.
 
 ### 3.4 Repositorios y ramas
 
@@ -117,24 +117,24 @@ Seg˙n `pom.xml`, el proyecto utiliza:
 
 ## 4. Requerimientos de hardware
 
-### 4.1 Servidor de producciÛn (frontend)
+### 4.1 Servidor de producci√≥n (frontend)
 
 - CPU: 2 vCPU o superior.
 - RAM: 4 GB o superior.
-- Almacenamiento: 20 GB (mÌnimo) para sistema, logs y artefactos est·ticos.
-- Conectividad: acceso a internet o red corporativa seg˙n el alcance.
+- Almacenamiento: 20 GB (m√≠nimo) para sistema, logs y artefactos est√°ticos.
+- Conectividad: acceso a internet o red corporativa seg√∫n el alcance.
 
-### 4.2 Servidor de producciÛn (backend y base de datos)
+### 4.2 Servidor de producci√≥n (backend y base de datos)
 
-Los valores pueden ajustarse seg˙n carga esperada:
+Los valores pueden ajustarse seg√∫n carga esperada:
 
-- CPU: 2ñ4 vCPU para el backend; 2ñ4 vCPU para la base de datos (en caso de servidor separado).
+- CPU: 2‚Äì4 vCPU para el backend; 2‚Äì4 vCPU para la base de datos (en caso de servidor separado).
 - RAM:
-  - Backend: 4ñ8 GB.
-  - Base de datos: 8 GB o superior seg˙n volumen de datos.
+  - Backend: 4‚Äì8 GB.
+  - Base de datos: 8 GB o superior seg√∫n volumen de datos.
 - Almacenamiento:
-  - Backend: 20ñ40 GB para sistema, logs y JARs/im·genes Docker.
-  - BD: almacenamiento dimensionado seg˙n el crecimiento esperado (mÌnimo 50ñ100 GB), con discos SSD recomendados.
+  - Backend: 20‚Äì40 GB para sistema, logs y JARs/im√°genes Docker.
+  - BD: almacenamiento dimensionado seg√∫n el crecimiento esperado (m√≠nimo 50‚Äì100 GB), con discos SSD recomendados.
 - Conectividad:
   - Acceso a la base de datos desde el backend (red interna segura o reglas de firewall adecuadas).
   - Acceso controlado desde internet o red corporativa hacia el backend (firewall / WAF).
@@ -143,52 +143,52 @@ Los valores pueden ajustarse seg˙n carga esperada:
 
 - CPU equivalente a Intel i5 o superior.
 - RAM: 8 GB o superior.
-- Disco SSD recomendado para mejorar tiempos de compilaciÛn y ejecuciÛn.
+- Disco SSD recomendado para mejorar tiempos de compilaci√≥n y ejecuci√≥n.
 
 ---
 
 ## 5. Dispositivos adicionales
 
-No se requiere hardware adicional especÌfico.
+No se requiere hardware adicional espec√≠fico.
 
-El sistema se utiliza desde navegadores web est·ndar (Chrome, Edge, Firefox, Safari) en equipos de escritorio o dispositivos mÛviles.  
-El backend expone una API HTTP/HTTPS consumida ˙nicamente por el frontend y por herramientas de administraciÛn o integraciÛn si se definen.
+El sistema se utiliza desde navegadores web est√°ndar (Chrome, Edge, Firefox, Safari) en equipos de escritorio o dispositivos m√≥viles.  
+El backend expone una API HTTP/HTTPS consumida √∫nicamente por el frontend y por herramientas de administraci√≥n o integraci√≥n si se definen.
 
 ---
 
-## 6. MigraciÛn
+## 6. Migraci√≥n
 
-### 6.1 MigraciÛn de frontend
+### 6.1 Migraci√≥n de frontend
 
-En el contexto del frontend, la migraciÛn se centra en:
+En el contexto del frontend, la migraci√≥n se centra en:
 
-- Adaptar la nueva versiÛn del frontend a la API existente del backend.
-- Ajustar par·metros de endpoints, URLs y configuraciones de entorno (`apiUrl`, rutas, etc.).
+- Adaptar la nueva versi√≥n del frontend a la API existente del backend.
+- Ajustar par√°metros de endpoints, URLs y configuraciones de entorno (`apiUrl`, rutas, etc.).
 
-Si existe una versiÛn anterior del frontend:
+Si existe una versi√≥n anterior del frontend:
 
 - Validar compatibilidad con la API actual.
-- Actualizar rutas, componentes y servicios seg˙n cambios funcionales.
-- Coordinar una ventana de migraciÛn con el backend para minimizar impactos.
+- Actualizar rutas, componentes y servicios seg√∫n cambios funcionales.
+- Coordinar una ventana de migraci√≥n con el backend para minimizar impactos.
 
-### 6.2 MigraciÛn de backend y datos
+### 6.2 Migraci√≥n de backend y datos
 
-La migraciÛn de datos (productos, categorÌas, usuarios, cotizaciones, etc.) se realiza en la base de datos del backend.
+La migraci√≥n de datos (productos, categor√≠as, usuarios, cotizaciones, etc.) se realiza en la base de datos del backend.
 
-- Revisar la configuraciÛn de `spring.jpa.hibernate.ddl-auto` (actualmente `update`):
-  - Para entornos productivos puede ser recomendable usar migraciones controladas (Flyway/Liquibase) en lugar de cambios autom·ticos.
+- Revisar la configuraci√≥n de `spring.jpa.hibernate.ddl-auto` (actualmente `update`):
+  - Para entornos productivos puede ser recomendable usar migraciones controladas (Flyway/Liquibase) en lugar de cambios autom√°ticos.
 - Antes de cambios de esquema:
   - Realizar backup completo de la base de datos.
   - Probar los cambios en un entorno de staging con una copia de datos.
-- MigraciÛn de lÛgica de negocio:
+- Migraci√≥n de l√≥gica de negocio:
   - Revisar cambios en controladores (`CategoriaController`, `ProductoController`, `UsuarioController`, etc.) y DTOs.
-  - Garantizar compatibilidad hacia atr·s de la API o planificar cambios de versiÛn (por ejemplo `/api/v1/...`).
+  - Garantizar compatibilidad hacia atr√°s de la API o planificar cambios de versi√≥n (por ejemplo `/api/v1/...`).
 
 ---
 
-## 7. InstalaciÛn del aplicativo
+## 7. Instalaci√≥n del aplicativo
 
-### 7.1 InstalaciÛn del frontend en entorno de desarrollo
+### 7.1 Instalaci√≥n del frontend en entorno de desarrollo
 
 1. Clonar el repositorio:
    ```bash
@@ -203,12 +203,12 @@ La migraciÛn de datos (productos, categorÌas, usuarios, cotizaciones, etc.) se r
    ```bash
    ng serve
    ```
-4. Acceder a la aplicaciÛn:
+4. Acceder a la aplicaci√≥n:
    - Navegador: `http://localhost:4200`
 
 Asegurarse de que `environment.ts` apunte al backend de desarrollo (por ejemplo `http://localhost:8080/okBranding/...`).
 
-### 7.2 InstalaciÛn del backend en entorno de desarrollo
+### 7.2 Instalaci√≥n del backend en entorno de desarrollo
 
 1. Clonar el repositorio:
    ```bash
@@ -217,13 +217,13 @@ Asegurarse de que `environment.ts` apunte al backend de desarrollo (por ejemplo 
    ```
 2. Configurar acceso a la base de datos MySQL de desarrollo:
    - Crear base de datos `okbrandingdb` (nombre de ejemplo o el especificado en `spring.datasource.url`).
-   - Configurar usuario y contraseÒa con permisos sobre la base.
+   - Configurar usuario y contrase√±a con permisos sobre la base.
 3. Configurar `application.properties` o variables de entorno:
-   - OpciÛn A ñ usar variables de entorno:
+   - Opci√≥n A ‚Äì usar variables de entorno:
      - `JDBC_DATABASE_URL=jdbc:mysql://<host>:3306/okbrandingdb?sslMode=REQUIRED|DISABLED`
      - `JDBC_DATABASE_USERNAME=<usuario>`
-     - `JDBC_DATABASE_PASSWORD=<contraseÒa>`
-   - OpciÛn B ñ ajustar directamente `application.properties` (no recomendado para producciÛn, solo desarrollo).
+     - `JDBC_DATABASE_PASSWORD=<contrase√±a>`
+   - Opci√≥n B ‚Äì ajustar directamente `application.properties` (no recomendado para producci√≥n, solo desarrollo).
 4. Ejecutar el backend:
    ```bash
    ./mvnw spring-boot:run
@@ -234,29 +234,29 @@ Asegurarse de que `environment.ts` apunte al backend de desarrollo (por ejemplo 
    java -jar target/back-0.0.1-SNAPSHOT.jar
    ```
 5. Verificar:
-   - Acceso a `http://localhost:8080/actuator/health` (seg˙n configuraciÛn).
+   - Acceso a `http://localhost:8080/actuator/health` (seg√∫n configuraci√≥n).
    - Endpoints de negocio, por ejemplo:
      - `GET http://localhost:8080/okBranding/productos/listar`
      - `POST http://localhost:8080/okBranding/auth/login`
 
-### 7.3 ConstrucciÛn y despliegue del frontend en producciÛn
+### 7.3 Construcci√≥n y despliegue del frontend en producci√≥n
 
-1. Generar build de producciÛn:
+1. Generar build de producci√≥n:
    ```bash
    ng build --configuration production
    ```
-   Los artefactos se generan en `dist/<nombre-proyecto>/` (seg˙n `angular.json`).
+   Los artefactos se generan en `dist/<nombre-proyecto>/` (seg√∫n `angular.json`).
 2. Copiar los archivos generados al servidor web (Azure Static Web Apps o Nginx/Apache si se usa otra infraestructura).
 3. Configurar el servidor para:
    - Servir `index.html` como documento inicial.
    - Redirigir todas las rutas de la SPA a `index.html` (manejo de rutas en Angular).
    - Forzar HTTPS (redirecciones y certificados configurados).
 
-En el entorno actual, la URL de producciÛn del frontend es:
+En el entorno actual, la URL de producci√≥n del frontend es:
 
 - `https://blue-sky-09b61240f.3.azurestaticapps.net/`
 
-### 7.4 ConstrucciÛn y despliegue del backend en producciÛn
+### 7.4 Construcci√≥n y despliegue del backend en producci√≥n
 
 #### 7.4.1 Despliegue sin contenedores
 
@@ -264,15 +264,15 @@ En el entorno actual, la URL de producciÛn del frontend es:
    ```bash
    ./mvnw clean package -DskipTests
    ```
-2. Copiar `target/back-0.0.1-SNAPSHOT.jar` al servidor de producciÛn (si no se usa Docker).
-3. Configurar variables de entorno para producciÛn:
+2. Copiar `target/back-0.0.1-SNAPSHOT.jar` al servidor de producci√≥n (si no se usa Docker).
+3. Configurar variables de entorno para producci√≥n:
    - `JDBC_DATABASE_URL`, `JDBC_DATABASE_USERNAME`, `JDBC_DATABASE_PASSWORD`.
-   - `PORT` (si se requiere un puerto distinto a 8080, aunque en Azure App Service suele gestionarse autom·ticamente).
+   - `PORT` (si se requiere un puerto distinto a 8080, aunque en Azure App Service suele gestionarse autom√°ticamente).
 4. Ejecutar el backend:
    ```bash
    java -jar back-0.0.1-SNAPSHOT.jar
    ```
-5. Configurar servicio (systemd o equivalente) para que se ejecute como servicio de sistema, con restart autom·tico (en caso de servidor propio).
+5. Configurar servicio (systemd o equivalente) para que se ejecute como servicio de sistema, con restart autom√°tico (en caso de servidor propio).
 
 #### 7.4.2 Despliegue con Docker
 
@@ -285,7 +285,7 @@ En el entorno actual, la URL de producciÛn del frontend es:
    docker run -d \
      -e JDBC_DATABASE_URL="jdbc:mysql://<host>:3306/okbrandingdb?sslMode=REQUIRED" \
      -e JDBC_DATABASE_USERNAME="<usuario>" \
-     -e JDBC_DATABASE_PASSWORD="<contraseÒa>" \
+     -e JDBC_DATABASE_PASSWORD="<contrase√±a>" \
      -e PORT=8080 \
      -p 8080:8080 \
      --name okbranding-backend \
@@ -293,33 +293,33 @@ En el entorno actual, la URL de producciÛn del frontend es:
    ```
 3. Integrar con el balanceador o gateway de la infraestructura (si aplica).
 
-En el entorno actual, el backend est· desplegado en Azure App Service con la URL:
+En el entorno actual, el backend est√° desplegado en Azure App Service con la URL:
 
 - `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net`
 
 ---
 
-## 8. ConfiguraciÛn y puesta en marcha
+## 8. Configuraci√≥n y puesta en marcha
 
-### 8.1 ConfiguraciÛn de entornos (frontend)
+### 8.1 Configuraci√≥n de entornos (frontend)
 
 Archivos:
 
 - `src/environments/environment.ts` (desarrollo).
-- `src/environments/environment.prod.ts` (producciÛn).
+- `src/environments/environment.prod.ts` (producci√≥n).
 
-Par·metros clave:
+Par√°metros clave:
 
 - `apiUrl`: URL base del backend (REST API), por ejemplo:
   - Desarrollo: `http://localhost:8080/okBranding`
-  - ProducciÛn: `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding`
-- Otros par·metros seg˙n necesidades (por ejemplo, base URL para recursos est·ticos).
+  - Producci√≥n: `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding`
+- Otros par√°metros seg√∫n necesidades (por ejemplo, base URL para recursos est√°ticos).
 
-### 8.2 ConfiguraciÛn del backend
+### 8.2 Configuraci√≥n del backend
 
 Archivo principal: `src/main/resources/application.properties`.
 
-Par·metros clave:
+Par√°metros clave:
 
 - **Datasource**:
   - `spring.datasource.url=${JDBC_DATABASE_URL:jdbc:mysql://.../okbrandingdb?sslMode=REQUIRED}`
@@ -337,23 +337,23 @@ Par·metros clave:
 
 Recomendaciones:
 
-- En producciÛn, parametrizar tambiÈn la clave JWT y otros secretos en variables de entorno y no en cÛdigo fuente.
+- En producci√≥n, parametrizar tambi√©n la clave JWT y otros secretos en variables de entorno y no en c√≥digo fuente.
 - Configurar CORS adecuadamente en los controladores (`@CrossOrigin`) o a nivel global, permitiendo el dominio del frontend (por ejemplo, `https://blue-sky-09b61240f.3.azurestaticapps.net/`).
 
 ### 8.3 Puesta en marcha integrada
 
-1. Tener backend en ejecuciÛn (local o producciÛn).
+1. Tener backend en ejecuci√≥n (local o producci√≥n).
 2. Tener frontend desplegado y con `apiUrl` apuntando al backend correcto.
 3. Verificar funcionamiento end-to-end:
-   - Carga del index del frontend (en producciÛn: `https://blue-sky-09b61240f.3.azurestaticapps.net/`).
-   - NavegaciÛn por categorÌas y productos.
+   - Carga del index del frontend (en producci√≥n: `https://blue-sky-09b61240f.3.azurestaticapps.net/`).
+   - Navegaci√≥n por categor√≠as y productos.
    - Apertura del detalle de producto.
-   - Registro e inicio de sesiÛn de usuarios vÌa endpoints `/okBranding/auth/register` y `/okBranding/auth/login`.
-   - Acceso al mÛdulo admin seg˙n roles y token JWT.
+   - Registro e inicio de sesi√≥n de usuarios v√≠a endpoints `/okBranding/auth/register` y `/okBranding/auth/login`.
+   - Acceso al m√≥dulo admin seg√∫n roles y token JWT.
 4. Verificar que las peticiones al backend se realizan correctamente:
    - Sin errores de CORS.
    - Sin rutas 404 en la API.
-   - AutenticaciÛn y autorizaciÛn funcionando (tokens v·lidos, expiraciÛn).
+   - Autenticaci√≥n y autorizaci√≥n funcionando (tokens v√°lidos, expiraci√≥n).
 
 ---
 
@@ -361,19 +361,19 @@ Recomendaciones:
 
 - **Frontend**:
   - Navegadores soportados:
-    - Google Chrome (˙ltimas versiones).
+    - Google Chrome (√∫ltimas versiones).
     - Microsoft Edge (Chromium).
     - Mozilla Firefox.
     - Safari (macOS/iOS).
-  - Tipo de aplicaciÛn:
+  - Tipo de aplicaci√≥n:
     - SPA (Single Page Application) en Angular.
     - Servido actualmente desde Azure Static Web Apps.
 
 - **Backend**:
-  - AplicaciÛn Spring Boot auto-contenida (JAR) o empaquetada en contenedor Docker.
+  - Aplicaci√≥n Spring Boot auto-contenida (JAR) o empaquetada en contenedor Docker.
   - Desplegada actualmente en Azure App Service.
   - API REST accesible bajo una ruta base (`/okBranding/...`).
-  - AutenticaciÛn y autorizaciÛn mediante JWT.
+  - Autenticaci√≥n y autorizaci√≥n mediante JWT.
   - Uso de Azure Database for MySQL Flexible Server como base de datos transaccional.
 
 ---
@@ -384,7 +384,7 @@ Recomendaciones:
 
 Frontend:
 
-- DetecciÛn de errores mediante:
+- Detecci√≥n de errores mediante:
   - Reportes de usuarios.
   - Logs de consola del navegador.
   - Herramientas de monitoreo de errores (si se integran).
@@ -392,208 +392,208 @@ Frontend:
 
 Backend:
 
-- MonitorizaciÛn de logs de aplicaciÛn (`logging.file.name`) y mÈtricas de Actuator.
-- CorrecciÛn de bugs en controladores, servicios, repositorios y entidades.
-- AplicaciÛn de parches de seguridad en dependencias (actualizaciÛn de `pom.xml`).
+- Monitorizaci√≥n de logs de aplicaci√≥n (`logging.file.name`) y m√©tricas de Actuator.
+- Correcci√≥n de bugs en controladores, servicios, repositorios y entidades.
+- Aplicaci√≥n de parches de seguridad en dependencias (actualizaci√≥n de `pom.xml`).
 
 ### 10.2 Mantenimiento evolutivo
 
-- IncorporaciÛn de nuevas funcionalidades:
-  - Nuevos mÛdulos en el admin (gestiÛn de nuevas entidades).
+- Incorporaci√≥n de nuevas funcionalidades:
+  - Nuevos m√≥dulos en el admin (gesti√≥n de nuevas entidades).
   - Nuevas vistas o filtros para el cliente.
   - Nuevos endpoints en el backend para soportar nuevas operaciones.
-- Refactor de cÛdigo:
-  - En frontend: componentes, servicios, optimizaciÛn de carga.
-  - En backend: servicios, mappers, repositorios, optimizaciÛn de consultas.
+- Refactor de c√≥digo:
+  - En frontend: componentes, servicios, optimizaci√≥n de carga.
+  - En backend: servicios, mappers, repositorios, optimizaci√≥n de consultas.
 
 ### 10.3 Soporte
 
 - Canal de soporte:
   - Correo, sistema de tickets (Jira, GitHub Issues, etc.) o similar.
-- DefiniciÛn de SLA:
-  - Tiempos objetivo de respuesta y resoluciÛn seg˙n criticidad de la incidencia.
+- Definici√≥n de SLA:
+  - Tiempos objetivo de respuesta y resoluci√≥n seg√∫n criticidad de la incidencia.
 - Escalamiento:
-  - Procedimiento para escalar incidencias crÌticas a equipo de desarrollo o equipo de infraestructura.
+  - Procedimiento para escalar incidencias cr√≠ticas a equipo de desarrollo o equipo de infraestructura.
 
 ---
 
-## 11. DocumentaciÛn del respaldo de datos
+## 11. Documentaci√≥n del respaldo de datos
 
 El frontend no almacena datos de negocio permanente; estos se guardan en la base de datos del backend.
 
-La documentaciÛn de respaldo de datos aplica principalmente a:
+La documentaci√≥n de respaldo de datos aplica principalmente a:
 
-- Base de datos del backend (cat·logo de productos, categorÌas, usuarios, cotizaciones, etc.).
-- ConfiguraciÛn del backend:
+- Base de datos del backend (cat√°logo de productos, categor√≠as, usuarios, cotizaciones, etc.).
+- Configuraci√≥n del backend:
   - `application.properties`.
   - Variables de entorno en servidores o plataformas de despliegue.
 - Scripts o configuraciones de infraestructura (Dockerfiles, pipelines CI/CD, etc.).
 
 Desde el punto de vista del frontend:
 
-- Respaldar el cÛdigo fuente (repositorio Git).
-- Respaldar configuraciones de entorno (`environment.*`) y cualquier archivo de configuraciÛn adicional.
+- Respaldar el c√≥digo fuente (repositorio Git).
+- Respaldar configuraciones de entorno (`environment.*`) y cualquier archivo de configuraci√≥n adicional.
 
 ---
 
-## 12. PolÌticas de backup
+## 12. Pol√≠ticas de backup
 
 ### 12.1 Backups de base de datos (backend)
 
-- Copia completa diaria de la base de datos de producciÛn.
-- RetenciÛn mÌnima de 30 dÌas (ajustable seg˙n polÌtica de la organizaciÛn).
+- Copia completa diaria de la base de datos de producci√≥n.
+- Retenci√≥n m√≠nima de 30 d√≠as (ajustable seg√∫n pol√≠tica de la organizaci√≥n).
 - Almacenamiento de copias en:
-  - Otro servidor fÌsico o lÛgico.
+  - Otro servidor f√≠sico o l√≥gico.
   - Servicio de almacenamiento en la nube (seguro y redundante).
-- Pruebas periÛdicas de restauraciÛn para asegurar que los backups son utilizables.
+- Pruebas peri√≥dicas de restauraci√≥n para asegurar que los backups son utilizables.
 
 ### 12.2 Backups del backend y frontend
 
-- CÛdigo fuente:
+- C√≥digo fuente:
   - Respaldado y versionado en el repositorio remoto (Git).
-  - PolÌticas de branch y tagging para releases.
+  - Pol√≠ticas de branch y tagging para releases.
 - Artefactos de build:
-  - JARs del backend y builds del frontend etiquetados por versiÛn.
+  - JARs del backend y builds del frontend etiquetados por versi√≥n.
   - Opcionalmente almacenados en un repositorio de artefactos.
-- ConfiguraciÛn:
-  - Respaldo de `application.properties` y/o gestiÛn de configuraciÛn mediante infraestructura como cÛdigo (IaC).
+- Configuraci√≥n:
+  - Respaldo de `application.properties` y/o gesti√≥n de configuraci√≥n mediante infraestructura como c√≥digo (IaC).
 
 ---
 
-## 13. Plan de capacitaciÛn
+## 13. Plan de capacitaci√≥n
 
 ### 13.1 Usuarios administradores
 
 Contenidos:
 
-- Acceso al mÛdulo admin.
-- GestiÛn de:
+- Acceso al m√≥dulo admin.
+- Gesti√≥n de:
   - Productos.
-  - CategorÌas.
+  - Categor√≠as.
   - Colores.
-  - Im·genes del carrusel de inicio (banners del home).
-  - Usuarios (seg˙n las funcionalidades expuestas en el mÛdulo).
-- Uso de formularios de creaciÛn/ediciÛn y visibilidad de cambios en el frontend cliente.
+  - Im√°genes del carrusel de inicio (banners del home).
+  - Usuarios (seg√∫n las funcionalidades expuestas en el m√≥dulo).
+- Uso de formularios de creaci√≥n/edici√≥n y visibilidad de cambios en el frontend cliente.
 
 Formato:
 
-- SesiÛn pr·ctica (presencial o remota).
-- Manual breve o guÌa paso a paso.
+- Sesi√≥n pr√°ctica (presencial o remota).
+- Manual breve o gu√≠a paso a paso.
 
 ### 13.2 Usuarios clientes
 
 Contenidos:
 
-- NavegaciÛn por categorÌas.
+- Navegaci√≥n por categor√≠as.
 - Consulta de detalle de producto.
-- Uso del botÛn ìCotizar este productoî.
-- Proceso de registro e inicio de sesiÛn.
+- Uso del bot√≥n ‚ÄúCotizar este producto‚Äù.
+- Proceso de registro e inicio de sesi√≥n.
 
 Formato:
 
-- Manual de usuario sencillo o video corto de demostraciÛn.
+- Manual de usuario sencillo o video corto de demostraci√≥n.
 
-### 13.3 Equipo tÈcnico
+### 13.3 Equipo t√©cnico
 
 Contenidos:
 
 - Arquitectura general (Angular + Spring Boot + MySQL en Azure).
-- Flujo de autenticaciÛn JWT (login, obtenciÛn y envÌo de token).
-- Proceso de despliegue (build, configuraciÛn, despliegue en Azure Static Web Apps y Azure App Service).
-- Procedimientos de backup y restauraciÛn.
+- Flujo de autenticaci√≥n JWT (login, obtenci√≥n y env√≠o de token).
+- Proceso de despliegue (build, configuraci√≥n, despliegue en Azure Static Web Apps y Azure App Service).
+- Procedimientos de backup y restauraci√≥n.
 
 Formato:
 
-- DocumentaciÛn tÈcnica + sesiones tÈcnicas con el equipo de desarrollo.
+- Documentaci√≥n t√©cnica + sesiones t√©cnicas con el equipo de desarrollo.
 
 ---
 
-## 14. MigraciÛn de archivos principales
+## 14. Migraci√≥n de archivos principales
 
 ### 14.1 Frontend
 
 Archivos principales del frontend:
 
-- Im·genes:
+- Im√°genes:
   - Logo.
   - Banners del carrusel.
-  - Im·genes de productos.
+  - Im√°genes de productos.
 - Archivos en `src/assets/`.
-- Archivos de configuraciÛn de entornos `environment.*`.
+- Archivos de configuraci√≥n de entornos `environment.*`.
 
-Para una nueva versiÛn:
+Para una nueva versi√≥n:
 
-- Verificar que las rutas de im·genes (`assets/img/...`) se mantienen o se actualizan correctamente.
-- Si se migran im·genes a un servidor externo/CDN, actualizar las URLs utilizadas por el frontend.
+- Verificar que las rutas de im√°genes (`assets/img/...`) se mantienen o se actualizan correctamente.
+- Si se migran im√°genes a un servidor externo/CDN, actualizar las URLs utilizadas por el frontend.
 
 ### 14.2 Backend
 
 Archivos principales del backend:
 
-- CÛdigo fuente en `src/main/java/com/okBranding/back/...` (controladores, servicios, entidades, etc.).
+- C√≥digo fuente en `src/main/java/com/okBranding/back/...` (controladores, servicios, entidades, etc.).
 - Recursos en `src/main/resources/`:
   - `application.properties`.
-  - Otros recursos de configuraciÛn.
-- Dockerfile (si se usa contenedorizaciÛn).
+  - Otros recursos de configuraci√≥n.
+- Dockerfile (si se usa contenedorizaci√≥n).
 - Scripts de despliegue (si existen).
 
-Al migrar a una nueva versiÛn:
+Al migrar a una nueva versi√≥n:
 
 - Mantener versiones anteriores del JAR o imagen Docker como fallback.
-- Versionar cambios en configuraciÛn (`application.properties`, variables de entorno) y documentarlos.
+- Versionar cambios en configuraci√≥n (`application.properties`, variables de entorno) y documentarlos.
 
 ---
 
-## 15. ParametrizaciÛn
+## 15. Parametrizaci√≥n
 
 ### 15.1 Frontend
 
-La parametrizaciÛn del frontend se realiza principalmente a travÈs de:
+La parametrizaci√≥n del frontend se realiza principalmente a trav√©s de:
 
 - `src/environments/environment.ts`
 - `src/environments/environment.prod.ts`
 
-Par·metros tÌpicos:
+Par√°metros t√≠picos:
 
 - `apiUrl`: URL base del backend.
 - `production: true/false`.
-- Otros flags o URLs de recursos seg˙n necesidades.
+- Otros flags o URLs de recursos seg√∫n necesidades.
 
 Opcionalmente se pueden agregar:
 
-- Archivos JSON de configuraciÛn en `assets/` (por ejemplo `assets/config.json`) para textos, colores u otros par·metros que se quieran modificar sin recompilar, carg·ndolos din·micamente desde el cÛdigo.
+- Archivos JSON de configuraci√≥n en `assets/` (por ejemplo `assets/config.json`) para textos, colores u otros par√°metros que se quieran modificar sin recompilar, carg√°ndolos din√°micamente desde el c√≥digo.
 
 ### 15.2 Backend
 
-La parametrizaciÛn del backend se realiza mediante:
+La parametrizaci√≥n del backend se realiza mediante:
 
 - `application.properties`.
-- Variables de entorno leÌdas desde `application.properties` (por ejemplo `JDBC_DATABASE_URL`, `PORT`).
+- Variables de entorno le√≠das desde `application.properties` (por ejemplo `JDBC_DATABASE_URL`, `PORT`).
 
-Par·metros tÌpicos:
+Par√°metros t√≠picos:
 
-- ConexiÛn a base de datos (`spring.datasource.*`).
-- ConfiguraciÛn de JPA/Hibernate.
+- Conexi√≥n a base de datos (`spring.datasource.*`).
+- Configuraci√≥n de JPA/Hibernate.
 - Puerto de escucha (`server.port`).
-- ConfiguraciÛn de logging.
-- En una siguiente mejora, tambiÈn:
+- Configuraci√≥n de logging.
+- En una siguiente mejora, tambi√©n:
   - Clave secreta JWT.
-  - Par·metros de correo (`spring.mail.*`), si se utiliza.
+  - Par√°metros de correo (`spring.mail.*`), si se utiliza.
 
 ---
 
-## 16. Plan de liberaciÛn del sistema de informaciÛn
+## 16. Plan de liberaci√≥n del sistema de informaci√≥n
 
-### 16.1 Flujo de liberaciÛn
+### 16.1 Flujo de liberaci√≥n
 
 1. Desarrollo y pruebas en entorno local (frontend y backend).
 2. Deploy en entorno de pruebas (staging):
    - Backend apuntando a base de datos de pruebas.
    - Frontend apuntando al backend de staging.
-3. Pruebas funcionales e integraciÛn (frontend + backend):
-   - Casos de uso principales (navegaciÛn, cotizaciÛn, login, administraciÛn).
-4. AprobaciÛn del responsable funcional.
-5. Build de producciÛn:
+3. Pruebas funcionales e integraci√≥n (frontend + backend):
+   - Casos de uso principales (navegaci√≥n, cotizaci√≥n, login, administraci√≥n).
+4. Aprobaci√≥n del responsable funcional.
+5. Build de producci√≥n:
    - Frontend:
      ```bash
      ng build --configuration production
@@ -602,43 +602,43 @@ Par·metros tÌpicos:
      ```bash
      ./mvnw clean package -DskipTests
      ```
-6. Despliegue de artefactos en producciÛn:
+6. Despliegue de artefactos en producci√≥n:
    - Frontend en Azure Static Web Apps (o infraestructura equivalente).
    - Backend en Azure App Service (o infraestructura equivalente como contenedores).
-7. Pruebas r·pidas de humo (smoke tests) en producciÛn:
+7. Pruebas r√°pidas de humo (smoke tests) en producci√≥n:
    - Acceso al home.
-   - NavegaciÛn a categorÌas y productos.
-   - Proceso de login y acceso a mÛdulo admin.
-   - Operaciones b·sicas de administraciÛn.
+   - Navegaci√≥n a categor√≠as y productos.
+   - Proceso de login y acceso a m√≥dulo admin.
+   - Operaciones b√°sicas de administraci√≥n.
 
 ### 16.2 Versionado
 
-- Usar versionado sem·ntico:
+- Usar versionado sem√°ntico:
   - `MAJOR.MINOR.PATCH` (por ejemplo, `1.3.0`).
 - Etiquetar releases en los repositorios:
   ```bash
   git tag v1.3.0
   git push origin v1.3.0
   ```
-- Mantener alineadas las versiones de frontend y backend (por ejemplo `frontend-1.3.0` y `backend-1.3.0` o un n˙mero de versiÛn com˙n en la documentaciÛn de entrega).
+- Mantener alineadas las versiones de frontend y backend (por ejemplo `frontend-1.3.0` y `backend-1.3.0` o un n√∫mero de versi√≥n com√∫n en la documentaci√≥n de entrega).
 
 ---
 
-## 17. GestiÛn de entrega
+## 17. Gesti√≥n de entrega
 
 Para cada entrega (release) se debe:
 
 - Registrar:
-  - VersiÛn del frontend.
-  - VersiÛn del backend.
+  - Versi√≥n del frontend.
+  - Versi√≥n del backend.
   - Fecha y hora de despliegue.
-  - Entorno de despliegue (staging/producciÛn).
-  - Responsable tÈcnico del despliegue.
+  - Entorno de despliegue (staging/producci√≥n).
+  - Responsable t√©cnico del despliegue.
 - Adjuntar:
-  - Notas de versiÛn (cambios incluidos).
+  - Notas de versi√≥n (cambios incluidos).
   - Estado de pruebas (superadas/no superadas, incidencias abiertas).
 - Soportar rollback:
-  - Indicar quÈ versiÛn anterior se usar· en caso de revertir.
+  - Indicar qu√© versi√≥n anterior se usar√° en caso de revertir.
 
 El registro puede llevarse en:
 
@@ -651,31 +651,31 @@ El registro puede llevarse en:
 
 ### 18.1 Funcionales (cliente)
 
-- Visualizar carrusel de la p·gina de inicio.
-- Visualizar categorÌas y productos por categorÌa.
-- Visualizar detalle de producto y generar cotizaciÛn.
-- Registrarse e iniciar sesiÛn.
-- Interactuar con la API de backend para obtener informaciÛn de productos, categorÌas, etc.
+- Visualizar carrusel de la p√°gina de inicio.
+- Visualizar categor√≠as y productos por categor√≠a.
+- Visualizar detalle de producto y generar cotizaci√≥n.
+- Registrarse e iniciar sesi√≥n.
+- Interactuar con la API de backend para obtener informaci√≥n de productos, categor√≠as, etc.
 
 ### 18.2 Funcionales (administrador)
 
-- Gestionar productos, categorÌas, colores.
-- Gestionar im·genes del carrusel del home.
-- Gestionar usuarios (creaciÛn, actualizaciÛn, activaciÛn/desactivaciÛn seg˙n funcionalidad disponible).
-- Cerrar sesiÛn y volver al index p˙blico.
+- Gestionar productos, categor√≠as, colores.
+- Gestionar im√°genes del carrusel del home.
+- Gestionar usuarios (creaci√≥n, actualizaci√≥n, activaci√≥n/desactivaci√≥n seg√∫n funcionalidad disponible).
+- Cerrar sesi√≥n y volver al index p√∫blico.
 - Consumir endpoints protegidos del backend mediante token JWT.
 
 ### 18.3 No funcionales
 
 - Rendimiento aceptable en navegadores modernos.
-- DiseÒo responsivo (adaptado a escritorio y dispositivos mÛviles).
-- Seguridad b·sica:
+- Dise√±o responsivo (adaptado a escritorio y dispositivos m√≥viles).
+- Seguridad b√°sica:
   - Rutas admin protegidas por `authGuard` en el frontend.
-  - AutenticaciÛn y autorizaciÛn en el backend mediante Spring Security + JWT.
-  - Manejo de token de autenticaciÛn en `sessionStorage` o similar en el frontend.
+  - Autenticaci√≥n y autorizaci√≥n en el backend mediante Spring Security + JWT.
+  - Manejo de token de autenticaci√≥n en `sessionStorage` o similar en el frontend.
 - Disponibilidad y resiliencia:
   - Uso de backups regulares de la base de datos.
-  - SupervisiÛn y logs en backend.
+  - Supervisi√≥n y logs en backend.
 
 ---
 
@@ -683,7 +683,7 @@ El registro puede llevarse en:
 
 Este proyecto no cuenta con un instalador tradicional (EXE/MSI).
 
-La ìinstalaciÛnî se realiza mediante:
+La ‚Äúinstalaci√≥n‚Äù se realiza mediante:
 
 - Frontend:
   - Comandos de build:
@@ -697,7 +697,7 @@ La ìinstalaciÛnî se realiza mediante:
     ```bash
     ./mvnw clean package -DskipTests
     ```
-  - EjecuciÛn del JAR o despliegue de la imagen Docker.
+  - Ejecuci√≥n del JAR o despliegue de la imagen Docker.
 
 Opcionalmente se puede automatizar con:
 
@@ -706,27 +706,27 @@ Opcionalmente se puede automatizar con:
 
 ---
 
-## 20. Archivo de configuraciÛn
+## 20. Archivo de configuraci√≥n
 
-Los principales archivos de configuraciÛn del sistema son:
+Los principales archivos de configuraci√≥n del sistema son:
 
 - Frontend:
   - `src/environments/environment.ts`
   - `src/environments/environment.prod.ts`
 - Backend:
   - `src/main/resources/application.properties`
-  - Variables de entorno en el entorno de ejecuciÛn del backend.
+  - Variables de entorno en el entorno de ejecuci√≥n del backend.
 
 En ellos se define, entre otros:
 
 - URL base del backend (`apiUrl` en el frontend).
-- Par·metros de conexiÛn a la base de datos.
-- Par·metros de entorno especÌficos para desarrollo/producciÛn (puertos, logging, etc.).
+- Par√°metros de conexi√≥n a la base de datos.
+- Par√°metros de entorno espec√≠ficos para desarrollo/producci√≥n (puertos, logging, etc.).
 
 Adicionalmente:
 
-- Se pueden crear archivos de configuraciÛn en `assets/` del frontend (por ejemplo `assets/config.json`) que se lean en tiempo de ejecuciÛn para par·metros no crÌticos.
-- En el backend se pueden aÒadir m·s propiedades para JWT, correo, lÌmites de carga, etc., siempre parametrizadas y no embebidas como literales sensibles en el cÛdigo.
+- Se pueden crear archivos de configuraci√≥n en `assets/` del frontend (por ejemplo `assets/config.json`) que se lean en tiempo de ejecuci√≥n para par√°metros no cr√≠ticos.
+- En el backend se pueden a√±adir m√°s propiedades para JWT, correo, l√≠mites de carga, etc., siempre parametrizadas y no embebidas como literales sensibles en el c√≥digo.
 
 ---
 
