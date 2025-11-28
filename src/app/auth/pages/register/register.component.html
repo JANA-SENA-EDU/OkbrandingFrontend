@@ -1,6 +1,6 @@
 <div class="register-page">
   <button type="button" class="back-button" (click)="goBack()">
-    ← Volver
+    <img src="assets/icons/backbutton.png" alt="Volver" />
   </button>
   <div class="register-form-container">
     <form [formGroup]="registerForm" (ngSubmit)="registrarse()" class="register-form">
@@ -120,7 +120,9 @@
       </button>
 
       <div class="registro-link">
-        <a (click)="goToLoginWithAnimation()" href="javascript:void(0)">¿Ya tienes cuenta? Inicia sesión</a>
+        <a (click)="goToLoginWithAnimation()" href="javascript:void(0)">
+          ¿Ya tienes cuenta? Inicia sesión
+        </a>
       </div>
     </form>
   </div>

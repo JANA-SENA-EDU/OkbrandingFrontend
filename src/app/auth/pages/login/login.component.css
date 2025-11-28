@@ -60,14 +60,13 @@
   position: absolute;
   top: 24px;
   left: 24px;
-  background: rgba(15, 23, 42, 0.9);
-  border-radius: 999px;
-  border: 1px solid rgba(148, 163, 184, 0.8);
-  color: #e5e7eb;
   cursor: pointer;
-  font-size: 14px;
-  padding: 8px 16px;
   z-index: 10;
+}
+
+.back-button img {
+  height: 32px;
+  width: 32px;
 }
 
 .login-logo-container {

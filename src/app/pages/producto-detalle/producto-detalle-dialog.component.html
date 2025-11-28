@@ -74,30 +74,32 @@
         </p>
       </div>
 
-      <p
-        class="producto-detalle-descripcion"
-        *ngIf="producto.descripcion"
-      >
-        {{ producto.descripcion }}
-      </p>
-
       <div class="producto-detalle-precio">
         <span class="precio-label">Desde</span>
         <span class="precio-valor">{{ producto.precio | currency }}</span>
       </div>
 
+      <div class="producto-section" *ngIf="producto.descripcion">
+        <h3 class="producto-section-title">Descripción</h3>
+        <p class="producto-detalle-descripcion">
+          {{ producto.descripcion }}
+        </p>
+      </div>
+
       <div
-        class="producto-detalle-colores"
+        class="producto-section"
         *ngIf="producto.colores?.length"
       >
-        <span class="colores-label">Colores disponibles</span>
-        <div class="colores-lista">
-          <span
-            *ngFor="let color of producto.colores"
-            class="color-box"
-            [style.backgroundColor]="color.codigoColor"
-            [title]="color.nombreColor"
-          ></span>
+        <h3 class="producto-section-title">Colores disponibles</h3>
+        <div class="producto-detalle-colores">
+          <div class="colores-lista">
+            <span
+              *ngFor="let color of producto.colores"
+              class="color-box"
+              [style.backgroundColor]="color.codigoColor"
+              [title]="color.nombreColor"
+            ></span>
+          </div>
         </div>
       </div>
 

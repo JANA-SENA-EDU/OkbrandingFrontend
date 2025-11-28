@@ -1,41 +1,89 @@
-<div class="productos-por-categoria-container">
-  <h2 *ngIf="nombreCategoria; else tituloGenerico">
-    {{ nombreCategoria }}
-  </h2>
-  <ng-template #tituloGenerico>
-    <h2>Productos de la categoria</h2>
-  </ng-template>
+<div class="productos-por-categoria-page">
+  <div class="productos-por-categoria-container">
+    <button type="button" class="back-button" (click)="goToHome()">
+      <img src="assets/icons/backbutton.png" alt="Volver" />
+    </button>
 
-  <div *ngIf="productos.length === 0">No hay productos para esta categorA-a.</div>
-  <div class="producto-grid">
-    <mat-card
-      *ngFor="let producto of productos"
-      class="producto-card mat-elevation-z4"
-      (click)="abrirDetalle(producto)"
-      style="cursor:pointer;"
-    >
-      <img
-        mat-card-image
-        *ngIf="producto.imagenes?.length"
-        [src]="producto.imagenes[0].urlImagen"
-        alt="Imagen del producto"
-      />
-      <mat-card-content>
-        <h3>{{ producto.nombre }}</h3>
-        <p><strong>Dimensiones:</strong> {{ producto.dimensiones }}</p>
-        <p><strong>DescripciA3n:</strong> {{ producto.descripcion }}</p>
-        <div class="color-container" *ngIf="producto.colores?.length">
-          <strong>Colores:</strong>
-          <div
-            class="color"
-            *ngFor="let color of producto.colores"
-            [style.backgroundColor]="color.codigoColor"
-            title="{{ color.codigoColor }}"
-          >
+    <h2 *ngIf="nombreCategoria; else tituloGenerico">
+      {{ nombreCategoria }}
+    </h2>
+    <ng-template #tituloGenerico>
+      <h2>Productos de la categoría</h2>
+    </ng-template>
+
+    <div *ngIf="productos.length === 0">No hay productos para esta categoría.</div>
+
+    <div class="producto-grid">
+      <mat-card
+        *ngFor="let producto of productos"
+        class="producto-card mat-elevation-z4"
+        (click)="abrirDetalle(producto)"
+        style="cursor:pointer;"
+      >
+        <div class="tilt">
+          <div class="img">
+            <img
+              *ngIf="producto.imagenes?.length"
+              [src]="producto.imagenes[0].urlImagen"
+              alt="Imagen del producto"
+            />
           </div>
         </div>
-      </mat-card-content>
-    </mat-card>
+
+        <div class="info">
+          <div class="cat">
+            {{ nombreCategoria || 'Producto' }}
+          </div>
+          <h2 class="title">{{ producto.nombre }}</h2>
+
+          <div class="details">
+            <p class="detail-row" *ngIf="producto.dimensiones">
+              <span class="detail-label">Dimensiones:</span>
+              <span class="detail-value">{{ producto.dimensiones }}</span>
+            </p>
+
+            <p class="detail-row" *ngIf="producto.descripcion">
+              <span class="detail-label">Descripción:</span>
+              <span class="detail-value">{{ producto.descripcion }}</span>
+            </p>
+
+            <div class="detail-row" *ngIf="producto.colores?.length">
+              <span class="detail-label">Colores:</span>
+              <div class="detail-colors">
+                <span
+                  class="color-dot"
+                  *ngFor="let color of (producto.colores || []) | slice:0:4"
+                  [style.backgroundColor]="$any(color).codigoColor"
+                  [title]="$any(color).nombreColor || $any(color).codigoColor"
+                ></span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bottom">
+            <div class="price" *ngIf="producto.precio">
+              <span class="new">{{ producto.precio | currency }}</span>
+            </div>
+            <button
+              type="button"
+              class="btn"
+              (click)="$event.stopPropagation(); abrirDetalle(producto)"
+            >
+              <span>Ver detalle</span>
+              <span class="icon">➔</span>
+            </button>
+          </div>
+
+          <div class="meta" *ngIf="producto.colores?.length">
+            <div class="rating">
+              <span class="rcount">{{ producto.colores.length }} colores</span>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
   </div>
+
+  <app-footer></app-footer>
 </div>
 

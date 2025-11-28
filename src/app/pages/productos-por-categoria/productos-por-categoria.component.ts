@@ -8,11 +8,12 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ProductoService } from '../../services/producto.service';
 import { CategoriaService } from '../../admin/services/categoria.service';
 import { ProductoDetalleDialogComponent } from '../producto-detalle/producto-detalle-dialog.component';
+import { FooterComponent } from '../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-productos-por-categoria',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatDialogModule],
+  imports: [CommonModule, MatCardModule, MatButtonModule, RouterModule, MatDialogModule, FooterComponent],
   templateUrl: './productos-por-categoria.component.html',
   styleUrl: './productos-por-categoria.component.css'
 })
@@ -32,7 +33,21 @@ export class ProductosPorCategoriaComponent implements OnInit {
     const idCategoria = Number(this.route.snapshot.paramMap.get('id'));
     if (idCategoria) {
       this.productoService.listarPorCategoria(idCategoria).subscribe(
-        data => this.productos = data,
+        data => {
+          this.productos = (data || []).map((p: any) => ({
+            ...p,
+            imagenes: Array.isArray(p?.imagenes)
+              ? p.imagenes.filter(
+                  (img: any, index: number, arr: any[]) =>
+                    img &&
+                    img.urlImagen &&
+                    arr.findIndex(
+                      (x: any) => x && x.urlImagen === img.urlImagen
+                    ) === index
+                )
+              : p?.imagenes,
+          }));
+        },
         err => this.productos = []
       );
 
@@ -69,4 +84,3 @@ export class ProductosPorCategoriaComponent implements OnInit {
     });
   }
 }
-
