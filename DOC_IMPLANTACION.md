@@ -206,7 +206,7 @@ La migración de datos (productos, categorías, usuarios, cotizaciones, etc.) se
 4. Acceder a la aplicación:
    - Navegador: `http://localhost:4200`
 
-Asegurarse de que `environment.ts` apunte al backend de desarrollo (por ejemplo `http://localhost:8080/okBranding/...`).
+Asegurarse de que `environment.ts` apunte al backend de desarrollo (por ejemplo `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/...`).
 
 ### 7.2 Instalación del backend en entorno de desarrollo
 
@@ -234,10 +234,10 @@ Asegurarse de que `environment.ts` apunte al backend de desarrollo (por ejemplo 
    java -jar target/back-0.0.1-SNAPSHOT.jar
    ```
 5. Verificar:
-   - Acceso a `http://localhost:8080/actuator/health` (según configuración).
+   - Acceso a `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/actuator/health` (según configuración).
    - Endpoints de negocio, por ejemplo:
-     - `GET http://localhost:8080/okBranding/productos/listar`
-     - `POST http://localhost:8080/okBranding/auth/login`
+     - `GET https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/productos/listar`
+     - `POST https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/auth/login`
 
 ### 7.3 Construcción y despliegue del frontend en producción
 
@@ -311,7 +311,7 @@ Archivos:
 Parámetros clave:
 
 - `apiUrl`: URL base del backend (REST API), por ejemplo:
-  - Desarrollo: `http://localhost:8080/okBranding`
+  - Desarrollo: `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding`
   - Producción: `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding`
 - Otros parámetros según necesidades (por ejemplo, base URL para recursos estáticos).
 
