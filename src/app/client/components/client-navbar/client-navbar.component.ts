@@ -21,11 +21,14 @@ import { Component } from '@angular/core';
       private router: Router,                                                                                              
       private authService: AuthService,                                                                                    
       private cotizacionService: CotizacionService                                                                         
-    ) {                                                                                                                    
-      this.cotizacionService.items$.subscribe(items => {                                                                   
-        this.cotizacionCount = items.length;                                                                               
-      });                                                                                                                  
-    }                                                                                                                      
+    ) {
+      this.cotizacionService.items$.subscribe(items => {
+        this.cotizacionCount = items.reduce(
+          (acum, item) => acum + (item.cantidad || 0),
+          0
+        );
+      });
+    }
                                                                                                                            
     get isLoggedIn(): boolean {                                                                                            
       return this.authService.isAuthenticated();                                                                           

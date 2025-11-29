@@ -1,53 +1,40 @@
-<div class="colores-container">
-  <!-- Encabezado -->
+<section class="colores-wrapper">
   <div class="colores-header">
-    <h2>Gestión de Colores</h2>
-    <button class="boton-profesional" (click)="abrirFormulario()">Nuevo Color</button>
+    <div>
+      <p class="eyebrow">Catálogo visual</p>
+      <h2>Gestión de colores</h2>
+      <p class="subtitulo">Administra los colores que tus productos pueden mostrar en el catálogo.</p>
+    </div>
+    <button class="boton-profesional" (click)="abrirFormulario()">
+      <mat-icon>palette</mat-icon>
+      Nuevo color
+    </button>
   </div>
 
-  <!-- Tabla de Colores -->
-  <table mat-table [dataSource]="colores" class="mat-elevation-z8 colores-tabla">
-    <!-- ID -->
-    <ng-container matColumnDef="idColor">
-      <th mat-header-cell *matHeaderCellDef> ID </th>
-      <td mat-cell *matCellDef="let color"> {{ color.idColor }} </td>
-    </ng-container>
-
-    <!-- Código -->
-    <ng-container matColumnDef="codigoColor">
-      <th mat-header-cell *matHeaderCellDef> Código </th>
-      <td mat-cell *matCellDef="let color"> {{ color.codigoColor }} </td>
-    </ng-container>
-
-    <!-- Nombre -->
-    <ng-container matColumnDef="nombreColor">
-      <th mat-header-cell *matHeaderCellDef> Nombre </th>
-      <td mat-cell *matCellDef="let color"> {{ color.nombreColor }} </td>
-    </ng-container>
-
-    <!-- Vista del color -->
-    <ng-container matColumnDef="vista">
-      <th mat-header-cell *matHeaderCellDef> Vista </th>
-      <td mat-cell *matCellDef="let color">
-        <div class="color-preview" [style.backgroundColor]="color.codigoColor"></div>
-      </td>
-    </ng-container>
-
-    <!-- Acciones -->
-    <ng-container matColumnDef="acciones">
-      <th mat-header-cell *matHeaderCellDef> Acciones </th>
-      <td mat-cell *matCellDef="let color">
-        <button class="accion-boton boton-editar" aria-label="Editar color" (click)="editarColor(color)">
+  <div *ngIf="colores.length; else sinColores" class="colores-grid">
+    <div class="color-card" *ngFor="let color of colores">
+      <div class="color-preview" [style.backgroundColor]="color.codigoColor"></div>
+      <div class="color-info">
+        <h3>{{ color.nombreColor }}</h3>
+        <span class="codigo">{{ color.codigoColor }}</span>
+      </div>
+      <div class="color-actions">
+        <button mat-stroked-button color="primary" (click)="editarColor(color)">
           <mat-icon>edit</mat-icon>
+          Editar
         </button>
-        <button class="accion-boton boton-eliminar" aria-label="Eliminar color" (click)="eliminarColor(color.idColor)">
+        <button mat-stroked-button color="warn" (click)="eliminarColor(color.idColor)">
           <mat-icon>delete</mat-icon>
+          Eliminar
         </button>
-      </td>
-    </ng-container>
+      </div>
+    </div>
+  </div>
 
-    <!-- Definición de filas -->
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-</div>
+  <ng-template #sinColores>
+    <div class="colores-vacio">
+      <mat-icon>palette</mat-icon>
+      <p>Aún no has registrado colores.</p>
+    </div>
+  </ng-template>
+</section>

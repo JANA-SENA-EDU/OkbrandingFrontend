@@ -1,10 +1,18 @@
 <mat-toolbar class="navbar">
-  <button mat-icon-button (click)="toggleMenu()">
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span class="title">Admin Panel</span>
+  <div class="brand" (click)="toggleMenu()">
+    <button mat-icon-button class="menu-button">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="brand-title">OkBranding Admin</span>
+  </div>
   <span class="spacer"></span>
-  <button mat-button class="logout-button" (click)="cerrarSesion()">
-    <mat-icon class="logout-icon">logout</mat-icon>
-  </button>
+  <div class="navbar-actions">
+    <button mat-icon-button class="action-icon">
+      <mat-icon>notifications</mat-icon>
+    </button>
+    <button mat-stroked-button class="logout-button" (click)="cerrarSesion()">
+      <mat-icon>logout</mat-icon>
+      Cerrar sesión
+    </button>
+  </div>
 </mat-toolbar>

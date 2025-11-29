@@ -1,4 +1,5 @@
 export interface LoginResponse {
+  idUsuario: number;
   token: string;
   userName: string;
   nombre: string;
