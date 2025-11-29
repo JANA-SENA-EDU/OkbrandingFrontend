@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { LoaderService } from '../shared/services/loader.service';
 import { AlertService } from '../shared/services/alert.service';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
-  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/productos';
+  private apiUrl = `${environment.apiUrl}/okBranding/productos`;
 
   constructor(
     private http: HttpClient,
@@ -56,9 +57,9 @@ export class ProductoService {
     });
   });
 }
-obtenerPorId(id: number) {
-  return this.http.get<any>(`https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/productos/${id}`);
-}
+  obtenerPorId(id: number) {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
 
 actualizarProducto(producto: any): Observable<any> {
   this.loaderService.show();

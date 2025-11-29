@@ -4,12 +4,13 @@ import { Categoria } from '../models/categoria.model';
 import { Observable } from 'rxjs';
 import { LoaderService } from '../../shared/services/loader.service';
 import { AlertService } from '../../shared/services/alert.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
-  private baseUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/categorias';
+  private baseUrl = `${environment.apiUrl}/okBranding/categorias`;
 
   constructor(
   private http: HttpClient,

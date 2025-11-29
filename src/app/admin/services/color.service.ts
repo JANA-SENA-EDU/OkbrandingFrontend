@@ -4,12 +4,13 @@ import { LoaderService } from '../../shared/services/loader.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ColorService {
-  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/colores';
+  private apiUrl = `${environment.apiUrl}/okBranding/colores`;
 
   constructor(
     private http: HttpClient,

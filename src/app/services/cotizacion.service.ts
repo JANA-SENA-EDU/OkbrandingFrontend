@@ -18,7 +18,7 @@ export class CotizacionService {
   );
   readonly items$ = this.itemsSubject.asObservable();
 
-  private apiUrl = `https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/cotizaciones`;
+  private apiUrl = `${environment.apiUrl}/cotizaciones`;
 
   constructor(private http: HttpClient) {
     this.items$.subscribe((items) =>

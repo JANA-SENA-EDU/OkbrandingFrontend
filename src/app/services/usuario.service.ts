@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { LoaderService } from '../shared/services/loader.service';
 import { AlertService } from '../shared/services/alert.service';
 import { HttpClient } from '@angular/common/http';
-import { Observable,throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/usuarios'; 
+  private apiUrl = `${environment.apiUrl}/okBranding/usuarios`; 
   constructor(
     private http: HttpClient,
     private loaderService: LoaderService,

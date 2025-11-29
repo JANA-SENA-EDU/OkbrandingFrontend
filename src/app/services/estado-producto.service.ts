@@ -4,12 +4,13 @@ import { LoaderService } from '../shared/services/loader.service';
 import { AlertService } from '../shared/services/alert.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, tap } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EstadoProductoService {
-  private apiUrl = 'https://okbranding-ava4htfqc2ajefhh.chilecentral-01.azurewebsites.net/okBranding/estado-producto'; // ajusta si tu endpoint cambia
+  private apiUrl = `${environment.apiUrl}/okBranding/estado-producto`; // ajusta si tu endpoint cambia
 
   constructor(
     private http: HttpClient,
