@@ -1,89 +1,148 @@
-<div class="productos-por-categoria-page">
-  <div class="productos-por-categoria-container">
+<div class="categoria-productos-page">
+  <section
+    class="categoria-banner"
+    [ngStyle]="{
+      'background-image':
+        imagenCategoria
+          ? 'linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.55)), url(' + imagenCategoria + ')'
+          : 'linear-gradient(135deg, rgba(15, 23, 42, 0.85), rgba(2, 6, 23, 0.55))'
+    }"
+  >
     <button type="button" class="back-button" (click)="goToHome()">
-      <img src="assets/icons/backbutton.png" alt="Volver" />
+      <span aria-hidden="true">←</span>
+      <span>Volver</span>
     </button>
+    <p class="eyebrow">Colección curada</p>
+    <h1>{{ nombreCategoria || 'Productos por categoría' }}</h1>
+    <p class="hero-description">
+      {{ descripcionCategoria }}
+    </p>
+  </section>
 
-    <h2 *ngIf="nombreCategoria; else tituloGenerico">
-      {{ nombreCategoria }}
-    </h2>
-    <ng-template #tituloGenerico>
-      <h2>Productos de la categoría</h2>
-    </ng-template>
-
-    <div *ngIf="productos.length === 0">No hay productos para esta categoría.</div>
-
-    <div class="producto-grid">
-      <mat-card
-        *ngFor="let producto of productos"
-        class="producto-card mat-elevation-z4"
-        (click)="abrirDetalle(producto)"
-        style="cursor:pointer;"
-      >
-        <div class="tilt">
-          <div class="img">
-            <img
-              *ngIf="producto.imagenes?.length"
-              [src]="producto.imagenes[0].urlImagen"
-              alt="Imagen del producto"
-            />
-          </div>
-        </div>
-
-        <div class="info">
-          <div class="cat">
-            {{ nombreCategoria || 'Producto' }}
-          </div>
-          <h2 class="title">{{ producto.nombre }}</h2>
-
-          <div class="details">
-            <p class="detail-row" *ngIf="producto.dimensiones">
-              <span class="detail-label">Dimensiones:</span>
-              <span class="detail-value">{{ producto.dimensiones }}</span>
-            </p>
-
-            <p class="detail-row" *ngIf="producto.descripcion">
-              <span class="detail-label">Descripción:</span>
-              <span class="detail-value">{{ producto.descripcion }}</span>
-            </p>
-
-            <div class="detail-row" *ngIf="producto.colores?.length">
-              <span class="detail-label">Colores:</span>
-              <div class="detail-colors">
-                <span
-                  class="color-dot"
-                  *ngFor="let color of (producto.colores || []) | slice:0:4"
-                  [style.backgroundColor]="$any(color).codigoColor"
-                  [title]="$any(color).nombreColor || $any(color).codigoColor"
-                ></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="bottom">
-            <div class="price" *ngIf="producto.precio">
-              <span class="new">{{ producto.precio | currency }}</span>
-            </div>
-            <button
-              type="button"
-              class="btn"
-              (click)="$event.stopPropagation(); abrirDetalle(producto)"
-            >
-              <span>Ver detalle</span>
-              <span class="icon">➔</span>
-            </button>
-          </div>
-
-          <div class="meta" *ngIf="producto.colores?.length">
-            <div class="rating">
-              <span class="rcount">{{ producto.colores.length }} colores</span>
-            </div>
-          </div>
-        </div>
-      </mat-card>
+  <section class="filters-panel">
+    <div class="filter-group">
+      <label for="busqueda">Buscar producto</label>
+      <input
+        id="busqueda"
+        type="text"
+        [(ngModel)]="filtroTexto"
+        (ngModelChange)="aplicarFiltros()"
+        placeholder="Nombre o descripción…"
+      />
     </div>
+    <div class="filter-group">
+      <label for="colorFiltro">Color</label>
+      <select
+        id="colorFiltro"
+        [(ngModel)]="colorFiltro"
+        (ngModelChange)="aplicarFiltros()"
+      >
+        <option value="todos">Todos</option>
+        <option *ngFor="let color of coloresDisponibles" [value]="color">
+          {{ color }}
+        </option>
+      </select>
+    </div>
+    <div class="filter-actions">
+      <button type="button" class="filter-reset" (click)="limpiarFiltros()">
+        Limpiar filtros
+      </button>
+    </div>
+  </section>
+
+  <section class="results-header">
+    <div>
+      <strong>{{ productosFiltrados.length }}</strong>
+      <span>productos encontrados</span>
+    </div>
+    <div class="panel-pagination" *ngIf="totalPaginas > 1">
+      <button type="button" (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">
+        Anterior
+      </button>
+      <span>Página {{ paginaActual }} / {{ totalPaginas }}</span>
+      <button
+        type="button"
+        (click)="cambiarPagina(1)"
+        [disabled]="paginaActual === totalPaginas"
+      >
+        Siguiente
+      </button>
+    </div>
+  </section>
+
+  <section *ngIf="!productosFiltrados.length" class="estado-vacio">
+    <h3>No encontramos productos</h3>
+    <p>Prueba con otro término o ajusta los filtros.</p>
+  </section>
+
+  <div class="producto-grid" *ngIf="productosFiltrados.length">
+    <mat-card
+      *ngFor="let producto of productosPaginados"
+      class="producto-card mat-elevation-z4"
+      (click)="abrirDetalle(producto)"
+    >
+      <div class="card-media">
+        <img
+          *ngIf="producto.imagenes?.length"
+          [src]="producto.imagenes[0].urlImagen"
+          alt="Imagen del producto"
+        />
+      </div>
+      <div class="info">
+        <div class="cat">{{ nombreCategoria || 'Producto' }}</div>
+        <h2 class="title">{{ producto.nombre }}</h2>
+
+        <div class="details">
+          <p class="detail-row" *ngIf="producto.dimensiones">
+            <span class="detail-label">Dimensiones:</span>
+            <span class="detail-value">{{ producto.dimensiones }}</span>
+          </p>
+          <p class="detail-row" *ngIf="producto.descripcion">
+            <span class="detail-label">Descripción:</span>
+            <span class="detail-value">{{ producto.descripcion }}</span>
+          </p>
+          <div class="detail-row" *ngIf="producto.colores?.length">
+            <span class="detail-label">Colores:</span>
+            <div class="detail-colors">
+              <span
+                class="color-dot"
+                *ngFor="let color of (producto.colores || []) | slice:0:4"
+                [style.backgroundColor]="$any(color).codigoColor"
+                [title]="$any(color).nombreColor || $any(color).codigoColor"
+              ></span>
+              <span class="color-extra" *ngIf="producto.colores.length > 4">
+                +{{ producto.colores.length - 4 }}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <div class="price" *ngIf="producto.precio">
+            <span class="new">{{ producto.precio | currency:'COP':'symbol-narrow' }}</span>
+          </div>
+          <button type="button" class="btn" (click)="$event.stopPropagation(); abrirDetalle(producto)">
+            Ver detalle
+            <span aria-hidden="true">→</span>
+          </button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+
+  <div class="panel-pagination bottom" *ngIf="totalPaginas > 1">
+    <button type="button" (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">
+      Anterior
+    </button>
+    <span>Página {{ paginaActual }} / {{ totalPaginas }}</span>
+    <button
+      type="button"
+      (click)="cambiarPagina(1)"
+      [disabled]="paginaActual === totalPaginas"
+    >
+      Siguiente
+    </button>
   </div>
 
   <app-footer></app-footer>
 </div>
-
