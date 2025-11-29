@@ -1,3 +1,161 @@
-/* Estilos específicos del componente Footer (opcional).
-   La mayor parte del estilo está definido de forma global en src/styles.css */
+.site-footer {
+  margin-top: 64px;
+  padding: 72px clamp(1.5rem, 5vw, 80px) 40px;
+  background: #0f172a;
+  color: #f8fafc;
+  border-radius: 32px 32px 0 0;
+  box-shadow: 0 -30px 70px rgba(15, 23, 42, 0.45);
+}
 
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.footer-brand-block img {
+  width: 80px;
+  height: auto;
+  margin-bottom: 16px;
+}
+
+.footer-brand-block p {
+  color: rgba(248, 250, 252, 0.8);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-social a {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(248, 250, 252, 0.1);
+  color: #f8fafc;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-social a:hover {
+  background: rgba(248, 250, 252, 0.25);
+  transform: translateY(-2px);
+}
+
+.footer-links h4,
+.footer-contact h4,
+.footer-newsletter h4 {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.75rem;
+  margin-bottom: 16px;
+  color: #38bdf8;
+}
+
+.footer-links ul,
+.footer-contact ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: rgba(248, 250, 252, 0.85);
+  font-weight: 500;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+}
+
+.footer-contact li {
+  color: rgba(248, 250, 252, 0.8);
+}
+
+.footer-newsletter p {
+  color: rgba(248, 250, 252, 0.75);
+  margin-bottom: 16px;
+}
+
+.footer-newsletter form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.footer-newsletter input {
+  flex: 1;
+  min-width: 220px;
+  border-radius: 999px;
+  border: none;
+  padding: 12px 18px;
+  font-size: 0.95rem;
+}
+
+.footer-newsletter button {
+  border-radius: 999px;
+  padding: 12px 22px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  background: linear-gradient(120deg, #0ea5e9, #6366f1);
+  color: #ffffff;
+  box-shadow: 0 10px 25px rgba(79, 70, 229, 0.35);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(248, 250, 252, 0.1);
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: rgba(248, 250, 252, 0.7);
+}
+
+.footer-legal {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-legal a {
+  color: rgba(248, 250, 252, 0.8);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.footer-legal a:hover {
+  color: #ffffff;
+}
+
+@media (max-width: 640px) {
+  .footer-newsletter form {
+    flex-direction: column;
+  }
+
+  .footer-newsletter input {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

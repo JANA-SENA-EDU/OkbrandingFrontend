@@ -1,25 +1,26 @@
 <header class="client-header">
-  <img
-    src="assets/img/logo.png"
-    alt="Logo"
-    class="logo"
-    style="cursor:pointer"
-    (click)="goToHome()"
-  />
+  <div class="brand-block" (click)="goToHome()">
+    <img src="assets/img/logo.png" alt="Logo Okbranding" class="logo" />
+    <div class="brand-copy">
+      <span>Okbranding</span>
+      <small>Publicidad & experiencias</small>
+    </div>
+  </div>
 
-  <span class="spacer"></span>
+  <nav class="nav-links">
+    <button type="button" (click)="scrollToSection('nosotros')">Nosotros</button>
+    <button type="button" (click)="scrollToSection('categorias')">Categorías</button>
+    <button type="button" (click)="scrollToSection('contacto')">Contáctanos</button>
+  </nav>
 
   <div class="header-buttons">
     <ng-container *ngIf="!isLoggedIn; else loggedInButtons">
-      <button mat-stroked-button (click)="scrollToAbout()">Sobre nosotros</button>
-      <button mat-stroked-button (click)="goToLogin()">Iniciar sesion</button>
-      <button mat-flat-button color="primary" (click)="goToRegister()">
-        Registrarse
-      </button>
+      <button class="btn-ghost" type="button" (click)="goToLogin()">Ingresar</button>
+      <button class="btn-primary" type="button" (click)="goToRegister()">REGISTRARSE</button>
     </ng-container>
 
     <ng-template #loggedInButtons>
-      <button mat-stroked-button (click)="goToMisCotizaciones()" class="quote-button">
+      <button class="btn-outline quote-button" type="button" (click)="goToMisCotizaciones()">
         <mat-icon
           [matBadge]="cotizacionCount"
           [matBadgeHidden]="cotizacionCount === 0"
@@ -30,10 +31,7 @@
         <span>Mis cotizaciones</span>
       </button>
 
-      <button mat-flat-button color="primary" (click)="logout()">
-        Logout
-      </button>
+      <button class="btn-primary" type="button" (click)="logout()">Cerrar sesión</button>
     </ng-template>
   </div>
 </header>
-

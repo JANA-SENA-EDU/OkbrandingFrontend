@@ -13,6 +13,7 @@ import {
 } from '../../../services/models/cotizacion.model';
 import { AuthService } from '../../../auth/services/auth.service';
 import { AlertService } from '../../../shared/services/alert.service';
+import { FooterComponent } from '../../../shared/components/footer/footer.component';
 
 @Component({
   selector: 'app-mis-cotizaciones',
@@ -23,6 +24,7 @@ import { AlertService } from '../../../shared/services/alert.service';
     MatButtonModule,
     MatInputModule,
     MatIconModule,
+    FooterComponent,
   ],
   templateUrl: './mis-cotizaciones.component.html',
   styleUrls: ['./mis-cotizaciones.component.css'],

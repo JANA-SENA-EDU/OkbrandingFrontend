@@ -1,43 +1,76 @@
-<!-- Sección de categorías -->
+<!-- Sección de categorías rediseñada -->
 <section class="categories-section">
-  <h2 class="section-title">
-    <span class="line"></span>
-    <span class="section-title-text">Nuestras categorías</span>
-    <span class="line"></span>
-  </h2>
+  <div class="section-wrapper">
+    <div class="intro-panel">
+      <p class="eyebrow">Catálogo estratégico</p>
+      <h2>Nuestras categorías</h2>
+      <p class="intro-copy">
+        Conecta cada necesidad con una solución creativa. Reunimos líneas de
+        producto que cubren desde activaciones rápidas hasta proyectos de
+        branding integral para que tu marca siempre tenga el material perfecto.
+      </p>
 
-  <div class="categorias-lista">
-    <mat-card
-      class="categoria-card"
-      *ngFor="let categoria of categorias"
-      [routerLink]="['/categorias', categoria.idCategoria, 'productos']"
-    >
-      <div class="categoria-image-wrapper" *ngIf="categoria.imagen">
-        <img
-          mat-card-image
-          [src]="categoria.imagen"
-          alt="Imagen de {{ categoria.nombreCategoria }}"
-        />
+      <div class="pill-group">
+        <span class="pill">Producción local</span>
+        <span class="pill">Materiales premium</span>
+        <span class="pill">Entrega exprés</span>
       </div>
 
-      <div class="categoria-overlay">
-        <div class="categoria-overlay-content">
-          <h3 class="categoria-overlay-title">{{ categoria.nombreCategoria }}</h3>
+      <div class="metrics">
+        <div class="metric">
+          <span class="metric-value">
+            {{ categorias.length | number: '2.0-0' }}
+          </span>
+          <span class="metric-label">Categorías activas</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">+50</span>
+          <span class="metric-label">Proyectos mensuales</span>
+        </div>
+        <div class="metric">
+          <span class="metric-value">98%</span>
+          <span class="metric-label">Satisfacción clientes</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="categorias-grid">
+      <mat-card
+        class="categoria-card"
+        *ngFor="let categoria of categorias; index as i"
+        [routerLink]="['/categorias', categoria.idCategoria, 'productos']"
+      >
+        <div class="categoria-media">
+          <img
+            *ngIf="categoria.imagen"
+            [src]="categoria.imagen"
+            alt="Imagen de {{ categoria.nombreCategoria }}"
+          />
+          <div class="categoria-media-overlay"></div>
+          <span class="categoria-badge">OK BRANDING</span>
+        </div>
+
+        <div class="categoria-body">
+          <div class="categoria-header">
+            <span class="categoria-index">
+              {{ (i + 1) | number: '2.0-0' }}
+            </span>
+            <h3>{{ categoria.nombreCategoria }}</h3>
+          </div>
+
           <p class="categoria-description">
             {{ categoria.descripcion }}
           </p>
-        </div>
-      </div>
 
-      <div class="categoria-content">
-        <mat-card-title>{{ categoria.nombreCategoria }}</mat-card-title>
-        <div class="categoria-actions">
-          <button mat-stroked-button color="primary">
-            Ver productos
-          </button>
+          <div class="categoria-footer">
+            <span class="categoria-tag">Disponibles todo el año</span>
+            <button class="categoria-link" type="button">
+              Ver colección
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
         </div>
-      </div>
-    </mat-card>
+      </mat-card>
+    </div>
   </div>
 </section>
-

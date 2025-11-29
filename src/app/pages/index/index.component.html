@@ -1,7 +1,72 @@
-<app-hero-carousel></app-hero-carousel>
+<div class="landing-shell">
+  <section class="landing-hero">
+    <div class="hero-copy">
+      <p class="hero-eyebrow">publicidad y experiencias</p>
+      <h1>Activamos tu marca con experiencias físicas memorables</h1>
+      <p class="hero-lead">
+        Somos aliados estratégicos para diseñar regalos corporativos, campañas publicitarias, piezas personalizadas,
+        acciones que impulsen tu marca y asesoramiento comercial integral en cada etapa del proyecto.
+      </p>
 
-<app-categories-grid [categorias]="categorias"></app-categories-grid>
+      <div class="hero-tags">
+        <span>Regalos corporativos</span>
+        <span>Diseños personalizados</span>
+        <span>Publicidad integral</span>
+        <span>Impulso de marca</span>
+        <span>Asesoramiento comercial</span>
+      </div>
 
-<app-about-us></app-about-us>
-<app-footer></app-footer>
+      <div class="hero-buttons">
+        <button class="btn-primary" type="button" (click)="goToRegister()">
+          Cotizar ahora
+        </button>
+        <button class="btn-link" type="button" (click)="scrollTo('categorias')">
+          Explorar categorías <span aria-hidden="true">→</span>
+        </button>
+      </div>
 
+      <div class="hero-metrics">
+        <div class="metric-card">
+          <span class="metric-label">Campañas lanzadas</span>
+          <span class="metric-value">+50</span>
+          <small>Retail, eventos y BTL</small>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Tiempo de respuesta</span>
+          <span class="metric-value">Rápida</span>
+          <small>Para propuestas creativas</small>
+        </div>
+        <div class="metric-card">
+          <span class="metric-label">Contamos con Cobertura</span>
+          <span class="metric-value">Nacional</span>
+          <small>Producción & logística</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-carousel-frame">
+        <app-hero-carousel></app-hero-carousel>
+        <div class="hero-carousel-glow"></div>
+      </div>
+
+      <div class="hero-floating-card">
+        <p>PERMITENOS DARLE FORMA</p>
+        <strong>A TUS IDEAS</strong>
+        <span>Equipo creativo + producción propia</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="categorias" class="index-section">
+    <app-categories-grid [categorias]="categorias"></app-categories-grid>
+  </section>
+
+  <section id="nosotros" class="index-section">
+    <app-about-us></app-about-us>
+  </section>
+
+  <section id="contacto" class="index-section">
+    <app-footer></app-footer>
+  </section>
+</div>

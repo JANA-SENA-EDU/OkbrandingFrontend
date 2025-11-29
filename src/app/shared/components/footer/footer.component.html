@@ -1,36 +1,58 @@
-<footer class="site-footer">
-  <div class="footer-content">
-    <section class="footer-section">
-      <h3>Contacto</h3>
-      <p>Email: contacto&#64;okbranding.com</p>
-      <p>Teléfono: +52 (55) 0000 0000</p>
-    </section>
-    <section class="footer-section">
-      <h3>Secciones</h3>
+<footer class="site-footer" id="contacto">
+  <div class="footer-grid">
+    <div class="footer-brand-block">
+      <img src="assets/img/logo.png" alt="Okbranding" />
+      <p>
+        Diseñamos y producimos experiencias publicitarias integrales para marcas que
+        buscan destacar en cada punto de contacto.
+      </p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram">
+          <span>IG</span>
+        </a>
+        <a href="#" aria-label="LinkedIn">
+          <span>IN</span>
+        </a>
+        <a href="#" aria-label="Behance">
+          <span>BE</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-links">
+      <h4>Mapa rápido</h4>
       <ul>
-        <li><a href="#servicios">Servicios</a></li>
-        <li><a href="#portafolio">Portafolio</a></li>
+        <li><a href="#categorias">Categorías</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#contacto">Contacto</a></li>
+        <li><a routerLink="/mis-cotizaciones">Panel de clientes</a></li>
       </ul>
-    </section>
-    <section class="footer-section">
-      <h3>Legal</h3>
+    </div>
+
+    <div class="footer-contact">
+      <h4>Contacto directo</h4>
       <ul>
-        <li><a href="#aviso-privacidad">Aviso de privacidad</a></li>
-        <li><a href="#terminos-condiciones">Términos y condiciones</a></li>
+        <li>contacto&#64;okbranding.com</li>
+        <li>+57 (601) 000 0000</li>
+        <li>Cra. 00 #00-00 Bogotá, Colombia</li>
       </ul>
-    </section>
-    <section class="footer-section">
-      <h3>Síguenos</h3>
-      <ul>
-        <li><a href="#" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-        <li><a href="#" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="#" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-      </ul>
-    </section>
+    </div>
+
+    <div class="footer-newsletter">
+      <h4>Recibe tendencias</h4>
+      <p>Suscríbete para recibir ideas de activaciones y lanzamientos.</p>
+      <form (submit)="$event.preventDefault()" novalidate>
+        <input type="email" placeholder="Tu correo corporativo" />
+        <button type="submit">Suscribirme</button>
+      </form>
+    </div>
   </div>
+
   <div class="footer-bottom">
-    <p>© 2025 Okbranding. Todos los derechos reservados.</p>
+    <span>© 2025 Okbranding. Todos los derechos reservados.</span>
+    <div class="footer-legal">
+      <a href="#">Aviso de privacidad</a>
+      <a href="#">Términos de servicio</a>
+    </div>
   </div>
 </footer>
