@@ -132,9 +132,43 @@ button[disabled] {
 
 .dashboard-grid {
   display: grid;
-  grid-template-columns: minmax(320px, 1.1fr) minmax(280px, 0.85fr) minmax(420px, 1.55fr);
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 28px;
   align-items: flex-start;
+}
+
+.panel-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 12px 0;
+  color: var(--brand-muted);
+}
+
+.panel-controls select {
+  border-radius: 999px;
+  border: 1px solid #d5d9e3;
+  padding: 8px 14px;
+  background: #fff;
+  font-weight: 600;
+}
+
+.panel-scroll {
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 4px;
+  padding-left: 4px;
+}
+
+.panel-pagination {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 16px;
+  color: var(--brand-muted);
 }
 
 .panel header {
@@ -312,17 +346,20 @@ button[disabled] {
 .panel-history {
   background: #ffffff;
   border: 1px solid #e4e7ec;
+  display: flex;
+  flex-direction: column;
+  min-height: 420px;
 }
 
 .history-card {
-  border-radius: 24px;
-  padding: 20px;
-  margin-bottom: 16px;
+  border-radius: 20px;
+  padding: 16px;
+  margin: 0 4px 12px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   background: #ffffff;
   border: 1px solid #e4e7ec;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
 .history-card:hover {
@@ -340,6 +377,12 @@ button[disabled] {
   grid-template-columns: auto 1fr auto;
   gap: 12px;
   align-items: center;
+}
+
+.history-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .history-avatar {
@@ -378,25 +421,26 @@ button[disabled] {
   padding: 8px 16px;
 }
 
-.status-pill[data-status='PENDIENTE'] {
-  background: rgba(245, 158, 11, 0.15);
-  color: var(--brand-amber);
-}
-
-.status-pill[data-status='RESPONDIDA'] {
-  background: rgba(16, 185, 129, 0.15);
-  color: var(--brand-emerald);
-}
-
+.status-pill[data-status='PENDIENTE'],
 .status-pill[data-status='ENVIADA'],
 .status-pill[data-status='EN_PROCESO'] {
   background: rgba(99, 102, 241, 0.15);
   color: var(--brand-indigo);
 }
 
+.status-pill[data-status='RESPONDIDA'] {
+  background: rgba(245, 158, 11, 0.18);
+  color: #b45309;
+}
+
+.status-pill[data-status='CERRADA'] {
+  background: rgba(16, 185, 129, 0.18);
+  color: #047857;
+}
+
 .status-pill[data-status='CANCELADA'] {
-  background: rgba(244, 63, 94, 0.15);
-  color: var(--brand-rose);
+  background: rgba(244, 63, 94, 0.18);
+  color: #be123c;
 }
 
 .history-card-progress {
@@ -414,7 +458,8 @@ button[disabled] {
   transition: width 0.3s ease;
 }
 
-.progress-bar[data-status='PENDIENTE'] {
+.progress-bar[data-status='PENDIENTE'],
+.progress-bar[data-status='SOLICITADA'] {
   width: 30%;
   background: #f59e0b;
 }
@@ -422,11 +467,16 @@ button[disabled] {
 .progress-bar[data-status='ENVIADA'],
 .progress-bar[data-status='EN_PROCESO'] {
   width: 60%;
-  background: #6366f1;
+  background: #fbbf24;
 }
 
 .progress-bar[data-status='RESPONDIDA'] {
-  width: 90%;
+  width: 80%;
+  background: #facc15;
+}
+
+.progress-bar[data-status='CERRADA'] {
+  width: 100%;
   background: #10b981;
 }
 
@@ -440,6 +490,7 @@ button[disabled] {
   justify-content: space-between;
   text-align: left;
   color: var(--brand-ink);
+  gap: 24px;
 }
 
 .history-card-body p {
@@ -453,11 +504,49 @@ button[disabled] {
 }
 
 .panel-detail {
-  position: sticky;
-  top: 24px;
+  margin-top: 32px;
   border: 1px solid #e4e7ec;
   background: #ffffff;
-  min-width: 440px;
+  border-radius: 24px;
+}
+
+.panel-detail.placeholder {
+  text-align: center;
+  color: var(--brand-muted);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.detalle-title h2 {
+  margin: 0;
+}
+
+.detalle-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.close-detail {
+  border: none;
+  background: rgba(15, 23, 42, 0.08);
+  color: #0f172a;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 20px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.close-detail:hover {
+  background: rgba(15, 23, 42, 0.16);
+  transform: translateY(-2px);
 }
 
 .detalle-resumen {

@@ -33,8 +33,13 @@ export class MisCotizacionesComponent implements OnInit {
   @ViewChild('detalleSection') detalleSection?: ElementRef<HTMLDivElement>;
   productosActuales: CotizacionCarritoItem[] = [];
   comentarioSolicitud = '';
+  carritoPagina = 1;
+  carritoPageSize = 3;
 
   cotizaciones: Cotizacion[] = [];
+  historialPagina = 1;
+  historialPageSize = 4;
+  historialFiltroEstado = 'todas';
   cotizacionSeleccionada?: Cotizacion;
   ajustesCliente: Record<number, number> = {};
   cantidadesOriginales: Record<number, number> = {};
@@ -69,6 +74,55 @@ export class MisCotizacionesComponent implements OnInit {
     return this.productosActuales.reduce((acc, item) => acc + item.cantidad, 0);
   }
 
+  get totalPaginasCarrito(): number {
+    return Math.max(
+      1,
+      Math.ceil(this.productosActuales.length / this.carritoPageSize)
+    );
+  }
+
+  get productosPaginados(): CotizacionCarritoItem[] {
+    const start = (this.carritoPagina - 1) * this.carritoPageSize;
+    return this.productosActuales.slice(start, start + this.carritoPageSize);
+  }
+
+  get estadosDisponibles(): string[] {
+    const estados = new Set(
+      this.cotizaciones.map((c) => c.estadoCotizacion || 'SIN_ESTADO')
+    );
+    return ['todas', ...Array.from(estados)];
+  }
+
+  get cotizacionesFiltradas(): Cotizacion[] {
+    const filtradas =
+      this.historialFiltroEstado === 'todas'
+        ? this.cotizaciones
+        : this.cotizaciones.filter(
+            (cot) => cot.estadoCotizacion === this.historialFiltroEstado
+          );
+
+    return [...filtradas].sort((a, b) => {
+      const fechaA = a.fechaSolicitud ? new Date(a.fechaSolicitud).getTime() : 0;
+      const fechaB = b.fechaSolicitud ? new Date(b.fechaSolicitud).getTime() : 0;
+      return fechaB - fechaA;
+    });
+  }
+
+  get totalPaginasHistorial(): number {
+    return Math.max(
+      1,
+      Math.ceil(this.cotizacionesFiltradas.length / this.historialPageSize)
+    );
+  }
+
+  get cotizacionesPaginadas(): Cotizacion[] {
+    const start = (this.historialPagina - 1) * this.historialPageSize;
+    return this.cotizacionesFiltradas.slice(
+      start,
+      start + this.historialPageSize
+    );
+  }
+
   cargarCotizaciones(): void {
     const usuario = this.usuarioActual;
     if (!usuario) {
@@ -82,6 +136,7 @@ export class MisCotizacionesComponent implements OnInit {
         this.cotizaciones = data.filter(
           (cot) => cot.usuario?.idUsuario === usuario.idUsuario
         );
+        this.historialPagina = 1;
         if (this.cotizacionSeleccionada) {
           this.cotizacionSeleccionada =
             this.cotizaciones.find(
@@ -113,6 +168,9 @@ export class MisCotizacionesComponent implements OnInit {
 
   eliminarProductoCarrito(idProducto: number): void {
     this.cotizacionService.eliminarProducto(idProducto);
+    if (this.carritoPagina > this.totalPaginasCarrito) {
+      this.carritoPagina = this.totalPaginasCarrito;
+    }
   }
 
   seguirAgregandoProductos(): void {
@@ -235,6 +293,7 @@ export class MisCotizacionesComponent implements OnInit {
   seleccionarCotizacion(cotizacion: Cotizacion): void {
     this.cotizacionSeleccionada = cotizacion;
     this.prepararAjustes(cotizacion);
+    this.enfocarDetalle();
   }
 
   enfocarDetalle(): void {
@@ -436,5 +495,24 @@ export class MisCotizacionesComponent implements OnInit {
           this.alertService.error(mensaje);
         },
       });
+  }
+
+  cambiarPaginaCarrito(offset: number): void {
+    const nueva = this.carritoPagina + offset;
+    if (nueva >= 1 && nueva <= this.totalPaginasCarrito) {
+      this.carritoPagina = nueva;
+    }
+  }
+
+  cambiarPaginaHistorial(offset: number): void {
+    const nueva = this.historialPagina + offset;
+    if (nueva >= 1 && nueva <= this.totalPaginasHistorial) {
+      this.historialPagina = nueva;
+    }
+  }
+
+  aplicarFiltroEstado(filtro: string): void {
+    this.historialFiltroEstado = filtro;
+    this.historialPagina = 1;
   }
 }
