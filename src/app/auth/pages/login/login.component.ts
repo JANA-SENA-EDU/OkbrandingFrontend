@@ -77,6 +77,7 @@ export class LoginComponent implements AfterViewInit {
         if (response && response.token) {
           console.log('Respuesta de login:', response);
           this.authService.setToken(response.token);
+          this.authService.setUser(response);
           this.alertService.success(`Bienvenido, ${response.nombre}`);
 
           const rawRol: any =

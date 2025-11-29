@@ -4,39 +4,37 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { LoginResponse } from '../models/login-response.model';
 import { LoginRequest } from '../models/login-request.model';
 import { Router } from '@angular/router';
-import { LoaderService } from '../../shared/services/loader.service';
 import { environment } from '../../../environments/environment';
 import { AlertService } from '../../shared/services/alert.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private baseUrl = `${environment.apiUrl}/auth`;
+  private sidebarState = new BehaviorSubject<boolean>(false);
+  private tokenKey = 'auth_token';
+  private userKey = 'auth_user';
+  private currentUserSubject = new BehaviorSubject<LoginResponse | null>(
+    this.loadUserFromStorage()
+  );
+  readonly currentUser$ = this.currentUserSubject.asObservable();
+  sidebarVisible: boolean = false;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private loaderService: LoaderService,
     private alertService: AlertService
   ) {}
 
-  private baseUrl = `${environment.apiUrl}/auth`;
-  private sidebarState = new BehaviorSubject<boolean>(false);
-
-  private tokenKey = 'auth_token';
-  sidebarVisible: boolean = false;
-
-  // Método para hacer login
   login(loginRequest: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.baseUrl}/login`, loginRequest);
   }
 
-  // Método para registrar usuario
   registrarUsuario(usuario: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/register`, usuario);
   }
 
-  // Manejo del token en sessionStorage
   setToken(token: string): void {
     sessionStorage.setItem(this.tokenKey, token);
   }
@@ -49,21 +47,43 @@ export class AuthService {
     sessionStorage.removeItem(this.tokenKey);
   }
 
-  isAuthenticated(): boolean {
-    return !!this.getToken(); // Retorna true si hay un token, false si no
+  setUser(user: LoginResponse): void {
+    sessionStorage.setItem(this.userKey, JSON.stringify(user));
+    this.currentUserSubject.next(user);
   }
 
-  // Método para cerrar sesión
+  private loadUserFromStorage(): LoginResponse | null {
+    try {
+      const raw = sessionStorage.getItem(this.userKey);
+      return raw ? (JSON.parse(raw) as LoginResponse) : null;
+    } catch {
+      return null;
+    }
+  }
+
+  getCurrentUser(): LoginResponse | null {
+    return this.currentUserSubject.value;
+  }
+
+  clearUser(): void {
+    sessionStorage.removeItem(this.userKey);
+    this.currentUserSubject.next(null);
+  }
+
+  isAuthenticated(): boolean {
+    return !!this.getToken();
+  }
+
   logout(redirectTo: string = '/'): void {
     this.alertService
       .success('Sesión cerrada con éxito', '¡Hasta pronto!')
       .then(() => {
         this.removeToken();
+        this.clearUser();
         this.router.navigate([redirectTo]);
       });
   }
 
-  // Métodos para manejar el sidebar
   toggleSidebar(): void {
     this.sidebarState.next(!this.sidebarState.value);
   }
@@ -71,5 +91,4 @@ export class AuthService {
   getSidebarState(): Observable<boolean> {
     return this.sidebarState.asObservable();
   }
-
 }

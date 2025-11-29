@@ -1,143 +1,218 @@
-/* Fuente global */
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f4f4f9;
-}
-
-/* Contenedor Principal */
 .usuarios-container {
-  overflow-x: auto;
-  width: 85%;
-  margin: 5px auto;
-  background: #ffffff;
-  padding: 5px;
-  border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+  background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%);
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
 }
 
-/* Encabezado */
 .usuarios-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  background: #1d3557; /* Azul Marino */
-  padding: 18px;
-  border-radius: 10px;
-  color: white;
-  margin-bottom: 10px;
+  align-items: flex-end;
+  gap: 16px;
+  flex-wrap: wrap;
 }
 
 .usuarios-header h2 {
-  margin: 0;
-  font-size: 1.8rem;
-  font-weight: 600;
+  margin: 8px 0 0;
+  font-size: 28px;
+  color: #0f172a;
 }
 
-/* Botón de Nuevo Usuario */
 .boton-profesional {
-  background: #e63946; /* Rojo elegante */
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
-  font-size: 16px;
-  font-weight: bold;
   border: none;
   padding: 12px 20px;
-  border-radius: 8px;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .boton-profesional:hover {
-  background: #d62839;
-  box-shadow: 0 4px 12px rgba(230, 57, 70, 0.3);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(99, 102, 241, 0.35);
 }
 
-/* Tabla */
+.filtros-usuarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  padding: 16px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.campo label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+}
+
+.campo input,
+.campo select {
+  border: 1px solid #cbd5f5;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 15px;
+  background: white;
+  transition: border 0.2s ease, box-shadow 0.2s ease;
+}
+
+.campo input:focus,
+.campo select:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+}
+
+.input-icono {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icono mat-icon {
+  position: absolute;
+  left: 12px;
+  color: #94a3b8;
+}
+
+.input-icono input {
+  padding-left: 40px;
+}
+
+.campo-boton {
+  display: flex;
+  align-items: flex-end;
+}
+
 .usuarios-tabla {
   width: 100%;
-  border-collapse: collapse;
-  background: white;
-  border-radius: 8px;
+  border-radius: 16px;
   overflow: hidden;
 }
 
-/* Cabecera de la Tabla */
 .usuarios-tabla th {
-  background: #1d3557;
+  background: #0f172a;
   color: white;
-  font-weight: bold;
-  padding: 12px;
-  text-align: left;
-  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
-/* Celdas */
 .usuarios-tabla td {
-  padding: 14px;
-  font-size: 14px;
-  border-bottom: 1px solid #ddd;
+  color: #1e293b;
 }
 
-/* Alternancia de filas */
-.usuarios-tabla tr:nth-child(even) {
-  background: #f1f1f1;
+.usuarios-tabla tr {
+  transition: background 0.2s ease;
 }
 
-/* Hover en filas */
 .usuarios-tabla tr:hover {
-  background: rgba(29, 53, 87, 0.1);
+  background: rgba(99, 102, 241, 0.05);
 }
 
-/* Estado Activo/Inactivo */
+.usuario-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.usuario-col .titulo {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.usuario-col small {
+  color: #94a3b8;
+}
+
+.activo,
+.inactivo {
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
 .activo {
-  color: #2a9d8f; /* Verde oscuro */
-  font-weight: bold;
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
 }
 
 .inactivo {
-  color: #e63946; /* Rojo oscuro */
-  font-weight: bold;
+  background: rgba(248, 113, 113, 0.15);
+  color: #dc2626;
 }
 
-/* Botones de Acción */
 .accion-boton {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-right: 10px; /* Espacio entre botones */
+  margin-right: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Botón Editar */
-.boton-editar {
-  background: #2a9d8f; /* Verde */
-  color: white;
-}
-
-.boton-editar:hover {
-  background: #21867a;
-  box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3);
-}
-
-/* Botón Eliminar */
-.boton-eliminar {
-  background: #e63946; /* Rojo */
-  color: white;
-}
-
-.boton-eliminar:hover {
-  background: #d62839;
-  box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
-}
-
-/* Íconos dentro de los botones */
 .accion-boton mat-icon {
-  font-size: 20px;
+  color: white;
 }
 
+.boton-editar {
+  background: #0ea5e9;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.35);
+}
 
+.boton-eliminar {
+  background: #f43f5e;
+  box-shadow: 0 4px 12px rgba(244, 63, 94, 0.35);
+}
+
+.accion-boton:hover {
+  transform: translateY(-2px);
+}
+
+.sin-resultados {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px;
+  color: #64748b;
+}
+
+.sin-resultados mat-icon {
+  font-size: 40px;
+  opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+  .usuarios-container {
+    padding: 16px;
+  }
+
+  .usuarios-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

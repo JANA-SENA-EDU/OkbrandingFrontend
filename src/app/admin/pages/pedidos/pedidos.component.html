@@ -1,1 +1,168 @@
-<p>pedidos works!</p>
+<section class="cotizaciones-wrapper">
+  <div class="cotizaciones-header">
+    <div>
+      <p class="eyebrow">Relación con clientes</p>
+      <h2>Cotizaciones registradas</h2>
+      <p class="subtitulo">
+        Gestiona las solicitudes recibidas, responde con valores actualizados y revisa el historial de cada cliente.
+      </p>
+    </div>
+    <div class="header-actions">
+      <mat-select [(ngModel)]="filtroEstado" aria-label="Filtrar por estado">
+        <mat-option value="pendientes">Pendientes</mat-option>
+        <mat-option value="respondidas">Respondidas</mat-option>
+        <mat-option value="canceladas">Canceladas</mat-option>
+        <mat-option value="todas">Todas</mat-option>
+      </mat-select>
+      <button mat-stroked-button color="primary" (click)="cargarCotizaciones()" [disabled]="cargando">
+        Recargar
+      </button>
+    </div>
+  </div>
+
+  <div class="cotizaciones-layout">
+    <div class="panel listado">
+      <h3>Lista de cotizaciones</h3>
+      <div
+        class="card-cotizacion"
+        *ngFor="let cot of cotizacionesFiltradas"
+        [ngClass]="[
+          estadoClase(cot.estadoCotizacion),
+          cotizacionSeleccionada?.idCotizacion === cot.idCotizacion ? 'seleccionada' : ''
+        ]"
+        (click)="seleccionarCotizacion(cot)"
+      >
+        <div class="card-header">
+          <span class="codigo">COT-{{ cot.idCotizacion }}</span>
+          <span>{{ cot.fechaSolicitud | date : 'mediumDate' }}</span>
+        </div>
+        <div class="card-body">
+          <p class="cliente">{{ cot.usuario.nombre }}</p>
+          <p class="correo">{{ cot.usuario.correo }}</p>
+      <div class="card-footer">
+        <span class="estado" [ngClass]="cot.estadoCotizacion.toLowerCase()">{{ cot.estadoCotizacion }}</span>
+        <span class="total">{{ cot.montoTotal | currency : 'COP' : 'symbol-narrow' }}</span>
+      </div>
+        </div>
+      </div>
+      <p class="mensaje-vacio" *ngIf="!cotizacionesFiltradas.length">
+        No se encontraron cotizaciones para el filtro seleccionado.
+      </p>
+    </div>
+
+    <div class="panel detalle" *ngIf="cotizacionSeleccionada as seleccionada; else selecciona">
+      <div class="detalle-header">
+        <div>
+          <p class="eyebrow">Detalle</p>
+          <h3>COT-{{ seleccionada.idCotizacion }}</h3>
+          <p class="cliente-info">
+            {{ seleccionada.usuario.nombre }} · {{ seleccionada.usuario.correo }}
+          </p>
+        </div>
+        <span class="badge">{{ seleccionada.estadoCotizacion }}</span>
+      </div>
+
+      <div class="resumen">
+        <div class="resumen-item">
+          <label>Productos</label>
+          <strong>{{ seleccionada.productos.length }}</strong>
+        </div>
+        <div class="resumen-item">
+          <label>Monto total</label>
+          <strong>{{ seleccionada.montoTotal | currency : 'COP' : 'symbol-narrow' }}</strong>
+        </div>
+        <div class="resumen-item">
+          <label>Fecha</label>
+          <strong>{{ seleccionada.fechaSolicitud | date : 'medium' }}</strong>
+        </div>
+      </div>
+
+      <div class="tabla-productos">
+        <div class="tabla-header">
+          <span>Producto</span>
+          <span>Colores</span>
+          <span>Comentario cliente</span>
+          <span>Cantidad</span>
+          <span>Precio unitario</span>
+          <span>Subtotal</span>
+        </div>
+        <div class="tabla-row" *ngFor="let producto of seleccionada.productos">
+          <span>{{ producto.nombreProducto }}</span>
+          <span>
+            <ng-container *ngIf="producto.coloresSeleccionados?.length; else sinColor">
+              <span class="chip-color" *ngFor="let color of producto.coloresSeleccionados">
+                {{ obtenerNombreColor(color) }}
+              </span>
+            </ng-container>
+            <ng-template #sinColor>Sin definir</ng-template>
+          </span>
+          <span>{{ producto.comentarioCliente || 'Sin comentario' }}</span>
+          <span>{{ producto.cantidad }}</span>
+          <span>
+            <input
+              type="number"
+              min="0"
+              step="1000"
+              [(ngModel)]="precios[producto.idProducto]"
+              [readonly]="!puedeResponder()"
+            />
+          </span>
+          <span>
+            {{
+              (precios[producto.idProducto] || producto.precioUnitario || 0)
+                * producto.cantidad
+                | currency : 'COP' : 'symbol-narrow'
+            }}
+          </span>
+        </div>
+      </div>
+
+      <div class="comentarios-generales" *ngIf="seleccionada.comentarios?.length">
+        <h4>Comentarios registrados</h4>
+        <div class="comentario-item" *ngFor="let comentario of seleccionada.comentarios">
+          <div class="comentario-meta">
+            <span class="autor">{{ comentario.nombreUsuario || 'Usuario' }}</span>
+            <span class="fecha">{{ comentario.fechaComentario | date : 'short' }}</span>
+            <span class="rol" *ngIf="comentario.esAdministrador">Administrador</span>
+          </div>
+          <p>{{ comentario.comentario }}</p>
+        </div>
+      </div>
+
+      <div class="comentario-area" *ngIf="puedeResponder()">
+        <label>Mensaje al cliente</label>
+        <textarea
+          rows="3"
+          [(ngModel)]="comentarioRespuesta"
+          placeholder="Describe los alcances, tiempos de entrega, etc."
+        ></textarea>
+      </div>
+
+      <div class="acciones" *ngIf="puedeResponder()">
+        <button mat-raised-button color="primary" (click)="enviarRespuesta()">
+          Enviar respuesta al cliente
+        </button>
+      </div>
+
+      <div class="historial" *ngIf="seleccionada.historial?.length">
+        <h4>Historial de cambios</h4>
+        <div class="historial-item" *ngFor="let h of seleccionada.historial">
+          <div class="historial-meta">
+            <span>{{ h.fechaCambio | date : 'short' }}</span>
+            <span>{{ h.usuarioAccion }}</span>
+          </div>
+          <div class="historial-estado">
+            {{ h.estadoAnterior || 'Inicio' }} → {{ h.estadoNuevo }}
+          </div>
+          <p *ngIf="h.descripcionCambio">{{ h.descripcionCambio }}</p>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #selecciona>
+      <div class="panel detalle vacio">
+        <p>Selecciona una cotización para ver el detalle.</p>
+      </div>
+    </ng-template>
+  </div>
+</section>

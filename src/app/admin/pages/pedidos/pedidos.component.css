@@ -1,0 +1,322 @@
+.cotizaciones-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 32px;
+  background: linear-gradient(135deg, #eff7ff 0%, #fdf2ff 100%);
+  border-radius: 30px;
+  box-shadow: 0 30px 60px rgba(15, 23, 42, 0.12);
+}
+
+.cotizaciones-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.cotizaciones-header h2 {
+  margin: 6px 0 0;
+  font-size: 28px;
+  color: #0f172a;
+}
+
+.subtitulo {
+  margin: 4px 0 0;
+  color: #64748b;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.header-actions mat-select {
+  min-width: 200px;
+  border-radius: 16px;
+  padding: 6px 12px;
+  background: white;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  box-shadow: 0 8px 18px rgba(59, 130, 246, 0.15);
+}
+
+.header-actions button {
+  border-radius: 999px;
+  padding: 10px 22px;
+  text-transform: none;
+  font-weight: 600;
+  background: linear-gradient(135deg, #2dd4bf, #22d3ee);
+  color: white;
+  box-shadow: 0 14px 30px rgba(45, 212, 191, 0.35);
+}
+
+.cotizaciones-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 18px;
+}
+
+.panel {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.panel.listado {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.panel.listado h3 {
+  margin: 0 0 12px;
+  color: #0f172a;
+}
+
+.card-cotizacion {
+  border-radius: 18px;
+  padding: 16px;
+  border: 1px solid transparent;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: border 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  background: white;
+}
+
+.card-cotizacion:hover {
+  transform: translateX(3px);
+}
+
+.card-cotizacion.seleccionada {
+  border-color: rgba(59, 130, 246, 0.4);
+  box-shadow: 0 16px 30px rgba(59, 130, 246, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.card-body .cliente {
+  margin: 0;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.card-body .correo {
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 13px;
+}
+
+.card-footer .estado {
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(226, 232, 240, 0.6);
+}
+
+.card-footer .estado.pendientes {
+  background: rgba(251, 191, 36, 0.15);
+  color: #d97706;
+}
+
+.card-footer .estado.respondidas {
+  background: rgba(16, 185, 129, 0.15);
+  color: #047857;
+}
+
+.card-cotizacion.pendientes {
+  background: linear-gradient(120deg, rgba(255, 243, 224, 0.9), rgba(255, 255, 255, 0.95));
+}
+
+.card-cotizacion.respondida,
+.card-cotizacion.respondidas {
+  background: linear-gradient(120deg, rgba(236, 254, 255, 0.9), rgba(255, 255, 255, 0.95));
+}
+
+.card-cotizacion.cancelada,
+.card-cotizacion.canceladas {
+  background: linear-gradient(120deg, rgba(254, 242, 242, 0.9), rgba(255, 255, 255, 0.95));
+}
+
+.card-cotizacion.cerrada,
+.card-cotizacion.cerradas {
+  background: linear-gradient(120deg, rgba(240, 244, 255, 0.9), rgba(255, 255, 255, 0.95));
+}
+
+.card-cotizacion.ajustada_cliente {
+  background: linear-gradient(120deg, rgba(232, 245, 255, 0.9), rgba(255, 255, 255, 0.95));
+}
+
+.chip-color {
+  display: inline-block;
+  margin-right: 6px;
+  margin-bottom: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(243, 244, 246, 0.9);
+  font-size: 12px;
+  color: #0f172a;
+}
+
+.card-footer .estado.canceladas {
+  background: rgba(239, 68, 68, 0.15);
+  color: #b91c1c;
+}
+
+.card-footer .estado.cerrada {
+  background: rgba(99, 102, 241, 0.15);
+  color: #4338ca;
+}
+
+.card-footer .total {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.panel.detalle {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detalle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.detalle-header h3 {
+  margin: 6px 0;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.1);
+  color: #4338ca;
+  font-weight: 600;
+}
+
+.resumen {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 12px;
+}
+
+.resumen-item {
+  background: rgba(248, 250, 252, 0.9);
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.resumen-item label {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.resumen-item strong {
+  display: block;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.tabla-productos {
+  border-radius: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  overflow: hidden;
+}
+
+.tabla-header,
+.tabla-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1.2fr 0.6fr 0.8fr 0.8fr;
+  gap: 8px;
+  padding: 10px 12px;
+}
+
+.tabla-header {
+  background: rgba(15, 23, 42, 0.7);
+  color: white;
+  font-weight: 600;
+}
+
+.tabla-row:nth-child(even) {
+  background: rgba(148, 163, 184, 0.08);
+}
+
+.tabla-row input {
+  width: 100%;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+
+.comentarios-generales,
+.historial {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.comentario-item,
+.historial-item {
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(248, 250, 252, 0.9);
+}
+
+.comentario-meta,
+.historial-meta {
+  display: flex;
+  gap: 8px;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.comentario-area textarea {
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  padding: 10px;
+}
+
+.acciones {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.panel.detalle.vacio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+@media (max-width: 1000px) {
+  .cotizaciones-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel.listado {
+    max-height: none;
+  }
+}

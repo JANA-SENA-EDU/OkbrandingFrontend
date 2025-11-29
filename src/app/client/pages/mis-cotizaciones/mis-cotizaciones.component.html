@@ -1,66 +1,354 @@
-<div class="mis-cotizaciones">
-  <h2>Mis cotizaciones</h2>
-
-  <section class="bloque bloque-actual">
-    <h3>Productos a cotizar</h3>
-
-    <ng-container *ngIf="productosActuales.length; else sinProductos">
-      <div
-        class="producto-item"
-        *ngFor="let producto of productosActuales"
+<div class="cotizaciones-dashboard">
+  <section class="dashboard-hero surface-panel">
+    <div>
+      <p class="eyebrow">Panel de cotizaciones</p>
+      <h1>Gestiona tus solicitudes con estilo profesional</h1>
+      <p>
+        Edita, envia y da seguimiento a las respuestas del administrador. Cada accion queda registrada para que tengas
+        visibilidad total del proceso.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <button
+        mat-stroked-button
+        color="primary"
+        (click)="seguirAgregandoProductos()"
+        [disabled]="!productosActuales.length"
       >
-        <div class="producto-info">
-          <div class="producto-nombre">
-            {{ producto.nombre || producto.name || 'Producto sin nombre' }}
+        Explorar mas productos
+      </button>
+      <button mat-raised-button color="primary" (click)="crearNuevaCotizacion()">
+        Nueva cotizacion
+      </button>
+    </div>
+  </section>
+
+  <section class="stat-grid">
+    <article class="stat-card surface-panel">
+      <span class="label">Productos activos</span>
+      <strong>{{ productosActuales.length }}</strong>
+      <small>{{ totalCarrito }} unidades por cotizar</small>
+    </article>
+    <article class="stat-card surface-panel">
+      <span class="label">Cotizaciones enviadas</span>
+      <strong>{{ cotizaciones.length }}</strong>
+      <small>Historial sincronizado con tu cuenta</small>
+    </article>
+    <article class="stat-card surface-panel">
+      <span class="label">Estado seleccionado</span>
+      <strong>{{ cotizacionSeleccionada?.estadoCotizacion || 'Sin seleccionar' }}</strong>
+      <small *ngIf="cotizacionSeleccionada">COT-{{ cotizacionSeleccionada.idCotizacion }}</small>
+      <small *ngIf="!cotizacionSeleccionada">Elige una tarjeta del historial</small>
+    </article>
+  </section>
+
+  <div class="dashboard-grid">
+    <section class="panel surface-panel panel-current">
+      <header>
+        <div>
+          <p class="eyebrow">Carrito activo</p>
+          <h2>Productos a cotizar</h2>
+          <small *ngIf="usuarioActual; else requiereLogin">
+            Ajusta cantidades, colores y comentarios antes de enviar.
+          </small>
+          <ng-template #requiereLogin>
+            <small class="mensaje-alerta">
+              Inicia sesion para guardar y enviar tu cotizacion.
+            </small>
+          </ng-template>
+        </div>
+        <span class="tag tag-info" *ngIf="productosActuales.length">{{ productosActuales.length }} referencias</span>
+      </header>
+
+      <ng-container *ngIf="productosActuales.length; else sinProductos">
+        <article class="producto-tarjeta" *ngFor="let producto of productosActuales">
+          <div class="producto-cabecera">
+            <div>
+              <h3>{{ producto.nombre }}</h3>
+              <p *ngIf="producto.descripcion">{{ producto.descripcion }}</p>
+            </div>
+            <div class="producto-cantidad">
+              <button
+                mat-mini-fab
+                color="primary"
+                (click)="actualizarCantidadCarrito(producto, producto.cantidad - 1)"
+                [disabled]="producto.cantidad <= 1"
+              >
+                <mat-icon>remove</mat-icon>
+              </button>
+              <input
+                type="number"
+                min="1"
+                [ngModel]="producto.cantidad"
+                (ngModelChange)="actualizarCantidadCarrito(producto, $event)"
+              />
+              <button
+                mat-mini-fab
+                color="primary"
+                (click)="actualizarCantidadCarrito(producto, producto.cantidad + 1)"
+              >
+                <mat-icon>add</mat-icon>
+              </button>
+              <button mat-icon-button color="warn" (click)="eliminarProductoCarrito(producto.idProducto)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
-          <div class="producto-detalle" *ngIf="producto.descripcion">
-            {{ producto.descripcion }}
+
+          <div class="producto-config" *ngIf="producto.coloresDisponibles?.length">
+            <label>Colores del producto</label>
+            <div class="chips-colores">
+              <button
+                class="chip-color"
+                type="button"
+                *ngFor="let color of producto.coloresDisponibles"
+                [class.seleccionado]="esColorSeleccionado(producto, color)"
+                (click)="toggleColorSeleccionado(producto, color)"
+              >
+                <span class="chip-dot" [style.backgroundColor]="color.codigoColor"></span>
+                {{ color.nombreColor || color.codigoColor }}
+              </button>
+            </div>
           </div>
+
+          <div class="producto-config">
+            <label>Comentario para este producto</label>
+            <textarea
+              rows="2"
+              [(ngModel)]="producto.comentarioCliente"
+              (ngModelChange)="
+                actualizarDetalleCarrito(producto.idProducto, {
+                  comentarioCliente: producto.comentarioCliente || ''
+                })
+              "
+              [ngModelOptions]="{ updateOn: 'blur' }"
+              placeholder="Indica medidas, acabados o notas especificas"
+            ></textarea>
+          </div>
+        </article>
+
+        <div class="comentario-area">
+          <label>Comentarios generales para el administrador</label>
+          <textarea
+            rows="3"
+            [(ngModel)]="comentarioSolicitud"
+            placeholder="Describe informacion adicional para esta cotizacion"
+          ></textarea>
+        </div>
+
+        <div class="acciones-cotizacion">
+          <button mat-stroked-button color="primary" (click)="seguirAgregandoProductos()">
+            Seguir agregando productos
+          </button>
+          <button mat-stroked-button color="warn" (click)="cancelarBorrador()">
+            Cancelar cotizacion actual
+          </button>
+          <button mat-raised-button color="primary" (click)="mandarCotizacion()">
+            Enviar cotizacion ({{ totalCarrito }} productos)
+          </button>
+        </div>
+      </ng-container>
+
+      <ng-template #sinProductos>
+        <div class="estado-vacio">
+          <h3>Aun no agregas productos</h3>
+          <p>Explora el catalogo y anade articulos para empezar una nueva cotizacion.</p>
+          <button mat-raised-button color="primary" (click)="crearNuevaCotizacion()">
+            Crear nueva cotizacion
+          </button>
+        </div>
+      </ng-template>
+    </section>
+
+    <section class="panel surface-panel panel-history">
+      <header>
+        <div>
+          <p class="eyebrow">Historial</p>
+          <h2>Mis cotizaciones</h2>
+          <small>Selecciona una tarjeta para revisar los detalles.</small>
+        </div>
+        <button
+          mat-stroked-button
+          color="primary"
+          (click)="cargarCotizaciones()"
+          [disabled]="cargandoListado"
+        >
+          Actualizar
+        </button>
+      </header>
+
+      <ng-container *ngIf="cotizaciones.length; else sinCotizaciones">
+        <article
+          class="history-card"
+          *ngFor="let cot of cotizaciones"
+          [class.seleccionada]="cotizacionSeleccionada?.idCotizacion === cot.idCotizacion"
+          (click)="seleccionarCotizacion(cot); enfocarDetalle()"
+        >
+          <div class="history-card-hero">
+            <div class="history-avatar">
+              <span>{{ cot.productos.length }}</span>
+            </div>
+            <div>
+              <span class="codigo">COT-{{ cot.idCotizacion }}</span>
+              <span class="fecha">{{ cot.fechaSolicitud | date : 'mediumDate' }}</span>
+            </div>
+            <span class="status-pill" [attr.data-status]="cot.estadoCotizacion">
+              {{ cot.estadoCotizacion }}
+            </span>
+          </div>
+          <div class="history-card-progress">
+            <span class="progress-bar" [attr.data-status]="cot.estadoCotizacion"></span>
+          </div>
+          <div class="history-card-body">
+            <div>
+              <p>Monto estimado</p>
+              <strong>{{ cot.montoTotal | currency : 'COP' : 'symbol-narrow' }}</strong>
+            </div>
+            <div>
+              <p>Productos</p>
+              <strong>{{ cot.productos.length }}</strong>
+            </div>
+          </div>
+        </article>
+      </ng-container>
+
+      <ng-template #sinCotizaciones>
+        <div class="estado-vacio">
+          <h3>Sin registros todavia</h3>
+          <p>Aun no has enviado cotizaciones con esta cuenta.</p>
+        </div>
+      </ng-template>
+    </section>
+
+    <section
+      class="panel surface-panel panel-detail"
+      *ngIf="cotizacionSeleccionada as seleccionada"
+      #detalleSection
+    >
+      <header>
+        <div>
+          <p class="eyebrow">Detalle</p>
+          <h2>COT-{{ seleccionada.idCotizacion }}</h2>
+        </div>
+        <span class="status-pill grande" [attr.data-status]="seleccionada.estadoCotizacion">
+          {{ seleccionada.estadoCotizacion }}
+        </span>
+      </header>
+
+      <div class="detalle-resumen">
+        <div>
+          <span>Fecha</span>
+          <strong>{{ seleccionada.fechaSolicitud | date : 'medium' }}</strong>
+        </div>
+        <div>
+          <span>Productos</span>
+          <strong>{{ seleccionada.productos.length }}</strong>
+        </div>
+        <div>
+          <span>Total actualizado</span>
+          <strong>{{ seleccionada.montoTotal | currency : 'COP' : 'symbol-narrow' }}</strong>
         </div>
       </div>
 
-      <div class="acciones-cotizacion">
-        <button
-          mat-raised-button
-          color="primary"
-          (click)="mandarCotizacion()"
-        >
-          Mandar cotización
+      <div class="tabla-productos" [class.con-ajuste]="seleccionada.permiteAjusteCliente">
+        <div class="tabla-header">
+          <span>Producto</span>
+          <span>Colores</span>
+          <span>Comentario</span>
+          <span>Cantidad</span>
+          <span>Precio</span>
+          <span>Subtotal</span>
+          <span *ngIf="seleccionada.permiteAjusteCliente">Ajuste</span>
+        </div>
+        <div class="tabla-row" *ngFor="let producto of seleccionada.productos">
+          <span>{{ producto.nombreProducto }}</span>
+          <span>
+            <ng-container *ngIf="producto.coloresSeleccionados?.length; else sinColor">
+              {{ (producto.coloresSeleccionados || []).join(', ') }}
+            </ng-container>
+            <ng-template #sinColor>Sin definir</ng-template>
+          </span>
+          <span>{{ producto.comentarioCliente || 'Sin comentario' }}</span>
+          <span>{{ producto.cantidad }}</span>
+          <span>
+            {{ producto.precioUnitario || 0 | currency : 'COP' : 'symbol-narrow' }}
+          </span>
+          <span>
+            {{ producto.subtotal || 0 | currency : 'COP' : 'symbol-narrow' }}
+          </span>
+          <span *ngIf="seleccionada.permiteAjusteCliente" class="ajuste-input">
+            <input type="number" min="0" [(ngModel)]="ajustesCliente[producto.idProducto]" />
+            <button
+              mat-icon-button
+              color="warn"
+              (click)="desactivarProducto(producto.idProducto)"
+              [disabled]="ajustesCliente[producto.idProducto] === 0"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </span>
+        </div>
+      </div>
+
+      <div class="comentarios-generales" *ngIf="seleccionada.comentarios?.length">
+        <h3>Comentarios y notas</h3>
+        <div class="comentario-item" *ngFor="let comentario of seleccionada.comentarios">
+          <div class="comentario-meta">
+            <span class="autor">{{ comentario.nombreUsuario || 'Usuario' }}</span>
+            <span class="fecha">{{ comentario.fechaComentario | date : 'short' }}</span>
+            <span class="rol" *ngIf="comentario.esAdministrador">Administrador</span>
+          </div>
+          <p>{{ comentario.comentario }}</p>
+        </div>
+      </div>
+
+      <div class="timeline" *ngIf="seleccionada.historial?.length">
+        <h3>Historial de la cotizacion</h3>
+        <ol>
+          <li *ngFor="let h of seleccionada.historial">
+            <span class="dot"></span>
+            <div class="timeline-body">
+              <strong>{{ h.estadoNuevo }}</strong>
+              <small>{{ h.fechaCambio | date : 'medium' }} - {{ h.usuarioAccion }}</small>
+              <p *ngIf="h.descripcionCambio">{{ h.descripcionCambio }}</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="comentario-area" *ngIf="seleccionada.permiteAjusteCliente">
+        <label>Notas para el administrador</label>
+        <textarea
+          rows="3"
+          [(ngModel)]="comentarioAjuste"
+          placeholder="Describe el motivo de tus cambios"
+        ></textarea>
+      </div>
+      <div class="acciones-cotizacion" *ngIf="seleccionada.permiteAjusteCliente">
+        <button mat-raised-button color="accent" (click)="enviarAjustes()">
+          Enviar ajustes al administrador
         </button>
       </div>
-    </ng-container>
 
-    <ng-template #sinProductos>
-      <p class="mensaje-vacio">
-        Todavía no tienes productos en tu cotización actual.
-      </p>
-    </ng-template>
-  </section>
-
-  <section class="bloque bloque-enviadas">
-    <h3>Cotizaciones enviadas</h3>
-
-    <ng-container *ngIf="cotizacionesEnviadas.length; else sinCotizaciones">
-      <div
-        class="cotizacion-card"
-        *ngFor="let cot of cotizacionesEnviadas"
-      >
-        <div class="cotizacion-header">
-          <span class="cotizacion-codigo">{{ cot.codigo }}</span>
-          <span class="cotizacion-fecha">{{ cot.fecha }}</span>
-          <span class="cotizacion-estado">{{ cot.estado }}</span>
-        </div>
-        <div class="cotizacion-body">
-          <p>{{ cot.resumen }}</p>
-        </div>
+      <div class="comentario-area" *ngIf="seleccionada.estadoCotizacion === 'RESPONDIDA'">
+        <label>Mensaje al aceptar</label>
+        <textarea
+          rows="3"
+          [(ngModel)]="comentarioAceptacion"
+          placeholder="Puedes dejar instrucciones adicionales al confirmar"
+        ></textarea>
       </div>
-    </ng-container>
+      <div class="acciones-cotizacion" *ngIf="seleccionada.estadoCotizacion === 'RESPONDIDA'">
+        <button mat-stroked-button color="primary" (click)="aceptarCotizacion()">
+          Aceptar cotizacion
+        </button>
+      </div>
 
-    <ng-template #sinCotizaciones>
-      <p class="mensaje-vacio">
-        Todavía no has enviado ninguna cotización.
-      </p>
-    </ng-template>
-  </section>
+      <div class="acciones-cotizacion" *ngIf="puedeCancelarCotizacionSeleccionada()">
+        <button mat-stroked-button color="warn" (click)="cancelarCotizacionSeleccionada()">
+          Cancelar cotizacion
+        </button>
+      </div>
+    </section>
+  </div>
 </div>
-

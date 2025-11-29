@@ -88,4 +88,20 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   border-radius: 24px;
   overflow: hidden;
   background: transparent;
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background-color: #f4f6fb; }
+
+:root {
+  --brand-ink: #0f172a;
+  --brand-indigo: #6366f1;
+  --brand-violet: #8b5cf6;
+  --brand-cyan: #22d3ee;
+  --brand-emerald: #10b981;
+  --brand-amber: #f59e0b;
+  --brand-rose: #f43f5e;
+  --brand-panel: #ffffff;
+  --brand-surface: #f8fafc;
+  --brand-border: #e2e8f0;
+  --brand-muted: #94a3b8;
+}
 }
