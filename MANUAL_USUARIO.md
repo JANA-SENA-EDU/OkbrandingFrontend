@@ -7,6 +7,7 @@
 - Alcance: Uso completo de la aplicación web para clientes y administradores.
 - Público objetivo: Usuarios finales (clientes) y administradores del catálogo y cotizaciones.
 - Codificación del archivo: UTF-8 (para conservar acentos y caracteres latinos).
+- URL oficial de la aplicación: https://blue-sky-09b61240f.3.azurestaticapps.net/
 
 ## Contenidos
 - 1. Introducción
@@ -56,7 +57,7 @@ Proporcionar instrucciones claras y accionables para que cualquier usuario (clie
 
 ## 4. Guía para Usuario (cliente)
 ### 4.1 Navegación pública y acceso
-1. Ingresa a la URL principal (ejemplo: `https://<tu-dominio>`).
+1. Ingresa a la URL principal: https://blue-sky-09b61240f.3.azurestaticapps.net/.
 2. Desde la barra superior puedes ir a: Nosotros, Categorías, Contáctanos o usar los botones "Ingresar" / "Registrarse".
 3. Para cotizar debes iniciar sesión o registrarte en `/login` o `/register`.
 
@@ -188,7 +189,7 @@ Proporcionar instrucciones claras y accionables para que cualquier usuario (clie
 
 ## 6. Buenas prácticas y soporte
 - Clientes: inicia sesión antes de cotizar; selecciona colores si el producto los tiene; revisa estados y usa Ajustar/Aceptar/Cancelar según corresponda.
-- Administradores: ingresa precios en todas las líneas al responder; mantiene actualizado catálogo (categorías, colores, estados) antes de crear productos; comprueba que las URLs de imágenes funcionen; valida la home tras editar el carrusel.
+- Administradores: ingresa precios en todas las líneas al responder; mantén actualizado el catálogo (categorías, colores, estados) antes de crear productos; comprueba que las URLs de imágenes funcionen; valida la home tras editar el carrusel.
 - En caso de error: verifica conexión, credenciales y estado del backend; reintenta la acción.
 
 ## 7. Mapa rápido de rutas
