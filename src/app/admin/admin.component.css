@@ -34,7 +34,7 @@
   display: flex;
   align-items: center;
   padding: 14px 16px;
-  color: rgba(248, 250, 252, 0.85) !important;
+  color: #ffffff !important;
   text-decoration: none;
   font-size: 15px;
   font-weight: 500;
@@ -43,7 +43,7 @@
 }
 
 .sidebar-text {
-  color: inherit;
+  color: #ffffff;
 }
 
 .sidebar-icon {

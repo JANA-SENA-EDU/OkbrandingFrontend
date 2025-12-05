@@ -1,12 +1,43 @@
 .carousel-admin {
-  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 28px;
+  background: linear-gradient(135deg, #fff7ed 0%, #eef2ff 100%);
+  border-radius: 24px;
+  box-shadow: 0 25px 55px rgba(15, 23, 42, 0.1);
+}
+
+.carousel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.carousel-header h2 {
+  margin: 6px 0 0;
+  font-size: 28px;
+  color: #0f172a;
 }
 
 .subtitle {
-  margin-top: 4px;
-  margin-bottom: 16px;
-  color: #6b7280;
-  font-size: 14px;
+  margin: 4px 0 0;
+  color: #64748b;
+}
+
+.boton-profesional {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 15px 35px rgba(79, 70, 229, 0.35);
 }
 
 .slides-grid {
@@ -20,6 +51,11 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 0 15px 30px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(148, 163, 184, 0.3);
 }
 
 .slide-header {
@@ -55,6 +91,7 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  align-items: center;
 }
 
 .field-label {
@@ -64,14 +101,40 @@
 
 .slide-fields input[type='text'] {
   width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
   padding: 6px 8px;
   border-radius: 6px;
   border: 1px solid #d1d5db;
   font-size: 14px;
 }
 
+.file-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  color: #ffffff;
+  border: none;
+  font-weight: 600;
+  box-shadow: 0 12px 25px rgba(79, 70, 229, 0.35);
+  cursor: pointer;
+  text-transform: none;
+}
+
+.file-button mat-icon {
+  font-size: 20px;
+}
+
+.file-input {
+  display: none;
+}
+
 .add-slide-btn {
   height: 100%;
+  text-transform: none;
 }
 
 .actions {

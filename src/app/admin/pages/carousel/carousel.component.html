@@ -1,8 +1,18 @@
 <div class="carousel-admin">
-  <h2>Editar carrusel de inicio</h2>
-  <p class="subtitle">
-    Solo administradores pueden cambiar las imágenes que se muestran en el home.
-  </p>
+  <div class="carousel-header">
+    <div>
+      <p class="eyebrow">Contenido destacado</p>
+      <h2>Editar carrusel de inicio</h2>
+      <p class="subtitle">
+        Solo administradores pueden cambiar las imágenes que se muestran en el home.
+      </p>
+    </div>
+
+    <button mat-raised-button color="primary" class="boton-profesional" (click)="addSlide()">
+      <mat-icon>add</mat-icon>
+      Agregar slide
+    </button>
+  </div>
 
   <div class="slides-grid">
     <mat-card class="slide-card" *ngFor="let img of images; let i = index">
@@ -26,8 +36,17 @@
       </div>
 
       <div class="slide-fields">
-        <label class="field-label">Subir nueva imagen</label>
-        <input type="file" accept="image/*" (change)="onFileSelected(i, $event)" />
+        <label class="field-label">Imagen del slide</label>
+        <label class="file-button">
+          <mat-icon>upload</mat-icon>
+          Subir imagen
+          <input
+            class="file-input"
+            type="file"
+            accept="image/*"
+            (change)="onFileSelected(i, $event)"
+          />
+        </label>
 
         <label class="field-label">Ruta / URL de la imagen</label>
         <input
@@ -40,7 +59,7 @@
 
     <button mat-stroked-button color="primary" class="add-slide-btn" (click)="addSlide()">
       <mat-icon>add</mat-icon>
-      Agregar slide
+      Agregar otro slide
     </button>
   </div>
 
