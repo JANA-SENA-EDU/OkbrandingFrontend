@@ -490,8 +490,7 @@ Contenidos:
 - Proceso de registro e inicio de sesión.
 
 Formato:
-
-- Manual de usuario sencillo o video corto de demostración.
+- Manual de usuario (Drive): https://drive.google.com/file/d/15x6qnv3j073ofSaLfleB-MAx5FXBi8rt/view?usp=drive_link
 
 ### 13.3 Equipo técnico
 
@@ -731,3 +730,5 @@ Adicionalmente:
 ---
 
 **Fin del documento**
+
+
