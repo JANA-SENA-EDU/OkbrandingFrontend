@@ -1,4 +1,4 @@
-﻿# Documento de Implantación del Sistema OkBranding (Frontend y Backend)
+﻿# Manual de Implantación del Sistema OkBranding (Frontend y Backend)
 
 ## 1. Introducción
 
@@ -440,27 +440,31 @@ Desde el punto de vista del frontend:
 
 ### 12.1 Backups de base de datos (backend)
 
-- Copia completa diaria de la base de datos de producción.
-- Retención mínima de 30 días (ajustable según política de la organización).
-- Almacenamiento de copias en:
-  - Otro servidor físico o lógico.
-  - Servicio de almacenamiento en la nube (seguro y redundante).
-- Pruebas periódicas de restauración para asegurar que los backups son utilizables.
+- Tipo y frecuencia: respaldo completo diario de la base de datos MySQL de producción (Azure Database for MySQL Flexible Server) ejecutado a las 02:00 UTC.
+- Retención: 30 días en almacenamiento secundario; 7 días en almacenamiento primario.
+- Almacenamiento de copias:
+  - Primario: snapshots automáticas en Azure Database for MySQL (región Chile Central).
+  - Secundario: exportación diaria a Azure Blob Storage (cuenta de almacenamiento redundante RA-GRS), contenedor ackups-mysql/diarios/.
+- Procedimiento de restauración:
+  - Restauración puntual (point-in-time restore) desde Azure Portal o CLI hacia un servidor MySQL de recuperación.
+  - Validación de integridad ejecutando pruebas de conexión y conteo de tablas críticas (productos, categorías, usuarios, cotizaciones).
+- Pruebas periódicas:
+  - Restauración mensual de prueba en entorno de staging.
+  - Registro de resultados en bitácora de operaciones (SharePoint interno / Jira).
 
 ### 12.2 Backups del backend y frontend
 
 - Código fuente:
-  - Respaldado y versionado en el repositorio remoto (Git).
-  - Políticas de branch y tagging para releases.
+  - Repositorios Git en GitHub (OkbrandingFrontend, OkbrandingBackend) con rama main protegida y PR obligatorio.
+  - Tags por release (MAJOR.MINOR.PATCH) y copia espejo semanal en repositorio privado (Azure DevOps).
 - Artefactos de build:
-  - JARs del backend y builds del frontend etiquetados por versión.
-  - Opcionalmente almacenados en un repositorio de artefactos.
+  - Backend: JAR publicado en Azure Artifacts con retención de 6 meses.
+  - Frontend: build dist/ empaquetado y almacenado en Azure Blob Storage (rtefactos-frontend/) con retención de 6 meses.
 - Configuración:
-  - Respaldo de `application.properties` y/o gestión de configuración mediante infraestructura como código (IaC).
+  - Variables sensibles en App Settings (Azure App Service y Azure Static Web Apps).
+  - Respaldo semanal de plantillas pplication.properties y environment.* en SharePoint interno con control de versiones.
 
----
-
-## 13. Plan de capacitación
+## 13. Plan de capacitaciónón
 
 ### 13.1 Usuarios administradores
 
@@ -730,5 +734,7 @@ Adicionalmente:
 ---
 
 **Fin del documento**
+
+
 
 
