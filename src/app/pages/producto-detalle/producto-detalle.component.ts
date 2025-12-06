@@ -7,13 +7,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { AuthService } from '../../auth/services/auth.service';
 import { CotizacionService } from '../../services/cotizacion.service';
 
-@Component({                                                                                                             
-    selector: 'app-producto-detalle',                                                                                      
-    standalone: true,                                                                                                      
-    imports: [CommonModule, MatCardModule, RouterModule, MatButtonModule],                                                 
-    templateUrl: './producto-detalle.component.html',                                                                      
-    styleUrls: ['./producto-detalle.component.css']                                                                        
-  })  
+@Component({
+  selector: 'app-producto-detalle',
+  standalone: true,
+  imports: [CommonModule, MatCardModule, RouterModule, MatButtonModule],
+  templateUrl: './producto-detalle.component.html',
+  styleUrls: ['./producto-detalle.component.css'],
+})
 export class ProductoDetalleComponent implements OnInit, OnDestroy {
   producto: any;
   selectedImagenIndex = 0;
@@ -61,6 +61,10 @@ export class ProductoDetalleComponent implements OnInit, OnDestroy {
 
   goToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  goBack(): void {
+    this.router.navigate(['/productos-por-categoria']);
   }
 
   ngOnDestroy(): void {

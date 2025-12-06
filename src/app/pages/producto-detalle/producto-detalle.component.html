@@ -1,12 +1,20 @@
 <div class="producto-detalle-page" *ngIf="producto">
+  <section class="detalle-banner">
+    <button class="banner-back" type="button" (click)="goBack()">
+      <span aria-hidden="true">←</span>
+      <span>Volver</span>
+    </button>
+    <p class="eyebrow" *ngIf="producto.categoria?.nombreCategoria">
+      {{ producto.categoria.nombreCategoria }}
+    </p>
+    <h1>{{ producto.nombre }}</h1>
+    <p class="banner-copy" *ngIf="producto.descripcion">
+      {{ producto.descripcion }}
+    </p>
+  </section>
+
   <div class="producto-detalle-card">
     <div class="producto-detalle-left">
-      <div class="producto-detalle-marca" *ngIf="producto.categoria?.nombreCategoria">
-        <span class="producto-detalle-marca-badge">
-          {{ producto.categoria.nombreCategoria }}
-        </span>
-      </div>
-
       <div class="producto-detalle-imagen-principal">
         <button
           type="button"
@@ -45,60 +53,45 @@
             <img [src]="img.urlImagen" [alt]="producto.nombre + ' ' + (i + 1)" />
           </button>
         </div>
-        <div class="producto-detalle-dots">
-          <button
-            type="button"
-            class="dot"
-            *ngFor="let img of producto.imagenes; index as i"
-            [class.activa]="i === selectedImagenIndex"
-            (click)="selectImagen(i)"
-          ></button>
-        </div>
       </div>
     </div>
 
     <div class="producto-detalle-right">
       <div class="producto-detalle-header">
-        <h1 class="producto-detalle-nombre">
+        <h2 class="producto-detalle-nombre">
           {{ producto.nombre }}
-        </h1>
-        <p
-          class="producto-detalle-dimensiones"
-          *ngIf="producto.dimensiones"
-        >
+        </h2>
+        <p class="producto-detalle-dimensiones" *ngIf="producto.dimensiones">
           {{ producto.dimensiones }}
         </p>
       </div>
 
-      <p
-        class="producto-detalle-descripcion"
-        *ngIf="producto.descripcion"
-      >
-        {{ producto.descripcion }}
-      </p>
-
-      <div class="producto-detalle-precio">
+      <div class="producto-detalle-precio" *ngIf="producto.precio">
         <span class="precio-label">Desde</span>
-        <span class="precio-valor">{{ producto.precio | currency }}</span>
+        <span class="precio-valor">{{ producto.precio | currency : 'COP' : 'symbol-narrow' }}</span>
       </div>
 
-      <div
-        class="producto-detalle-colores"
-        *ngIf="producto.colores?.length"
-      >
-        <span class="colores-label">Colores disponibles</span>
-        <div class="colores-lista">
-          <span
-            *ngFor="let color of producto.colores"
-            class="color-box"
-            [style.backgroundColor]="color.codigoColor"
-            [title]="color.nombreColor"
-          ></span>
+      <div class="producto-detalle-info">
+        <div class="detalle-item" *ngIf="producto.descripcion">
+          <span class="detalle-label">Descripción</span>
+          <p>{{ producto.descripcion }}</p>
+        </div>
+        <div class="detalle-item" *ngIf="producto.colores?.length">
+          <span class="detalle-label">Colores disponibles</span>
+          <div class="colores-lista">
+            <span
+              *ngFor="let color of producto.colores"
+              class="color-box"
+              [style.backgroundColor]="color.codigoColor"
+              [title]="color.nombreColor"
+            ></span>
+          </div>
         </div>
       </div>
 
       <div class="producto-detalle-acciones">
-        <button mat-raised-button color="primary" (click)="cotizar()">
+        <button class="btn-outline" type="button" (click)="goBack()">Volver</button>
+        <button class="btn-primary" type="button" (click)="cotizar()">
           Cotizar este producto
         </button>
       </div>
