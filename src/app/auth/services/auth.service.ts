@@ -70,6 +70,27 @@ export class AuthService {
     this.currentUserSubject.next(null);
   }
 
+  getUserRole(): string | null {
+    const user = this.getCurrentUser() as any;
+    if (!user) {
+      return null;
+    }
+
+    const rawRol: any =
+      user.rol ?? user.role ?? user.roles ?? '';
+
+    if (Array.isArray(rawRol)) {
+      return rawRol.map((r: any) => String(r).toLowerCase()).join(',');
+    }
+
+    return String(rawRol).toLowerCase();
+  }
+
+  isAdmin(): boolean {
+    const rol = this.getUserRole();
+    return rol ? rol.includes('admin') : false;
+  }
+
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
