@@ -1,0 +1,53 @@
+<h1 class="titulo">📊 Panel de Estadísticas</h1>
+
+<!-- TARJETAS KPI -->
+<div class="kpi-container">
+
+  <div class="kpi-card">
+    <h3>Usuarios</h3>
+    <p>{{ resumen.usuarios }}</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Productos</h3>
+    <p>{{ resumen.productos }}</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Activos</h3>
+    <p>{{ resumen.productosActivos }}</p>
+  </div>
+
+  <div class="kpi-card">
+    <h3>Cotizaciones</h3>
+    <p>{{ resumen.cotizaciones }}</p>
+  </div>
+
+</div>
+
+<!-- GRAFICAS -->
+<div class="charts-grid">
+
+  <div class="chart-card">
+    <h3>Cotizaciones por Mes</h3>
+    <canvas id="cotizacionesMes"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Productos por Categoría</h3>
+    <canvas id="productosCategoria"></canvas>
+  </div>
+
+  <div class="chart-card">
+    <h3>Productos por Estado</h3>
+    <canvas id="productosEstado"></canvas>
+  </div>
+
+</div>
+
+<!-- BOTÓN PDF -->
+<div class="pdf-container">
+  <button class="btn-pdf" (click)="descargarPDF()">
+    📄 Descargar Reporte en PDF
+  </button>
+</div>
