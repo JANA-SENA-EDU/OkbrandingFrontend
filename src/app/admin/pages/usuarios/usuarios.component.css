@@ -215,4 +215,17 @@
     flex-direction: column;
     align-items: flex-start;
   }
+
+  /* Contenedor responsivo para la tabla en pantallas pequeñas */
+  .usuarios-tabla {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .usuarios-tabla table {
+    width: 100%;
+    min-width: 600px;
+  }
 }
