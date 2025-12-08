@@ -1,7 +1,7 @@
 <section class="producto-container">
   <div class="header-tools">
     <div>
-      <p class="eyebrow">Gestión de catálogo</p>
+      <p class="eyebrow">Gestion de catalogo</p>
       <h2>Productos disponibles</h2>
     </div>
     <button mat-raised-button color="primary" class="boton-crear" [routerLink]="['/admin/productos/crear']">
@@ -18,13 +18,13 @@
         <input
           id="busqueda"
           type="text"
-          placeholder="Nombre o descripción"
+          placeholder="Nombre o descripcion"
           [(ngModel)]="terminoBusqueda"
         />
       </div>
     </div>
     <div class="campo">
-      <label for="categoria">Categoría</label>
+      <label for="categoria">Categoria</label>
       <select
         id="categoria"
         [ngModel]="categoriaSeleccionada"
@@ -76,9 +76,9 @@
             <mat-icon>straighten</mat-icon>
             {{ producto.dimensiones }}
           </span>
-          <span>
+          <span *ngIf="producto.categoria?.nombreCategoria">
             <mat-icon>category</mat-icon>
-            {{ producto.categoria?.nombreCategoria || 'Sin categoría' }}
+            {{ producto.categoria.nombreCategoria }}
           </span>
         </div>
         <div class="color-container" *ngIf="producto.colores?.length">
@@ -112,5 +112,4 @@
     <p>No encontramos productos con los filtros seleccionados.</p>
   </div>
 </section>
-
 

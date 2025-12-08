@@ -41,7 +41,10 @@ export class ProductosComponent implements OnInit {
 
   obtenerCategorias(): void {
     this.categoriaService.listar().subscribe({
-      next: (data) => (this.categorias = data),
+      next: (data) => {
+        this.categorias = data;
+        this.asignarCategoriasAProductos();
+      },
       error: () => (this.categorias = []),
     });
   }
@@ -49,12 +52,18 @@ export class ProductosComponent implements OnInit {
   obtenerProductos(categoriaId?: number | null): void {
     if (categoriaId) {
       this.productoService.listarPorCategoria(categoriaId).subscribe({
-        next: (data) => (this.productos = data),
+        next: (data) => {
+          this.productos = data;
+          this.asignarCategoriasAProductos();
+        },
         error: () => (this.productos = []),
       });
     } else {
       this.productoService.listarProductos().subscribe({
-        next: (data) => (this.productos = data),
+        next: (data) => {
+          this.productos = data;
+          this.asignarCategoriasAProductos();
+        },
         error: () => (this.productos = []),
       });
     }
@@ -106,5 +115,19 @@ export class ProductosComponent implements OnInit {
         },
       });
     }
+  }
+
+  private asignarCategoriasAProductos(): void {
+    if (!this.productos?.length || !this.categorias?.length) {
+      return;
+    }
+
+    this.productos = this.productos.map((producto) => ({
+      ...producto,
+      categoria:
+        this.categorias.find(
+          (cat) => cat.idCategoria === producto.idCategoria
+        ) || producto.categoria,
+    }));
   }
 }

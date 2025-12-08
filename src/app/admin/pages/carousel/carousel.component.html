@@ -1,8 +1,8 @@
 <div class="carousel-admin">
   <div class="carousel-header">
     <div>
-      <p class="eyebrow">Contenido destacado</p>
-      <h2>Editar carrusel de inicio</h2>
+      <p class="eyebrow">Publicidad destacada</p>
+      <h2>Editar publicidad del home</h2>
       <p class="subtitle">
         Solo administradores pueden cambiar las imágenes que se muestran en el home.
       </p>
@@ -17,7 +17,7 @@
   <div class="slides-grid">
     <mat-card class="slide-card" *ngFor="let img of images; let i = index">
       <div class="slide-header">
-        <h3>Slide {{ i + 1 }}</h3>
+        <h3>Publicidad {{ i + 1 }}</h3>
         <button
           mat-icon-button
           color="warn"
@@ -29,14 +29,14 @@
       </div>
 
       <div class="slide-preview">
-        <img *ngIf="img" [src]="img" alt="Slide {{ i + 1 }}" />
+        <img *ngIf="img" [src]="img" alt="Publicidad {{ i + 1 }}" />
         <div *ngIf="!img" class="placeholder">
           Sin imagen
         </div>
       </div>
 
       <div class="slide-fields">
-        <label class="field-label">Imagen del slide</label>
+        <label class="field-label">Imagen de la publicidad</label>
         <label class="file-button">
           <mat-icon>upload</mat-icon>
           Subir imagen
@@ -69,4 +69,3 @@
     </button>
   </div>
 </div>
-
