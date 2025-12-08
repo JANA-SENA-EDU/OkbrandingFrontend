@@ -50,6 +50,9 @@ export class ProductosPorCategoriaComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    if (typeof window !== 'undefined') {                                                                
+      window.scrollTo({ top: 0, behavior: 'auto' });                                                    
+    }
     const idCategoria = Number(this.route.snapshot.paramMap.get('id'));
     if (idCategoria) {
       this.productoService.listarPorCategoria(idCategoria).subscribe(
