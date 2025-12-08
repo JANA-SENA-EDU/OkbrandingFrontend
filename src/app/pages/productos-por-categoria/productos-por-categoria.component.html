@@ -12,8 +12,9 @@
       <span aria-hidden="true">←</span>
       <span>Volver</span>
     </button>
-    <p class="eyebrow">Colección curada</p>
-    <h1>{{ nombreCategoria || 'Productos por categoría' }}</h1>
+    <h1 class="categoria-titulo">
+      {{ nombreCategoria || 'Productos por categoria' }}
+    </h1>
     <p class="hero-description">
       {{ descripcionCategoria }}
     </p>
@@ -27,7 +28,7 @@
         type="text"
         [(ngModel)]="filtroTexto"
         (ngModelChange)="aplicarFiltros()"
-        placeholder="Nombre o descripción…"
+        placeholder="Nombre o descripcion"
       />
     </div>
     <div class="filter-group">
@@ -59,7 +60,7 @@
       <button type="button" (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">
         Anterior
       </button>
-      <span>Página {{ paginaActual }} / {{ totalPaginas }}</span>
+      <span>Pagina {{ paginaActual }} / {{ totalPaginas }}</span>
       <button
         type="button"
         (click)="cambiarPagina(1)"
@@ -72,7 +73,7 @@
 
   <section *ngIf="!productosFiltrados.length" class="estado-vacio">
     <h3>No encontramos productos</h3>
-    <p>Prueba con otro término o ajusta los filtros.</p>
+    <p>Prueba con otro tAcrmino o ajusta los filtros.</p>
   </section>
 
   <div class="producto-grid" *ngIf="productosFiltrados.length">
@@ -98,7 +99,7 @@
             <span class="detail-value">{{ producto.dimensiones }}</span>
           </p>
           <p class="detail-row" *ngIf="producto.descripcion">
-            <span class="detail-label">Descripción:</span>
+            <span class="detail-label">Descripcion:</span>
             <span class="detail-value">{{ producto.descripcion }}</span>
           </p>
           <div class="detail-row" *ngIf="producto.colores?.length">
@@ -134,7 +135,7 @@
     <button type="button" (click)="cambiarPagina(-1)" [disabled]="paginaActual === 1">
       Anterior
     </button>
-    <span>Página {{ paginaActual }} / {{ totalPaginas }}</span>
+    <span>PA­gina {{ paginaActual }} / {{ totalPaginas }}</span>
     <button
       type="button"
       (click)="cambiarPagina(1)"
@@ -146,3 +147,4 @@
 
   <app-footer></app-footer>
 </div>
+

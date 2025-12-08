@@ -73,9 +73,23 @@ export class ClientNavbarComponent {
       return;
     }
 
-    const headerOffset = 90;
+    const header = document.querySelector('.client-header') as HTMLElement | null;
+    const headerHeight =
+      header?.getBoundingClientRect().height ?? 0;
+
     const rect = element.getBoundingClientRect();
-    const targetY = window.scrollY + rect.top - headerOffset;
+    const viewportHeight =
+      window.innerHeight || document.documentElement.clientHeight || 0;
+
+    const visibleHeight = Math.max(viewportHeight - headerHeight, 0);
+
+    const offsetWithinViewport =
+      rect.height <= visibleHeight
+        ? rect.top - (visibleHeight - rect.height) / 2 - headerHeight
+        : rect.top - headerHeight;
+
+    const extraOffset = 74;
+    const targetY = window.scrollY + offsetWithinViewport + extraOffset;
     this.animateScrollTo(targetY, 650);
   }
 
