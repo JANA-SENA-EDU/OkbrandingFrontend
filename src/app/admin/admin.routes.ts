@@ -70,6 +70,12 @@ export const adminRoutes: Routes = [
             (m) => m.CarouselAdminComponent
           ),
       },
+      {
+        path: 'estadisticas',
+        loadComponent: () =>
+          import('./pages/estadisticas/estadisticas.component').then(
+            (m) => m.EstadisticasComponent),
+      },
     ],
   },
 ];
